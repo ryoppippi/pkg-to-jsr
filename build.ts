@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { $, Glob } from 'bun';
 import isolatedDecl from 'bun-plugin-isolated-decl';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
