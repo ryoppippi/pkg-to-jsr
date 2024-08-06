@@ -4,18 +4,26 @@
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
 		"resolveJsonModule": true,
+		"allowImportingTsExtensions": true,
 		"strict": true,
+		"strictNullChecks": true,
 		"declaration": true,
 		"inlineSourceMap": true,
-		"outDir": "dist",
+		"noEmit": true,
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"isolatedDeclarations": true,
+		"skipLibCheck": true,
+		"plugins": [
+			{
+				"transform": "typia/lib/transform"
+			}
+		]
 	},
 	"include": [
 		"src",
 		"tests",
-		"vite.config.ts",
-		"eslint.config.js"
+		"eslint.config.js",
+		"build.ts"
 	],
 	"exclude": [
 		"node_modules",
