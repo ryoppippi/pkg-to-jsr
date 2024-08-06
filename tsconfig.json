@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
+		"strict": true,
+		"declaration": true,
+		"inlineSourceMap": true,
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": [
+		"src",
+		"tests",
+		"vite.config.ts",
+		"eslint.config.js"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
+}

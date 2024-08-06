@@ -1,0 +1,25 @@
+{
+	"name": "pkg-to-jsr",
+	"type": "module",
+	"version": "0.0.0",
+	"packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",
+	"description": "",
+	"author": "ryoppippi",
+	"license": "MIT",
+	"keywords": [],
+	"scripts": {
+		"build": "mkdist -d",
+		"typecheck": "tsc --noEmit",
+		"release": "nr typecheck && nr test run && nr build && nlx bumpp && npm publish",
+		"lint": "eslint --cache .",
+		"format": "nr lint --fix",
+		"test": "vitest"
+	},
+	"devDependencies": {
+		"@antfu/ni": "^0.22.0",
+		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
+		"eslint": "^9.8.0",
+		"eslint-plugin-format": "^0.1.2",
+		"typescript": "^5.5.4"
+	}
+}
