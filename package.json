@@ -24,6 +24,11 @@
 		"test": "bun test",
 		"prepare": "ts-patch install && typia patch && nlx bunpare"
 	},
+	"dependencies": {
+		"pathe": "^1.1.2",
+		"pkg-types": "^1.1.3",
+		"typia": "^6.7.2"
+	},
 	"devDependencies": {
 		"@antfu/ni": "^0.22.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
@@ -31,10 +36,7 @@
 		"@types/bun": "^1.1.6",
 		"eslint": "^9.8.0",
 		"eslint-plugin-format": "^0.1.2",
-		"pathe": "^1.1.2",
-		"pkg-types": "^1.1.3",
 		"ts-patch": "^3.2.1",
-		"typescript": "^5.5.4",
-		"typia": "^6.7.2"
+		"typescript": "^5.5.4"
 	}
 }
