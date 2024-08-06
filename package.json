@@ -13,7 +13,7 @@
 		}
 	},
 	"bin": {
-		"pkg-to-jsr": "dist/index.mjs"
+		"pkg-to-jsr": "dist/bin.mjs"
 	},
 	"scripts": {
 		"build": "bun build.ts",
@@ -34,8 +34,10 @@
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^0.6.16",
 		"@types/bun": "^1.1.6",
+		"bun-plugin-isolated-decl": "^0.1.4",
 		"eslint": "^9.8.0",
 		"eslint-plugin-format": "^0.1.2",
+		"oxc-transform": "^0.23.0",
 		"ts-patch": "^3.2.1",
 		"typescript": "^5.5.4"
 	}
