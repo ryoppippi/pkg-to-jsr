@@ -1,9 +1,7 @@
 import fs from 'node:fs/promises';
-import typia from 'typia';
 import { dirname, resolve } from 'pathe';
 import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
-import type { JSR } from './type';
-import { getExclude, getInclude } from './utils';
+import { genJsrFromPkg } from './utils';
 import { loadConfig } from './config';
 
 const pkgJSONPath = await resolvePackageJSON();
@@ -11,17 +9,9 @@ const pkgJSON = await readPackageJSON(pkgJSONPath);
 const rootDir = dirname(pkgJSONPath);
 const jsrPath = resolve(rootDir, 'jsr.json');
 
-const jsr = {
-	name: pkgJSON.name as string,
-	version: pkgJSON.version as string,
-	publish: {
-		include: getInclude(pkgJSON),
-		exclude: getExclude(pkgJSON),
-	},
-	exports: await loadConfig(),
-};
+const options = await loadConfig();
 
-typia.assertEquals<JSR>(jsr);
+const jsr = genJsrFromPkg({ pkgJSON, options });
 
 await fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
 
