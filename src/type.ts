@@ -1,3 +1,5 @@
+export type Exports = Record<string, string> | string;
+
 export type JSR = {
 	name: string;
 	version: string;
@@ -5,5 +7,9 @@ export type JSR = {
 		include: string[] | undefined;
 		exclude: string[] | undefined;
 	};
-	exports: Record<string, string> | string;
+	exports: Exports;
+};
+
+export type PkgToJsrConfig = {
+	exports: Exports;
 };

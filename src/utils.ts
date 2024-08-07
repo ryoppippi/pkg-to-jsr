@@ -1,6 +1,5 @@
 import typia from 'typia';
 import type { PackageJson } from 'pkg-types';
-import { parse } from 'pathe';
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 

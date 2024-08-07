@@ -4,6 +4,7 @@ import { dirname, resolve } from 'pathe';
 import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
 import type { JSR } from './type';
 import { getExclude, getInclude } from './utils';
+import { loadConfig } from './config';
 
 const pkgJSONPath = await resolvePackageJSON();
 const pkgJSON = await readPackageJSON(pkgJSONPath);
@@ -17,7 +18,7 @@ const jsr = {
 		include: getInclude(pkgJSON),
 		exclude: getExclude(pkgJSON),
 	},
-	exports: pkgJSON.exports,
+	exports: await loadConfig(),
 };
 
 typia.assertEquals<JSR>(jsr);
