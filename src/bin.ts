@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { dirname, resolve } from 'pathe';
 import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
+import { consola } from 'consola';
 import { genJsrFromPkg } from './utils';
 import { loadConfig } from './config';
 
@@ -15,4 +16,4 @@ const jsr = genJsrFromPkg({ pkgJSON, options });
 
 await fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
 
-console.log(`Generated ${jsrPath}`); // eslint-disable-line no-console
+consola.success(`Generated ${jsrPath}`);

@@ -25,6 +25,7 @@
 		"prepare": "ts-patch install && typia patch && nlx bunpare"
 	},
 	"dependencies": {
+		"consola": "^3.2.3",
 		"pathe": "^1.1.2",
 		"pkg-types": "^1.1.3",
 		"typia": "^6.7.2"
