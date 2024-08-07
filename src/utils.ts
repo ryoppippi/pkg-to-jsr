@@ -24,9 +24,6 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 	return files
 		.filter(file => !isStartWithExclamation(file))
 		.map((file) => {
-			if (file.startsWith('!**/')) {
-				return file.slice(4);
-			}
 			if (file.startsWith('!')) {
 				return file.slice(1);
 			}
