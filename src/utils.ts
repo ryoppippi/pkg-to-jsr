@@ -6,26 +6,32 @@ const isStartWithExclamation = typia.createIs<`!${string}`>();
 
 export function getInclude(pkgJSON: PackageJson): string[] | undefined {
 	const { files } = pkgJSON;
-	const include = files == null ? ['dist'] : files.filter(file => isStartWithExclamation(file));
-	return include;
+
+	if (files == null) {
+		return;
+	}
+
+	return files.filter(file => isStartWithExclamation(file));
 }
 
 export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 	const { files } = pkgJSON;
-	const exclude = files == null
-		? undefined
-		: files
-			.filter(file => !isStartWithExclamation(file))
-			.map((file) => {
-				if (file.startsWith('!**/')) {
-					return file.slice(4);
-				}
-				if (file.startsWith('!')) {
-					return file.slice(1);
-				}
-				return file;
-			});
-	return exclude;
+
+	if (files == null) {
+		return;
+	}
+
+	return files
+		.filter(file => !isStartWithExclamation(file))
+		.map((file) => {
+			if (file.startsWith('!**/')) {
+				return file.slice(4);
+			}
+			if (file.startsWith('!')) {
+				return file.slice(1);
+			}
+			return file;
+		});
 }
 
 export function genJsrFromPkg({ pkgJSON, options }: { pkgJSON: PackageJson; options: PkgToJsrConfig }): JSR {
