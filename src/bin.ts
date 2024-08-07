@@ -1,16 +1,18 @@
 import fs from 'node:fs/promises';
-import { dirname, resolve } from 'pathe';
-import { readPackageJSON, resolvePackageJSON } from 'pkg-types';
+import { resolve } from 'pathe';
+import { findWorkspaceDir, readPackageJSON, resolvePackageJSON } from 'pkg-types';
 import { consola } from 'consola';
 import { genJsrFromPkg } from './utils';
 import { loadConfig } from './config';
 
-const pkgJSONPath = await resolvePackageJSON();
-const pkgJSON = await readPackageJSON(pkgJSONPath);
-const rootDir = dirname(pkgJSONPath);
-const jsrPath = resolve(rootDir, 'jsr.json');
-
 const options = await loadConfig();
+
+const { rootDir: _rootDir } = options;
+const rootDir = _rootDir ?? await findWorkspaceDir();
+
+const pkgJSONPath = await resolvePackageJSON(rootDir);
+const pkgJSON = await readPackageJSON(pkgJSONPath);
+const jsrPath = resolve(rootDir, 'jsr.json');
 
 const jsr = genJsrFromPkg({ pkgJSON, options });
 
