@@ -41,6 +41,7 @@
 		"eslint": "^9.8.0",
 		"eslint-plugin-format": "^0.1.2",
 		"json-schema-to-typescript": "^15.0.0",
+		"pkg-types": "^1.1.3",
 		"ts-patch": "^3.2.1",
 		"tsdown": "^0.2.4",
 		"typescript": "^5.5.4",
