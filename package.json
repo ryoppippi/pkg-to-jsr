@@ -16,7 +16,7 @@
 		"pkg-to-jsr": "dist/bin.mjs"
 	},
 	"scripts": {
-		"build": "bun build.ts",
+		"build": "bun ./scripts/build.ts",
 		"typecheck": "tsc --noEmit",
 		"release": "nr typecheck && nr test run && nr build && nlx bumpp && npm publish",
 		"lint": "eslint --cache .",

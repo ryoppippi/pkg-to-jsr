@@ -23,7 +23,6 @@
 		"src",
 		"tests",
 		"eslint.config.js",
-		"build.ts"
 		"scripts"
 	],
 	"exclude": [
