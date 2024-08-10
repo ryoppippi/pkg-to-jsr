@@ -24,6 +24,7 @@
 		"tests",
 		"eslint.config.js",
 		"build.ts"
+		"scripts"
 	],
 	"exclude": [
 		"node_modules",
