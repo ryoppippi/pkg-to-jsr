@@ -5,10 +5,14 @@ import { consola } from 'consola';
 
 import { findUp, genJsrFromPkg, readPkgJSON, writeJsr } from './utils';
 
+function throwError(message: string): never {
+	consola.error(message);
+	process.exit(1);
+}
+
 const pkgJSONPath = await findUp('package.json', { cwd: process.cwd() });
 if (pkgJSONPath == null) {
-	consola.error('Cannot find package.json');
-	process.exit(1);
+	throwError('Cannot find package.json');
 }
 
 const pkgJSON = await readPkgJSON(pkgJSONPath);
@@ -21,8 +25,7 @@ try {
 	await writeJsr(jsrPath, jsr);
 }
 catch (e: unknown) {
-	consola.error(`Failed to write JSR to ${jsrPath}: ${e?.toString()}`);
-	process.exit(1);
+	throwError(`Failed to write JSR to ${jsrPath}: ${e?.toString()}`);
 }
 
 consola.success(`Generated ${jsrPath}`);
