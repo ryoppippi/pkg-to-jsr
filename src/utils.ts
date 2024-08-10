@@ -1,10 +1,59 @@
+import fs from 'node:fs/promises';
+import process from 'node:process';
+import { dirname, join, parse, resolve } from 'pathe';
+
 import typia from 'typia';
-import type { PackageJson } from 'pkg-types';
 import consola from 'consola';
-import type { Exports, JSR } from './type';
+import type { Exports, JSR, PackageJson } from './type';
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 
+/**
+ * Find a file in the directory hierarchy
+ */
+export async function findUp(
+	name: string | string[],
+	{ cwd }: { cwd: string | undefined },
+): Promise<string | undefined> {
+	let directory = resolve(cwd ?? process.cwd());
+	const { root } = parse(directory);
+	const names = [name].flat();
+
+	while (directory && directory !== root) {
+		for (const name of names) {
+			const filePath = join(directory, name);
+
+			try {
+				const stats = await fs.stat(filePath);
+				if (stats.isFile()) {
+					return filePath;
+				}
+			}
+			catch {}
+		}
+
+		directory = dirname(directory);
+	}
+}
+
+/**
+ * Get include field from package.json
+ */
+export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
+	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
+	return JSON.parse(pkgJSON) as PackageJson;
+}
+
+/**
+ * Write JSR to file
+ */
+export async function writeJsr(jsrPath: string, jsr: JSR): Promise<void> {
+	return fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
+}
+
+/**
+ * generate include for JSR from package.json
+ */
 export function getInclude(pkgJSON: PackageJson): string[] | undefined {
 	const { files } = pkgJSON;
 
@@ -15,6 +64,9 @@ export function getInclude(pkgJSON: PackageJson): string[] | undefined {
 	return files.filter(file => isStartWithExclamation(file));
 }
 
+/**
+ * generate exclude for JSR from package.json
+ */
 export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 	const { files } = pkgJSON;
 
