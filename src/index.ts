@@ -10,6 +10,7 @@ import type { JSRConfigurationFileSchema } from './jsr';
 type Exports = JSRConfigurationFileSchema['exports'];
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
+const isString = typia.createIs<string>();
 
 /**
  * Throw an error and exit the process
@@ -186,7 +187,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
 		throw new Error('No exports field found in package.json');
 	}
 
-	if (typia.is<string>(exports)) {
+	if (isString(exports)) {
 		return { '.': exports };
 	}
 
@@ -194,7 +195,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
 
 	for (const [key, value] of Object.entries(exports)) {
 		switch (true) {
-			case typia.is<string>(value):
+			case isString(value):
 				_exports[key] = value;
 				break;
 			case typia.is<Record<string, string>>(value):
