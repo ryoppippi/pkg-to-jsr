@@ -6,7 +6,7 @@ import { isAbsolute, resolve } from 'pathe';
 import { consola } from 'consola';
 
 import { description, name, version } from '../package.json';
-import { findPackageJSON, genJsrFromPkg, readPkgJSON, writeJsr } from '.';
+import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 
 function resolveJsrPath(root: string) {
 	return resolve(root, 'jsr.json');
@@ -39,7 +39,7 @@ const main = defineCommand({
 		const jsrPath = resolveJsrPath(cwd);
 
 		const pkgJSON = await readPkgJSON(pkgJSONPath);
-		const jsr = genJsrFromPkg({ pkgJSON });
+		const jsr = genJsrFromPackageJson({ pkgJSON });
 
 		await writeJsr(jsrPath, jsr);
 	},

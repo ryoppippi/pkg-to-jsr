@@ -217,7 +217,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
 /**
  * generate JSR from package.json
  */
-export function genJsrFromPkg({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
+export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
 	const { name, version } = pkgJSON;
 	const jsr = {
 		name: name as string,
