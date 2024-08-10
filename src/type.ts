@@ -1,4 +1,4 @@
-export type Exports = Record<string, string> | string;
+export type Exports = Record<string, string> | { '.': string };
 
 export type JSR = {
 	name: string;
@@ -7,5 +7,5 @@ export type JSR = {
 		include: string[] | undefined;
 		exclude: string[] | undefined;
 	};
-	exports: Exports;
+	exports: Exports | undefined;
 };
