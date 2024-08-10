@@ -13,7 +13,7 @@
 		}
 	},
 	"bin": {
-		"pkg-to-jsr": "dist/bin.js"
+		"pkg-to-jsr": "dist/index.js"
 	},
 	"files": [
 		"dist"

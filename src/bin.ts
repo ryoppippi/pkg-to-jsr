@@ -3,7 +3,7 @@ import process from 'node:process';
 import { dirname, resolve } from 'pathe';
 import { consola } from 'consola';
 
-import { findUp, genJsrFromPkg, readPkgJSON, writeJsr } from './utils';
+import { findUp, genJsrFromPkg, readPkgJSON, writeJsr } from '.';
 
 function throwError(message: string): never {
 	consola.error(message);
