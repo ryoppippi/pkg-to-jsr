@@ -15,6 +15,9 @@
 	"bin": {
 		"pkg-to-jsr": "dist/bin.js"
 	},
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsdown",
 		"dev": "tsdown --watch",
