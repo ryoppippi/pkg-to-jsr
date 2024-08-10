@@ -27,7 +27,7 @@
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
 		"test": "vitest",
-		"prepare": "ts-patch install && typia patch && bun run ./scripts/gen_types.ts"
+		"prepare": "ts-patch install && typia patch && ./scripts/gen_types.js"
 	},
 	"dependencies": {
 		"consola": "^3.2.3",
