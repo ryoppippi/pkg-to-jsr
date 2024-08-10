@@ -26,9 +26,9 @@ function _throwError(message: string): never {
  */
 export async function findUp(
 	name: string | string[],
-	{ cwd }: { cwd: string | undefined },
+	{ cwd }: { cwd: string },
 ): Promise<string | undefined> {
-	let directory = resolve(cwd ?? process.cwd());
+	let directory = resolve(cwd);
 	const { root } = parse(directory);
 	const names = [name].flat();
 
