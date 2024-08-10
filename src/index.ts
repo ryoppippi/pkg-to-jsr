@@ -44,7 +44,7 @@ export async function findUp(
  */
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
-	return JSON.parse(pkgJSON) as PackageJson;
+	return typia.json.assertParse<PackageJson>(pkgJSON);
 }
 
 /**
