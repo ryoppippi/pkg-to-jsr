@@ -20,10 +20,10 @@ const isString = typia.createIs<string>();
  */
 function _throwError(message: string): never {
 	consola.error(message);
-	if (!(process.env.NODE_ENV === 'test')) {
-		process.exit(1);
+	if (process.env.NODE_ENV === 'test') {
+		throw new Error(message);
 	}
-	throw new Error(message);
+	process.exit(1);
 }
 
 /**
