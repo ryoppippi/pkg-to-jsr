@@ -12,6 +12,15 @@ type Exports = JSRConfigurationFileSchema['exports'];
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 
 /**
+ * Throw an error and exit the process
+ * @internal
+ */
+function _throwError(message: string): never {
+	consola.error(message);
+	process.exit(1);
+}
+
+/**
  * Find a file in the directory hierarchy
  */
 export async function findUp(
@@ -40,6 +49,19 @@ export async function findUp(
 }
 
 /**
+ * Find package.json in the directory hierarchy
+ * if not found, throw an error
+ */
+export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string> {
+	const path = await findUp('package.json', { cwd });
+	if (!isString(path)) {
+		_throwError(`Cannot find package.json at ${cwd}`);
+		return '';
+	}
+	return path;
+}
+
+/**
  * Get include field from package.json
  */
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
@@ -51,7 +73,12 @@ export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
  * Write JSR to file
  */
 export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema): Promise<void> {
-	return fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
+	try {
+		return await fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
+	}
+	catch (e: unknown) {
+		_throwError(`Failed to write JSR to ${jsrPath}: ${e?.toString()}`);
+	}
 }
 
 /**
