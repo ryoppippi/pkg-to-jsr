@@ -1,3 +1,5 @@
+export type { PackageJson } from 'pkg-types';
+
 export type Exports = Record<string, string> | { '.': string };
 
 export type JSR = {
