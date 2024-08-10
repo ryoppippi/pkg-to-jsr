@@ -1,9 +1,8 @@
 {
-	"name": "@dummy/dummy",
+	"name": "dummy",
 	"type": "module",
 	"version": "0.1.0",
 	"description": "hello world",
-	"author": "ryoppippi",
 	"license": "MIT",
 	"keywords": [],
 	"exports": {

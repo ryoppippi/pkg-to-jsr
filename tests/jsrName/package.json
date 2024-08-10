@@ -1,5 +1,6 @@
 {
-	"name": "@dummy/dummy",
+	"name": "dummy",
+	"jsrName": "@ryoppippi/helloworld",
 	"type": "module",
 	"version": "0.1.0",
 	"description": "hello world",

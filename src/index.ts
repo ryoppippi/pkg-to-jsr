@@ -9,6 +9,8 @@ import type { JSRConfigurationFileSchema } from './jsr';
 
 type Exports = JSRConfigurationFileSchema['exports'];
 
+const JSR_NAME_REGEX = /^@[^/]+\/[^/]+$/;
+
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 const isString = typia.createIs<string>();
 
@@ -18,7 +20,10 @@ const isString = typia.createIs<string>();
  */
 function _throwError(message: string): never {
 	consola.error(message);
-	process.exit(1);
+	if (!(process.env.NODE_ENV === 'test')) {
+		process.exit(1);
+	}
+	throw new Error(message);
 }
 
 /**
@@ -80,6 +85,29 @@ export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema)
 	catch (e: unknown) {
 		_throwError(`Failed to write JSR to ${jsrPath}: ${e?.toString()}`);
 	}
+}
+
+export function getName(pkgJSON: PackageJson): string {
+	const { name, author } = pkgJSON;
+	const jsrName = pkgJSON.jsrName as string | undefined;
+
+	if (jsrName != null) {
+		if (!JSR_NAME_REGEX.test(jsrName)) {
+			_throwError(`Invalid JSR name ${jsrName}. Must be scoped`);
+		}
+		return jsrName;
+	}
+
+	if (name != null && JSR_NAME_REGEX.test(name)) {
+		return name;
+	}
+
+	if (name != null && author != null && (isString(author) || isString(author?.name))) {
+		const _author = isString(author) ? author : author.name;
+		return `@${_author}/${name}`;
+	}
+
+	_throwError(`Cannot determine JSR name from package.json. 1. add jsrName field to package.json / 2. use scoped package name (ex: @author/package) / 3. add name & author field to package.json ( ex: { "name": "package", "author": { "name": "author" } })`);
 }
 
 /**
@@ -218,12 +246,12 @@ export function getExports(pkgJSON: PackageJson): Exports {
  * generate JSR from package.json
  */
 export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
-	const { name, version } = pkgJSON;
+	const { version } = pkgJSON;
 
 	const _include = getInclude(pkgJSON);
 	const _exclude = getExclude(pkgJSON);
 	const jsr = {
-		name: name as string,
+		name: getName(pkgJSON),
 		version: version as string,
 		// publish: {
 		// 	include: getInclude(pkgJSON),

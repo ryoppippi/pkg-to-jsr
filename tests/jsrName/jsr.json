@@ -1,5 +1,5 @@
 {
-	"name": "@dummy/dummy",
+	"name": "@ryoppippi/helloworld",
 	"version": "0.1.0",
 	"exports": {
 		".": "./dist/index.js"
