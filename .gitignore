@@ -133,3 +133,5 @@ dist
 .pnp.*
 
 .eslintcache
+
+/src/jsr.d.ts
