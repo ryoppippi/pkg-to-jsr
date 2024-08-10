@@ -1,5 +1,8 @@
 name: CI
 
+env:
+  NODE_VERSION: lts/*
+
 on:
   push:
   pull_request:
@@ -10,23 +13,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          bun-version: latest
-      - run: bun i --frozen-lockfile
-      - run: bun run prepare
-      - run: bun run lint
-      - run: bun run typecheck
-      - run: bun run test
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
 
-  pkg-pr-new-publish:
+  npm-publish-dry-run-and-upload-pkg-pr-now:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          bun-version: latest
-      - run: bun i --frozen-lockfile
-      - run: bun run build
-      - run: bunx pkg-pr-new publish
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm dlx pkg-pr-new publish
