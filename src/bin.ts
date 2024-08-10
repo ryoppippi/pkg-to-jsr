@@ -1,18 +1,51 @@
 import process from 'node:process';
+import fs from 'node:fs/promises';
+import { defineCommand, runMain } from 'citty';
 
-import { dirname, resolve } from 'pathe';
+import { isAbsolute, resolve } from 'pathe';
 import { consola } from 'consola';
 
+import { description, name, version } from '../package.json';
 import { findPackageJSON, genJsrFromPkg, readPkgJSON, writeJsr } from '.';
 
-const pkgJSONPath = await findPackageJSON({ cwd: process.cwd() });
+function resolveJsrPath(root: string) {
+	return resolve(root, 'jsr.json');
+}
 
-const pkgJSON = await readPkgJSON(pkgJSONPath);
+const main = defineCommand({
+	meta: { name, version, description },
+	args: {
+		root: {
+			type: 'string',
+			description: 'root directory including package.json',
+		},
+	},
+	async run({ args: { root } }) {
+		/** current working directory or maybe file */
+		const cwd
+			= isAbsolute(root)
+				? root
+				: root != null
+					? resolve(process.cwd(), root)
+					: process.cwd();
 
-const rootDir = dirname(pkgJSONPath);
-const jsrPath = resolve(rootDir, 'jsr.json');
+		/* check if root is a directory */
+		if (!(await fs.lstat(cwd)).isDirectory()) {
+			consola.error(`${root} is not a valid root directory`);
+			process.exit(1);
+		}
 
-const jsr = genJsrFromPkg({ pkgJSON });
-await writeJsr(jsrPath, jsr);
+		const pkgJSONPath = await findPackageJSON({ cwd });
+		const jsrPath = resolveJsrPath(cwd);
 
-consola.success(`Generated ${jsrPath}`);
+		const pkgJSON = await readPkgJSON(pkgJSONPath);
+		const jsr = genJsrFromPkg({ pkgJSON });
+
+		await writeJsr(jsrPath, jsr);
+	},
+	cleanup({ args: { root } }) {
+		consola.success(`Generated ${resolveJsrPath(root)}`);
+	},
+});
+
+await runMain(main);
