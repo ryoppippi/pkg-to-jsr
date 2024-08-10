@@ -64,7 +64,7 @@ export function getInclude(pkgJSON: PackageJson): string[] | undefined {
 		return;
 	}
 
-	return files.filter(file => isStartWithExclamation(file));
+	return files.filter(file => !isStartWithExclamation(file));
 }
 
 /**
@@ -78,7 +78,7 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 	}
 
 	return files
-		.filter(file => !isStartWithExclamation(file))
+		.filter(file => isStartWithExclamation(file))
 		.map((file) => {
 			if (file.startsWith('!')) {
 				return file.slice(1);
