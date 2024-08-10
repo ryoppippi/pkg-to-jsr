@@ -1,17 +1,27 @@
-import fs from 'node:fs/promises';
-import { resolve } from 'pathe';
-import { findWorkspaceDir, readPackageJSON, resolvePackageJSON } from 'pkg-types';
+import process from 'node:process';
+
+import { dirname, resolve } from 'pathe';
 import { consola } from 'consola';
-import { genJsrFromPkg } from './utils';
+import { findUp, genJsrFromPkg, readPkgJSON, writeJsr } from './utils';
 
-const rootDir = await findWorkspaceDir();
+const pkgJSONPath = await findUp('package.json', { cwd: process.cwd() });
+if (pkgJSONPath == null) {
+	consola.error('Cannot find package.json');
+	process.exit(1);
+}
 
-const pkgJSONPath = await resolvePackageJSON(rootDir);
-const pkgJSON = await readPackageJSON(pkgJSONPath);
+const pkgJSON = await readPkgJSON(pkgJSONPath);
+
+const rootDir = dirname(pkgJSONPath);
 const jsrPath = resolve(rootDir, 'jsr.json');
 
 const jsr = genJsrFromPkg({ pkgJSON });
-
-await fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
+try {
+	await writeJsr(jsrPath, jsr);
+}
+catch (e: unknown) {
+	consola.error(`Failed to write JSR to ${jsrPath}: ${e?.toString()}`);
+	process.exit(1);
+}
 
 consola.success(`Generated ${jsrPath}`);
