@@ -86,7 +86,7 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 
 /**
  * generate exports filed for JSR from package.json
- * the import path should be string, { source: string }, { import: string }
+ * the import path should be string, { jsr: string }, { import: string }
  *
  * @example
  * ```json
@@ -127,12 +127,12 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
  * {
  *   "exports": {
  *     ".": {
- *       "source": "./src/index.ts",
+ *       "jsr": "./src/index.ts",
  *       "import": "./dist/index.js"
  *       "types": "./dist/index.d.ts"
  *     },
  *     "./sub": {
- *       "source": "./src/sub.ts"
+ *       "jsr": "./src/sub.ts"
  *       "import": "./dist/sub.js"
  *       "types": "./dist/sub.d.ts"
  *	   }
@@ -168,8 +168,8 @@ export function getExports(pkgJSON: PackageJson): Exports | undefined {
 				_exports[key] = value;
 				break;
 			case typia.is<Record<string, string>>(value):
-				/* if source is defined, use it, otherwise use import */
-				_exports[key] = value.source ?? value.import;
+				/* if jsr is defined, use it, otherwise use import */
+				_exports[key] = value.jsr ?? value.import;
 				break;
 			default:
 				consola.error(`Export key ${key} is ignored because it is not a string or object`);
