@@ -40,7 +40,6 @@
 		"eslint-plugin-format": "^0.1.2",
 		"oxc-transform": "^0.23.0",
 		"ts-patch": "^3.2.1",
-		"typescript": "^5.5.4",
-		"unconfig": "^0.5.5"
+		"typescript": "^5.5.4"
 	}
 }

@@ -9,27 +9,3 @@ export type JSR = {
 	};
 	exports: Exports;
 };
-
-/**
- * The configuration object
- */
-export type PkgToJsrConfig = {
-	/**
-	 * The exports object
-	 *
-	 * @example
-	 * ```typescript
-	 * {
-	 *   ".": "./src/index.ts",
-	 *   "./lib": "./src/lib.ts",
-	 * }
-	 * ```
-	 */
-	exports: Exports;
-
-	/**
-	 * The root directory
-	 * @default "."
-	 */
-	rootDir?: string;
-};

@@ -1,6 +1,6 @@
 import typia from 'typia';
 import type { PackageJson } from 'pkg-types';
-import type { JSR, PkgToJsrConfig } from './type';
+import type { JSR } from './type';
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 
@@ -32,6 +32,7 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 }
 
 export function genJsrFromPkg({ pkgJSON, options }: { pkgJSON: PackageJson; options: PkgToJsrConfig }): JSR {
+export function genJsrFromPkg({ pkgJSON }: { pkgJSON: PackageJson }): JSR {
 	const { name, version } = pkgJSON;
 	const jsr = {
 		name: name as string,
