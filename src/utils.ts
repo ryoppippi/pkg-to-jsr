@@ -4,7 +4,10 @@ import { dirname, join, parse, resolve } from 'pathe';
 
 import typia from 'typia';
 import consola from 'consola';
-import type { Exports, JSR, PackageJson } from './type';
+import type { PackageJson } from 'pkg-types';
+import type { JSRConfigurationFileSchema } from './jsr';
+
+type Exports = JSRConfigurationFileSchema['exports'];
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 
@@ -47,7 +50,7 @@ export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 /**
  * Write JSR to file
  */
-export async function writeJsr(jsrPath: string, jsr: JSR): Promise<void> {
+export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema): Promise<void> {
 	return fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
 }
 
@@ -149,11 +152,11 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
  * }
  * ```
  */
-export function getExports(pkgJSON: PackageJson): Exports | undefined {
+export function getExports(pkgJSON: PackageJson): Exports {
 	const { exports } = pkgJSON;
 
 	if (exports == null) {
-		return;
+		throw new Error('No exports field found in package.json');
 	}
 
 	if (typia.is<string>(exports)) {
@@ -177,7 +180,7 @@ export function getExports(pkgJSON: PackageJson): Exports | undefined {
 	}
 
 	if (Object.keys(_exports).length === 0) {
-		return;
+		throw new Error('No valid exports field found in package.json');
 	}
 
 	return _exports;
@@ -186,7 +189,7 @@ export function getExports(pkgJSON: PackageJson): Exports | undefined {
 /**
  * generate JSR from package.json
  */
-export function genJsrFromPkg({ pkgJSON }: { pkgJSON: PackageJson }): JSR {
+export function genJsrFromPkg({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
 	const { name, version } = pkgJSON;
 	const jsr = {
 		name: name as string,
@@ -196,10 +199,10 @@ export function genJsrFromPkg({ pkgJSON }: { pkgJSON: PackageJson }): JSR {
 			exclude: getExclude(pkgJSON),
 		},
 		exports: getExports(pkgJSON),
-	} as const satisfies JSR;
+	} as const satisfies JSRConfigurationFileSchema;
 
 	/* check the JSR object */
-	typia.assertEquals<JSR>(jsr);
+	typia.assertEquals<JSRConfigurationFileSchema>(jsr);
 
 	return jsr;
 }
