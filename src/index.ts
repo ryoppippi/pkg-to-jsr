@@ -219,13 +219,17 @@ export function getExports(pkgJSON: PackageJson): Exports {
  */
 export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
 	const { name, version } = pkgJSON;
+
+	const _include = getInclude(pkgJSON);
+	const _exclude = getExclude(pkgJSON);
 	const jsr = {
 		name: name as string,
 		version: version as string,
-		publish: {
-			include: getInclude(pkgJSON),
-			exclude: getExclude(pkgJSON),
-		},
+		// publish: {
+		// 	include: getInclude(pkgJSON),
+		// 	exclude: getExclude(pkgJSON),
+		// },
+		publish: _include != null || _exclude != null ? { include: _include, exclude: _exclude } : undefined,
 		exports: getExports(pkgJSON),
 	} as const satisfies JSRConfigurationFileSchema;
 
