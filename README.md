@@ -65,7 +65,8 @@ Here are some examples of how pkg-to-jsr transforms your `package.json` into `js
 
 ```json
 {
-	"name": "@scope/package",
+	"name": "package",
+	"jsrName": "@scope/package",
 	"version": "1.0.0",
 	"exports": "./index.js"
 }
@@ -89,7 +90,8 @@ Here are some examples of how pkg-to-jsr transforms your `package.json` into `js
 
 ```json
 {
-	"name": "@scope/package",
+	"name": "package",
+	"author": "ryoppippi",
 	"version": "1.0.0",
 	"exports": {
 		".": {
@@ -114,7 +116,7 @@ Here are some examples of how pkg-to-jsr transforms your `package.json` into `js
 
 ```json
 {
-	"name": "@scope/package",
+	"name": "@ryoppippi/package",
 	"version": "1.0.0",
 	"exports": {
 		".": "./src/index.ts",
@@ -134,6 +136,17 @@ pkg-to-jsr performs the following steps:
 1. 🔍 Locates your `package.json` file
 2. 📤 Extracts relevant information such as `name`, `version`, and `exports`
 3. ✍️ Generates a `jsr.json` file with the correct structure for JSR
+
+### Name Handling
+
+pkg-to-jsr determines the package name for `jsr.json` using the following logic:
+
+1. 🏷️ If a `jsrName` field exists in `package.json` and is correctly formatted (`@scope/package-name`), it is used.
+2. 📦 If `jsrName` is not present, it checks the `name` field in `package.json`. If this is correctly formatted for JSR, it is used.
+3. 🔧 If `name` is not in JSR format, it combines the `name` and `author` fields. For example, if `name` is "package" and `author` is "ryoppippi", it generates `@ryoppippi/package`.
+4. ❌ If none of the above methods produce a valid name, an error is thrown.
+
+This approach allows maximum flexibility while ensuring compliance with JSR naming conventions.
 
 ### Exports handling
 
