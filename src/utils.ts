@@ -175,7 +175,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
 				_exports[key] = value.jsr ?? value.import;
 				break;
 			default:
-				consola.error(`Export key ${key} is ignored because it is not a string or object`);
+				consola.warn(`Export key ${key} is ignored because it is not a string or object`);
 		}
 	}
 
