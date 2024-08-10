@@ -23,7 +23,8 @@
 		"src",
 		"tests",
 		"eslint.config.js",
-		"scripts"
+		"scripts",
+		"tests"
 	],
 	"exclude": [
 		"node_modules",

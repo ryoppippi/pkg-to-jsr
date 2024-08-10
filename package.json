@@ -2,6 +2,7 @@
 	"name": "pkg-to-jsr",
 	"type": "module",
 	"version": "0.0.0",
+	"packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf",
 	"description": "",
 	"author": "ryoppippi",
 	"license": "MIT",
@@ -25,7 +26,7 @@
 		"release": "nr typecheck && nr test run && nr build && nlx bumpp && npm publish",
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
-		"test": "bun test",
+		"test": "vitest",
 		"prepare": "ts-patch install && typia patch && bun run ./scripts/gen_types.ts"
 	},
 	"dependencies": {
@@ -46,7 +47,7 @@
 		"ts-patch": "^3.2.1",
 		"tsdown": "^0.2.4",
 		"typescript": "^5.5.4",
-		"typia": "^6.7.2"
-	},
-	"packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf"
+		"typia": "^6.7.2",
+		"vitest": "^2.0.5"
+	}
 }
