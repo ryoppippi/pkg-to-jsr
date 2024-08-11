@@ -138,6 +138,8 @@ pkg-to-jsr performs the following steps:
 2. 📤 Extracts relevant information such as `name`, `version`, and `exports`
 3. ✍️ Generates a `jsr.json` file with the correct structure for JSR
 
+More details on implementation can be found in the [source code](./src).
+
 You can see example projects in the [tests](./tests).
 
 ### Name Handling
