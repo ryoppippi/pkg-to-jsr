@@ -170,20 +170,20 @@ The tool intelligently handles various `exports` configurations:
 
 ### Publish configuration
 
-pkg-to-jsr generates the `publish.include` and `publish.exclude` fields in `jsr.json` by merging information from multiple sources:
+pkg-to-jsr generates the `publish.include` and `publish.exclude` fields in `jsr.json` by merging and filtering information from multiple sources:
 
-1. 📂 `jsrInclude` array in `package.json`: All entries are added to `include`
-2. 🚫 `jsrExclude` array in `package.json`: All entries are added to `exclude`
+1. 📂 `jsrInclude` array in `package.json`: All entries are considered for inclusion
+2. 🚫 `jsrExclude` array in `package.json`: All entries are considered for exclusion
 3. 📁 `files` array in `package.json`:
-   - Files without a leading `!` are added to `include`
-   - Files with a leading `!` are added to `exclude` (with the `!` removed)
+   - Files without a leading `!` are considered for inclusion
+   - Files with a leading `!` are considered for exclusion (with the `!` removed)
 
-The final `include` and `exclude` lists in `jsr.json` are the result of merging these sources:
+The final `include` and `exclude` lists in `jsr.json` are the result of merging and filtering these sources:
 
-- The `include` list combines unique entries from both `jsrInclude` and the positive entries in `files`
-- The `exclude` list combines unique entries from both `jsrExclude` and the negative entries in `files` (with `!` removed)
+- The `include` list combines unique entries from both `jsrInclude` and the positive entries in `files`, excluding any paths that are in `jsrExclude`
+- The `exclude` list combines unique entries from both `jsrExclude` and the negative entries in `files` (with `!` removed), excluding any paths that are in `jsrInclude`
 
-This approach provides fine-grained control over what gets published to JSR while maintaining compatibility with existing `files` configurations.
+This approach provides fine-grained control over what gets published to JSR while maintaining compatibility with existing `files` configurations and allowing for explicit inclusion and exclusion rules.
 
 Example:
 
@@ -193,13 +193,16 @@ Example:
 {
 	"files": [
 		"dist",
+		"src",
 		"!dist/**/*.test.js"
 	],
 	"jsrInclude": [
-		"src"
+		"src",
+		"types"
 	],
 	"jsrExclude": [
-		"src/**/*.test.ts"
+		"src/**/*.test.ts",
+		"dist"
 	]
 }
 ```
@@ -209,13 +212,19 @@ Example:
 ```json
 {
 	"publish": {
-		"include": ["dist", "src"],
+		"include": ["src", "types"],
 		"exclude": ["dist/**/*.test.js", "src/**/*.test.ts"]
 	}
 }
 ```
 
-This merged configuration ensures that all necessary files are included while excluding test files from both the `dist` and `src` directories.
+In this example:
+- `src` is included because it's in both `files` and `jsrInclude`
+- `types` is included because it's in `jsrInclude`
+- `dist` is excluded because it's in `jsrExclude`, overriding its presence in `files`
+- Test files in both `dist` and `src` are excluded
+
+This merged and filtered configuration ensures that all necessary files are included while respecting explicit inclusion and exclusion rules, providing precise control over the package contents for JSR publication.
 
 ## 🤝 Contributing
 
