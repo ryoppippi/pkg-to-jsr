@@ -122,7 +122,14 @@ export function getName(pkgJSON: PackageJson): string {
 		return `@${_author}/${name}`;
 	}
 
-	_throwError(`Cannot determine JSR name from package.json. 1. add jsrName field to package.json / 2. use scoped package name (ex: @author/package) / 3. add name & author field to package.json ( ex: { "name": "package", "author": { "name": "author" } })`);
+	const errorMessages = [
+		'Cannot determine JSR name from package.json.',
+		'1. add jsrName field to package.json',
+		'2. use scoped package name (ex: @author/package)',
+		'3. add name & author field to package.json ( ex: { "name": "package", "author": { "name": "author" } })',
+	] as const;
+
+	_throwError(errorMessages.join('\n'));
 }
 
 /**
