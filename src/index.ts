@@ -8,7 +8,7 @@ import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema } from './jsr';
 
 type Exports = JSRConfigurationFileSchema['exports'];
-type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string };
+type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
 
 const JSR_NAME_REGEX = /^@[^/]+\/[^/]+$/;
 
@@ -194,13 +194,17 @@ export function getName(pkgJSON: PackageJson): string {
  * generate include for JSR from package.json
  */
 export function getInclude(pkgJSON: PackageJson): string[] | undefined {
-	const { files } = pkgJSON;
+	const { files, jsrInclude } = pkgJSON;
 
 	if (files == null) {
 		return;
 	}
 
-	return files.filter(file => !isStartWithExclamation(file));
+	const includeFromFiles = files.filter(file => !isStartWithExclamation(file));
+
+	const includes = new Set([...(jsrInclude ?? []), ...includeFromFiles]);
+
+	return includes.size > 0 ? Array.from(includes) : undefined;
 }
 
 /**
@@ -213,7 +217,7 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 		return;
 	}
 
-	return files
+	const excludeFromFiles = files
 		.filter(file => isStartWithExclamation(file))
 		.map((file) => {
 			if (file.startsWith('!')) {
@@ -221,6 +225,9 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 			}
 			return file;
 		});
+
+	const excludes = new Set([...(pkgJSON?.jsrExclude ?? []), ...excludeFromFiles]);
+	return excludes.size > 0 ? Array.from(excludes) : undefined;
 }
 
 /**

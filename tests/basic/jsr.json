@@ -4,8 +4,7 @@
 	"publish": {
 		"include": [
 			"dist"
-		],
-		"exclude": []
+		]
 	},
 	"exports": {
 		".": "./dist/index.js"
