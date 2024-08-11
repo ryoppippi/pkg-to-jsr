@@ -153,7 +153,7 @@ This approach allows maximum flexibility while ensuring compliance with JSR nami
 The tool intelligently handles various `exports` configurations:
 
 - 🧵 String exports are converted to object format
-- 🧩 Complex exports with `jsr`, `import`, and other conditions are simplified for JSR
+- 🧩 Complex exports with `jsr`, `import`, and other conditions are simplified for JSR (`jsr` is a special field. It is used to specify the main entry point for the package on JSR)
 - ⚠️ Invalid or unsupported exports are warned about and skipped
 
 ### Publish configuration
