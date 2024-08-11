@@ -44,3 +44,12 @@ it('error caused name', async () => {
 	const pkgJSON = await readPkgJSON(pkgJsonPath);
 	expect(() => genJsrFromPackageJson({ pkgJSON })).toThrowError();
 });
+
+it('includes', async () => {
+	const DIR = resolve(__dirname, './includes');
+	const pkgJsonPath = await findPackageJSON({ cwd: DIR });
+	const pkgJSON = await readPkgJSON(pkgJsonPath);
+	const jsr = genJsrFromPackageJson({ pkgJSON });
+
+	await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
+});
