@@ -109,6 +109,12 @@ Here are some examples of how pkg-to-jsr transforms your `package.json` into `js
 	"files": [
 		"dist",
 		"!dist/**/*.test.js"
+	],
+	"jsrInclude": [
+		"src"
+	],
+	"jsrExclude": [
+		"src/**/*.test.ts"
 	]
 }
 ```
@@ -124,8 +130,8 @@ Here are some examples of how pkg-to-jsr transforms your `package.json` into `js
 		"./utils": "./src/utils.ts"
 	},
 	"publish": {
-		"include": ["dist"],
-		"exclude": ["dist/**/*.test.js"]
+		"include": ["dist", "src"],
+		"exclude": ["dist/**/*.test.js", "src/**/*.test.ts"]
 	}
 }
 ```
@@ -158,15 +164,58 @@ This approach allows maximum flexibility while ensuring compliance with JSR nami
 The tool intelligently handles various `exports` configurations:
 
 - 🧵 String exports are converted to object format
-- 🧩 Complex exports with `jsr`, `import`, and other conditions are simplified for JSR (`jsr` is a special field. It is used to specify the main entry point for the package on JSR)
+- 🧩 Complex exports with `jsr`, `import`, and other conditions are handled
+- 🏆 If a `jsr` field is specified in the exports, it takes priority over other fields
 - ⚠️ Invalid or unsupported exports are warned about and skipped
 
 ### Publish configuration
 
-If your `package.json` includes a `files` array, pkg-to-jsr will use it to generate the `publish.include` and `publish.exclude` fields in `jsr.json`:
+pkg-to-jsr generates the `publish.include` and `publish.exclude` fields in `jsr.json` by merging information from multiple sources:
 
-- 📂 Files without a leading `!` are added to `include`
-- 🚫 Files with a leading `!` are added to `exclude` (with the `!` removed)
+1. 📂 `jsrInclude` array in `package.json`: All entries are added to `include`
+2. 🚫 `jsrExclude` array in `package.json`: All entries are added to `exclude`
+3. 📁 `files` array in `package.json`:
+   - Files without a leading `!` are added to `include`
+   - Files with a leading `!` are added to `exclude` (with the `!` removed)
+
+The final `include` and `exclude` lists in `jsr.json` are the result of merging these sources:
+
+- The `include` list combines unique entries from both `jsrInclude` and the positive entries in `files`
+- The `exclude` list combines unique entries from both `jsrExclude` and the negative entries in `files` (with `!` removed)
+
+This approach provides fine-grained control over what gets published to JSR while maintaining compatibility with existing `files` configurations.
+
+Example:
+
+**package.json**:
+
+```json
+{
+	"files": [
+		"dist",
+		"!dist/**/*.test.js"
+	],
+	"jsrInclude": [
+		"src"
+	],
+	"jsrExclude": [
+		"src/**/*.test.ts"
+	]
+}
+```
+
+**Generated jsr.json**:
+
+```json
+{
+	"publish": {
+		"include": ["dist", "src"],
+		"exclude": ["dist/**/*.test.js", "src/**/*.test.ts"]
+	}
+}
+```
+
+This merged configuration ensures that all necessary files are included while excluding test files from both the `dist` and `src` directories.
 
 ## 🤝 Contributing
 
