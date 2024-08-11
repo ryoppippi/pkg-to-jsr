@@ -1,5 +1,8 @@
 import { defineConfig } from 'tsdown';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/rolldown'
+import { dependencies } from './package.json';
+
+const external = Object.keys(dependencies);
 
 // TODO: minify config
 export default defineConfig({
@@ -8,7 +11,7 @@ export default defineConfig({
   clean: true,
   platform: 'node',
   dts: true,
-  external: ['pathe', 'consola'],
+  external,
   plugins: [
     UnpluginTypia({ cache: false, log: 'verbose' }),
   ]

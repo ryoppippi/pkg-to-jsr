@@ -37,6 +37,7 @@
 		"prepare": "ts-patch install && typia patch && ./scripts/gen_types.js"
 	},
 	"dependencies": {
+		"citty": "^0.1.6",
 		"consola": "^3.2.3",
 		"pathe": "^1.1.2"
 	},
@@ -45,7 +46,6 @@
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@types/bun": "^1.1.6",
-		"citty": "^0.1.6",
 		"dax-sh": "^0.41.0",
 		"eslint": "^9.8.0",
 		"eslint-plugin-format": "^0.1.2",
