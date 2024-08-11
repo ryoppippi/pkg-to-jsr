@@ -49,8 +49,8 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1
       tsdown:
-        specifier: ^0.2.4
-        version: 0.2.4(rollup@4.20.0)(typescript@5.5.4)
+        specifier: ^0.2.5
+        version: 0.2.5(rollup@4.20.0)(typescript@5.5.4)
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -2451,8 +2451,8 @@ packages:
     resolution: {integrity: sha512-hlR43v+GUIUy8/ZGFP1DquEqPh7PFKQdDMTAmYt671kCCA6AkDQMoeFaFmZ7ObPLYOmpMgyKUqL1C+coFMf30w==}
     hasBin: true
 
-  tsdown@0.2.4:
-    resolution: {integrity: sha512-V6DzvHOo/j0GBIAcekxe6evfYVBvb2nQjy6Hb0CewkiZake6SG8PnqKzOa8RMJNs8/I1ugSnvO7lg8+90a0CUw==}
+  tsdown@0.2.5:
+    resolution: {integrity: sha512-dlPUNsujnsrLIAjFZmydtYyt2fDZvC5HYOKnIOiTJVlel3nymjPsVXNqMaqhrEfV0tvcf3/vfaroA4a/1/4pFQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -5154,7 +5154,7 @@ snapshots:
       semver: 7.6.3
       strip-ansi: 6.0.1
 
-  tsdown@0.2.4(rollup@4.20.0)(typescript@5.5.4):
+  tsdown@0.2.5(rollup@4.20.0)(typescript@5.5.4):
     dependencies:
       cac: 6.7.14
       chokidar: 3.6.0
