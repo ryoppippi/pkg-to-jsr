@@ -425,7 +425,7 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	const jsr = {
 		name: getName(pkgJSON),
 		version: version as string,
-		publish: include != null || exclude != null ? { include, exclude } : undefined,
+		publish: include == null && exclude == null ? undefined : { ...(include && { include }), ...(exclude && { exclude }) },
 		exports: getExports(pkgJSON),
 	} as const satisfies JSRConfigurationFileSchema;
 
