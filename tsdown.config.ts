@@ -12,7 +12,6 @@ export default defineConfig({
   platform: 'node',
   dts: true,
   minify: true,
-  sourcemap: true,
   external,
   plugins: [
     UnpluginTypia({ cache: false, log: 'verbose' }),
