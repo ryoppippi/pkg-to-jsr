@@ -102,6 +102,63 @@ export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema)
 	}
 }
 
+/**
+ * Get JSR name from package.json
+ *
+ * @example
+ * ```json
+ * {
+ *   "name": "package",
+ *   "author": "author"
+ * }
+ * ```
+ * will get converted into
+ * ```json
+ * {
+ *   "name": "@author/package"
+ * }
+ * ```
+ *
+ * @example
+ * ```json
+ * {
+ *   "name": "package",
+ *   "author": {
+ *     "name": "author"
+ *     "email": "example@example.com"
+ *   }
+ * }
+ * ```
+ * will get converted into
+ * ```json
+ * {
+ *   "name": "@author/package"
+ * }
+ * ```
+ *
+ * @example
+ * ```json
+ * {
+ *   "name": "package",
+ *   "jsrName": "@author/package"
+ * }
+ * ```
+ * will get converted into
+ * ```json
+ * {
+ *   "name": "@author/package"
+ * }
+ * ```
+ *
+ * @example
+ * ```json
+ * {
+ *   "name": "package",
+ * }
+ * ```
+ * the function will throw an error because it is not scoped name
+ *
+ */
 export function getName(pkgJSON: PackageJson): string {
 	const { name, author } = pkgJSON;
 	const jsrName = pkgJSON.jsrName as string | undefined;
