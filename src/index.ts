@@ -4,10 +4,11 @@ import { dirname, join, parse, resolve } from 'pathe';
 
 import typia from 'typia';
 import consola from 'consola';
-import type { PackageJson } from 'pkg-types';
+import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema } from './jsr';
 
 type Exports = JSRConfigurationFileSchema['exports'];
+type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string };
 
 const JSR_NAME_REGEX = /^@[^/]+\/[^/]+$/;
 
