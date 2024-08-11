@@ -4,6 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/pkg-to-jsr?color=yellow)](https://npmjs.com/package/pkg-to-jsr)
 
 pkg-to-jsr is a zero-config generator that creates a `jsr.json` file from your existing `package.json`.
+
 It simplifies the process of preparing your package for publication on [JSR](https://jsr.io).
 
 ## ✨ Features
