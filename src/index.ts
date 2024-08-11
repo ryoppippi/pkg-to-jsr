@@ -27,6 +27,20 @@ function _throwError(message: string): never {
 }
 
 /**
+ * Handle typia validation error
+ */
+function _typiaErrorHandler<T>(validation: typia.IValidation<T>): never | typia.IValidation.ISuccess<T> {
+	if (!validation.success) {
+		const message = validation.errors.map(({ path, expected, value }) =>
+			`${path} is invalid. Ecpected type is ${expected}, but got ${value}`,
+		).join('\n');
+		return _throwError(`Invalid JSR configuration: ${message}`);
+	}
+
+	return validation;
+}
+
+/**
  * Find a file in the directory hierarchy
  */
 export async function findUp(
@@ -62,7 +76,6 @@ export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string>
 	const path = await findUp('package.json', { cwd });
 	if (!isString(path)) {
 		_throwError(`Cannot find package.json at ${cwd}`);
-		return '';
 	}
 	return path;
 }
@@ -72,7 +85,9 @@ export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string>
  */
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
-	return typia.json.assertParse<PackageJson>(pkgJSON);
+	const validation = typia.json.validateParse<PackageJson>(pkgJSON);
+	const { data } = _typiaErrorHandler(validation);
+	return data;
 }
 
 /**
@@ -262,7 +277,8 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	} as const satisfies JSRConfigurationFileSchema;
 
 	/* check the JSR object */
-	typia.assertEquals<JSRConfigurationFileSchema>(jsr);
+	const validation = typia.validateEquals<JSRConfigurationFileSchema>(jsr);
 
-	return jsr;
+	const { data } = _typiaErrorHandler(validation);
+	return data;
 }
