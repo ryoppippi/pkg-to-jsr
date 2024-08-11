@@ -20,14 +20,14 @@
 		}
 	},
 	"bin": {
-		"pkg-to-jsr": "./dist/cli.js"
+		"pkg-to-jsr": "./bin/pkg-to-jsr.mjs"
 	},
 	"files": [
+		"bin",
 		"dist"
 	],
 	"scripts": {
-		"build": "tsdown && nr build:shebang",
-		"build:shebang": "echo '#!/usr/bin/env node' | cat - dist/cli.js > temp && mv temp dist/cli.js",
+		"build": "tsdown",
 		"dev": "tsdown --watch",
 		"typecheck": "tsc --noEmit",
 		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp && npm publish",
