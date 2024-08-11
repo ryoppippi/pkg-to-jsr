@@ -107,55 +107,48 @@ export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema)
  * Get JSR name from package.json
  *
  * @example
- * ```json
- * {
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getName({
  *   "name": "package",
  *   "author": "author"
- * }
- * ```
- * will get converted into
- * ```json
- * {
- *   "name": "@author/package"
- * }
- * ```
+ *  })
+ * )
+ * .toBe('@author/package');
  *
  * @example
- * ```json
- * {
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getName({
  *   "name": "package",
  *   "author": {
- *     "name": "author"
+ *     "name": "author",
  *     "email": "example@example.com"
  *   }
- * }
- * ```
- * will get converted into
- * ```json
- * {
- *   "name": "@author/package"
- * }
- * ```
+ *  })
+ * )
+ * .toBe('@author/package');
+ *```
  *
  * @example
- * ```json
- * {
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getName({
  *   "name": "package",
  *   "jsrName": "@author/package"
- * }
- * ```
- * will get converted into
- * ```json
- * {
- *   "name": "@author/package"
- * }
+ *  })
+ * )
+ * .toBe('@author/package');
  * ```
  *
  * @example
- * ```json
- * {
+ * ```ts @import.meta.vitest
+ * expect(
+ *  () => getName({
  *   "name": "package",
- * }
+ *  })
+ * )
+ * .toThrowError();
  * ```
  * the function will throw an error because it is not scoped name
  *
@@ -192,6 +185,39 @@ export function getName(pkgJSON: PackageJson): string {
 
 /**
  * generate include for JSR from package.json
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getInclude({
+ *   "files": ["src", "dist", "!node_modules"]
+ *  })
+ * )
+ * .toEqual(["src", "dist"]);
+ * ```
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getInclude({
+ *   "files": ["dist", "!node_modules"],
+ *   "jsrInclude": ["src"]
+ *  })
+ * )
+ * .toEqual(["src", "dist"]);
+ * ```
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getInclude({
+ *   "files": ["src", "dist", "!node_modules"],
+ *   "jsrInclude": ["src"],
+ *  })
+ * )
+ * .toEqual(["src", "dist"]);
+ * ```
+ *
  */
 export function getInclude(pkgJSON: PackageJson): string[] | undefined {
 	const { files, jsrInclude } = pkgJSON;
@@ -209,6 +235,39 @@ export function getInclude(pkgJSON: PackageJson): string[] | undefined {
 
 /**
  * generate exclude for JSR from package.json
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExclude({
+ *   "files": ["src", "dist", "!node_modules"]
+ *  })
+ * )
+ * .toEqual(["node_modules"]);
+ * ```
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExclude({
+ *   "files": ["src", "dist", "!node_modules"],
+ *   "jsrExclude": ["dist"]
+ *  })
+ * )
+ * .toEqual(["dist", "node_modules"]);
+ * ```
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExclude({
+ *   "files": ["src", "dist", "!node_modules"],
+ *   "jsrExclude": ["dist"]
+ *  })
+ * )
+ * .toEqual(["dist", "node_modules"]);
+ * ```
+ *
  */
 export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 	const { files } = pkgJSON;
@@ -235,65 +294,59 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
  * the import path should be string, { jsr: string }, { import: string }
  *
  * @example
- * ```json
- * {
- *   "exports": './index.js',
- * }
- * ```
- * will get coverted into
- * ```json
- * {
- *   "exports": {
- *     ".": "./index.js"
- *   }
- * }
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExports({
+ *   "exports": "./index.js"
+ *  })
+ * )
+ * .toEqual({ ".": "./index.js" });
  * ```
  *
  * @example
- * ```json
- * {
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExports({
  *   "exports": {
  *     ".": "./index.js",
  *     "./sub": "./sub.js"
  *   }
- * }
- * ```
- * will get coverted into
- * ```json
- * {
- *   "exports": {
- *     ".": "./index.js",
- *     "./sub": "./sub.js"
- *   }
- * }
+ *  })
+ * )
+ * .toEqual(
+ *  {
+ *    ".": "./index.js",
+ *    "./sub": "./sub.js"
+ *  }
+ * );
  * ```
  *
  * @example
- * ```json
- * {
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExports({
  *   "exports": {
  *     ".": {
  *       "jsr": "./src/index.ts",
- *       "import": "./dist/index.js"
+ *       "import": "./dist/index.js",
  *       "types": "./dist/index.d.ts"
  *     },
  *     "./sub": {
- *       "jsr": "./src/sub.ts"
- *       "import": "./dist/sub.js"
+ *       "jsr": "./src/sub.ts",
+ *       "import": "./dist/sub.js",
  *       "types": "./dist/sub.d.ts"
  *	   }
- *   }
- * }
+ *    }
+ *  })
+ * )
+ * .toEqual(
+ *  {
+ *    ".": "./src/index.ts",
+ *    "./sub": "./src/sub.ts"
+ *  }
+ * );
  * ```
- * will get coverted into
- * ```json
- * {
- *   "exports": {
- *     ".": "./src/index.ts",",
- *     "./sub": "./src/sub.ts"
- *   }
- * }
- * ```
+ *
  */
 export function getExports(pkgJSON: PackageJson): Exports {
 	const { exports } = pkgJSON;
@@ -331,6 +384,38 @@ export function getExports(pkgJSON: PackageJson): Exports {
 
 /**
  * generate JSR from package.json
+ *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  genJsrFromPackageJson({
+ *   pkgJSON: {
+ *     "name": "package",
+ *     "author": "author",
+ *     "version": "1.0.0",
+ *     "files": ["src", "dist", "!node_modules"],
+ *     "exports": {
+ *       ".": "./src/index.ts",
+ *       "./sub": "./src/sub.ts"
+ *     }
+ *   }
+ * })
+ * )
+ * .toEqual(
+ *  {
+ *    "name": "@author/package",
+ *    "version": "1.0.0",
+ *    "publish": {
+ *      "include": ["src", "dist"],
+ *      "exclude": ["node_modules"]
+ *    },
+ *    "exports": {
+ *      ".": "./src/index.ts",
+ *      "./sub": "./src/sub.ts"
+ *    }
+ *  }
+ * );
+ * ```
  */
 export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
 	const { version } = pkgJSON;
