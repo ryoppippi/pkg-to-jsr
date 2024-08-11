@@ -218,19 +218,34 @@ export function getName(pkgJSON: PackageJson): string {
  * .toEqual(["src", "dist"]);
  * ```
  *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getInclude({
+ *   "files": ["src", "dist", "!node_modules"],
+ *   "jsrInclude": ["src"],
+ *   "jsrExclude": ["dist"]
+ *  })
+ * )
+ * .toEqual(["src"]);
+ * ```
  */
 export function getInclude(pkgJSON: PackageJson): string[] | undefined {
-	const { files, jsrInclude } = pkgJSON;
-
-	if (files == null) {
-		return;
-	}
+	const {
+		files = [],
+		jsrInclude = [],
+		jsrExclude = [],
+	} = pkgJSON;
 
 	const includeFromFiles = files.filter(file => !isStartWithExclamation(file));
 
-	const includes = new Set([...(jsrInclude ?? []), ...includeFromFiles]);
+	const includes = [...jsrInclude, ...includeFromFiles].filter(file => !jsrExclude.includes(file));
 
-	return includes.size > 0 ? Array.from(includes) : undefined;
+	if (includes.length === 0) {
+		return;
+	}
+
+	return Array.from(new Set(includes));
 }
 
 /**
@@ -268,13 +283,25 @@ export function getInclude(pkgJSON: PackageJson): string[] | undefined {
  * .toEqual(["dist", "node_modules"]);
  * ```
  *
+ * @example
+ * ```ts @import.meta.vitest
+ * expect(
+ *  getExclude({
+ *   "files": ["src", "dist", "!node_modules"],
+ *   "jsrInclude": ["src"],
+ *   "jsrExclude": ["dist"]
+ *  })
+ * )
+ * .toEqual(["dist", "node_modules"]);
+ * ```
+ *
  */
 export function getExclude(pkgJSON: PackageJson): string[] | undefined {
-	const { files } = pkgJSON;
-
-	if (files == null) {
-		return;
-	}
+	const {
+		files = [],
+		jsrInclude = [],
+		jsrExclude = [],
+	} = pkgJSON;
 
 	const excludeFromFiles = files
 		.filter(file => isStartWithExclamation(file))
@@ -285,8 +312,13 @@ export function getExclude(pkgJSON: PackageJson): string[] | undefined {
 			return file;
 		});
 
-	const excludes = new Set([...(pkgJSON?.jsrExclude ?? []), ...excludeFromFiles]);
-	return excludes.size > 0 ? Array.from(excludes) : undefined;
+	const excludes = [...jsrExclude, ...excludeFromFiles].filter(file => !jsrInclude.includes(file));
+
+	if (excludes.length === 0) {
+		return;
+	}
+
+	return Array.from(new Set(excludes));
 }
 
 /**
