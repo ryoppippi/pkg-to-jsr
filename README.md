@@ -219,6 +219,7 @@ Example:
 ```
 
 In this example:
+
 - `src` is included because it's in both `files` and `jsrInclude`
 - `types` is included because it's in `jsrInclude`
 - `dist` is excluded because it's in `jsrExclude`, overriding its presence in `files`
