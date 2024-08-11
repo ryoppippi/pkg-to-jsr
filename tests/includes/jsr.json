@@ -1,0 +1,13 @@
+{
+	"name": "@ryoppippi/dummy",
+	"version": "0.1.0",
+	"publish": {
+		"include": [
+			"src/**/*.ts",
+			"dist"
+		]
+	},
+	"exports": {
+		".": "./dist/index.js"
+	}
+}

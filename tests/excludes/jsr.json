@@ -1,0 +1,16 @@
+{
+	"name": "@ryoppippi/dummy",
+	"version": "0.1.0",
+	"publish": {
+		"include": [
+			"dist"
+		],
+		"exclude": [
+			"src/**/*.ts",
+			"node_modules"
+		]
+	},
+	"exports": {
+		".": "./dist/index.js"
+	}
+}
