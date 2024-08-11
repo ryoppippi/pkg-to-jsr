@@ -1,0 +1,22 @@
+{
+	"name": "dummy",
+	"type": "module",
+	"version": "0.1.0",
+	"description": "hello world",
+	"author": "ryoppippi",
+	"license": "MIT",
+	"keywords": [],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist",
+		"!node_modules"
+	],
+	"jsrExclude": [
+		"src/**/*.ts"
+	]
+}
