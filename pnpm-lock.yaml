@@ -19,7 +19,7 @@ importers:
         version: 1.1.2
     devDependencies:
       '@antfu/ni':
-        specifier: ^0.22.0
+        specifier: ^0.22.1
         version: 0.22.1
       '@ryoppippi/eslint-config':
         specifier: npm:@jsr/ryoppippi__eslint-config@^0.0.21

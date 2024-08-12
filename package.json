@@ -42,7 +42,7 @@
 		"pathe": "^1.1.2"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^0.22.0",
+		"@antfu/ni": "^0.22.1",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@types/bun": "^1.1.6",
