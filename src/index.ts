@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises';
 import process from 'node:process';
-import { dirname, join, parse, resolve } from 'pathe';
 
 import typia from 'typia';
 import consola from 'consola';
+import { findUp } from 'find-up-simple';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema } from './jsr';
 
@@ -39,34 +39,6 @@ function _typiaErrorHandler<T>(validation: typia.IValidation<T>): never | typia.
 	}
 
 	return validation;
-}
-
-/**
- * Find a file in the directory hierarchy
- */
-export async function findUp(
-	name: string | string[],
-	{ cwd }: { cwd: string },
-): Promise<string | undefined> {
-	let directory = resolve(cwd);
-	const { root } = parse(directory);
-	const names = [name].flat();
-
-	while (directory && directory !== root) {
-		for (const name of names) {
-			const filePath = join(directory, name);
-
-			try {
-				const stats = await fs.stat(filePath);
-				if (stats.isFile()) {
-					return filePath;
-				}
-			}
-			catch {}
-		}
-
-		directory = dirname(directory);
-	}
 }
 
 /**
