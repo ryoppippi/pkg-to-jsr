@@ -47,7 +47,7 @@
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@types/bun": "^1.1.6",
 		"dax-sh": "^0.41.0",
-		"eslint": "^9.8.0",
+		"eslint": "^9.9.0",
 		"eslint-plugin-format": "^0.1.2",
 		"find-up-simple": "^1.0.0",
 		"json-schema-to-typescript": "^15.0.0",
