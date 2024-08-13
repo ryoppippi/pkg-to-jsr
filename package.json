@@ -29,6 +29,7 @@
 	"scripts": {
 		"build": "tsdown",
 		"dev": "tsdown --watch",
+		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
 		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp && npm publish",
 		"lint": "eslint --cache .",
