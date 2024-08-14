@@ -3,9 +3,9 @@ import fs from 'node:fs/promises';
 import { cli } from 'cleye';
 
 import { isAbsolute, resolve } from 'pathe';
-import { consola } from 'consola';
 
 import { description, name, version } from '../package.json';
+import { logger } from './logger';
 import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 
 function resolveJsrPath(root: string) {
@@ -42,7 +42,7 @@ export async function main(): Promise<void> {
 
 	/* check if root is a directory */
 	if (!(await fs.lstat(cwd)).isDirectory()) {
-		consola.error(`${root} is not a valid root directory`);
+		logger.error(`${root} is not a valid root directory`);
 		process.exit(1);
 	}
 
@@ -54,5 +54,5 @@ export async function main(): Promise<void> {
 
 	await writeJsr(jsrPath, jsr);
 
-	consola.success(`Generated ${jsrPath}`);
+	logger.success(`Generated ${jsrPath}`);
 }

@@ -2,10 +2,10 @@ import fs from 'node:fs/promises';
 import process from 'node:process';
 
 import typia from 'typia';
-import consola from 'consola';
 import { findUp } from 'find-up-simple';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema } from './jsr';
+import { logger } from './logger';
 
 type Exports = JSRConfigurationFileSchema['exports'];
 type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
@@ -20,7 +20,7 @@ const isString = typia.createIs<string>();
  * @internal
  */
 function _throwError(message: string): never {
-	consola.error(message);
+	logger.error(message);
 	if (process.env.NODE_ENV === 'test') {
 		throw new Error(message);
 	}
@@ -375,7 +375,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
 				_exports[key] = value.jsr ?? value.import;
 				break;
 			default:
-				consola.warn(`Export key ${key} is ignored because it is not a string or object`);
+				logger.warn(`Export key ${key} is ignored because it is not a string or object`);
 		}
 	}
 
