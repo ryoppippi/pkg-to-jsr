@@ -35,7 +35,8 @@
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
 		"test": "vitest --typecheck",
-		"prepare": "ts-patch install && typia patch && ./scripts/gen_types.js"
+		"prepare": "ts-patch install && typia patch && ./scripts/gen_types.js",
+		"prepublishOnly": "nr build"
 	},
 	"dependencies": {
 		"cleye": "^1.3.2",
