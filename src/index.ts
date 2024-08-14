@@ -1,11 +1,10 @@
 import fs from 'node:fs/promises';
-import process from 'node:process';
 
 import typia from 'typia';
 import { findUp } from 'find-up-simple';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema } from './jsr';
-import { logger } from './logger';
+import { _throwError, _typiaErrorHandler, logger } from './logger';
 
 type Exports = JSRConfigurationFileSchema['exports'];
 type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
@@ -14,32 +13,6 @@ const JSR_NAME_REGEX = /^@[^/]+\/[^/]+$/;
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 const isString = typia.createIs<string>();
-
-/**
- * Throw an error and exit the process
- * @internal
- */
-function _throwError(message: string): never {
-	logger.error(message);
-	if (process.env.NODE_ENV === 'test') {
-		throw new Error(message);
-	}
-	process.exit(1);
-}
-
-/**
- * Handle typia validation error
- */
-function _typiaErrorHandler<T>(validation: typia.IValidation<T>): never | typia.IValidation.ISuccess<T> {
-	if (!validation.success) {
-		const message = validation.errors.map(({ path, expected, value }) =>
-			`${path} is invalid. Ecpected type is ${expected}, but got ${value}`,
-		).join('\n');
-		return _throwError(`Invalid JSR configuration: ${message}`);
-	}
-
-	return validation;
-}
 
 /**
  * Find package.json in the directory hierarchy

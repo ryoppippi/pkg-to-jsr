@@ -5,7 +5,7 @@ import { cli } from 'cleye';
 import { isAbsolute, resolve } from 'pathe';
 
 import { description, name, version } from '../package.json';
-import { logger } from './logger';
+import { _throwError, logger } from './logger';
 import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 
 function resolveJsrPath(root: string) {
@@ -42,8 +42,7 @@ export async function main(): Promise<void> {
 
 	/* check if root is a directory */
 	if (!(await fs.lstat(cwd)).isDirectory()) {
-		logger.error(`${root} is not a valid root directory`);
-		process.exit(1);
+		_throwError(`${root} is not a valid root directory`);
 	}
 
 	const pkgJSONPath = await findPackageJSON({ cwd });
