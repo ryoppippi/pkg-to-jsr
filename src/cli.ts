@@ -1,6 +1,6 @@
 import process from 'node:process';
 import fs from 'node:fs/promises';
-import { defineCommand, runMain } from 'citty';
+import { cli } from 'cleye';
 
 import { isAbsolute, resolve } from 'pathe';
 import { consola } from 'consola';
@@ -12,40 +12,47 @@ function resolveJsrPath(root: string) {
 	return resolve(root, 'jsr.json');
 }
 
-const main = defineCommand({
-	meta: { name, version, description },
-	args: {
-		root: {
-			type: 'string',
-			description: 'root directory including package.json',
+export async function main(): Promise<void> {
+	const argv = cli({
+		name,
+		version,
+		flags: {
+			root: {
+				type: String,
+				alias: 'r',
+				description: 'root directory including package.json',
+				placeholder: '[path]',
+			},
 		},
-	},
-	async run({ args: { root } }) {
-		/** current working directory or maybe file */
-		const cwd
-			= isAbsolute(root)
-				? root
-				: root != null
-					? resolve(process.cwd(), root)
-					: process.cwd();
 
-		/* check if root is a directory */
-		if (!(await fs.lstat(cwd)).isDirectory()) {
-			consola.error(`${root} is not a valid root directory`);
-			process.exit(1);
-		}
+		help: {
+			description,
+		},
+	});
 
-		const pkgJSONPath = await findPackageJSON({ cwd });
-		const jsrPath = resolveJsrPath(cwd);
+	const { root } = argv.flags;
 
-		const pkgJSON = await readPkgJSON(pkgJSONPath);
-		const jsr = genJsrFromPackageJson({ pkgJSON });
+	/** current working directory or maybe file */
+	const cwd
+	= isAbsolute(root as string)
+		? root as string
+		: root != null
+			? resolve(process.cwd(), root)
+			: process.cwd();
 
-		await writeJsr(jsrPath, jsr);
-	},
-	cleanup({ args: { root } }) {
-		consola.success(`Generated ${resolveJsrPath(root)}`);
-	},
-});
+	/* check if root is a directory */
+	if (!(await fs.lstat(cwd)).isDirectory()) {
+		consola.error(`${root} is not a valid root directory`);
+		process.exit(1);
+	}
 
-await runMain(main);
+	const pkgJSONPath = await findPackageJSON({ cwd });
+	const jsrPath = resolveJsrPath(cwd);
+
+	const pkgJSON = await readPkgJSON(pkgJSONPath);
+	const jsr = genJsrFromPackageJson({ pkgJSON });
+
+	await writeJsr(jsrPath, jsr);
+
+	consola.success(`Generated ${jsrPath}`);
+}
