@@ -43,7 +43,7 @@
 		"consola": "^3.2.3"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^0.22.1",
+		"@antfu/ni": "^0.22.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@types/bun": "^1.1.6",
