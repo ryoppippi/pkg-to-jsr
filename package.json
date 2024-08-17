@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^0.22.4",
-		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.21",
+		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.22",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@types/bun": "^1.1.6",
 		"dax-sh": "^0.41.0",

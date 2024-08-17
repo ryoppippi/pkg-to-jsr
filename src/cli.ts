@@ -8,7 +8,7 @@ import { description, name, version } from '../package.json';
 import { _throwError, logger } from './logger';
 import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 
-function resolveJsrPath(root: string) {
+function resolveJsrPath(root: string): string {
 	return resolve(root, 'jsr.json');
 }
 
