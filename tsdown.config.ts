@@ -4,7 +4,6 @@ import { dependencies } from './package.json';
 
 const external = Object.keys(dependencies);
 
-// TODO: minify config
 export default defineConfig({
   entry: ['./src/*.ts'],
   format: 'esm',
