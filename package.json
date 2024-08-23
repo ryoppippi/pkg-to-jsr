@@ -27,7 +27,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsdown",
+		"build": "tsdown && node ./scripts/postbuild.js",
 		"dev": "tsdown --watch",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
@@ -46,10 +46,11 @@
 		"@antfu/ni": "^0.22.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.22",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
+		"@swc/core": "^1.7.14",
 		"@types/bun": "^1.1.6",
-		"dax-sh": "^0.41.0",
 		"eslint": "^9.9.0",
 		"eslint-plugin-format": "^0.1.2",
+		"fast-glob": "^3.3.2",
 		"find-up-simple": "^1.0.0",
 		"json-schema-to-typescript": "^15.0.0",
 		"pathe": "^1.1.2",
