@@ -23,6 +23,11 @@ export async function main(): Promise<void> {
 				description: 'root directory including package.json',
 				placeholder: '[path]',
 			},
+			silent: {
+				type: Boolean,
+				alias: 's',
+				description: 'Suppress non-error logs',
+			},
 		},
 
 		help: {
@@ -30,7 +35,11 @@ export async function main(): Promise<void> {
 		},
 	});
 
-	const { root } = argv.flags;
+	const { root, silent } = argv.flags;
+
+	logger.level = silent === true
+		? 0 // Fatal and Error
+		: 3; // Informational logs, success, fail, ready, start, ...
 
 	/** current working directory or maybe file */
 	const cwd
