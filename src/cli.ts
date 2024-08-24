@@ -8,6 +8,9 @@ import { description, name, version } from '../package.json';
 import { _throwError, logger } from './logger';
 import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 
+const LOG_LEVEL_SILENT = 0; // Fatal and Error
+const LOG_LEVEL_NORMAL = 3; // Informational logs, success, fail, ready, start, ...
+
 function resolveJsrPath(root: string): string {
 	return resolve(root, 'jsr.json');
 }
@@ -37,9 +40,7 @@ export async function main(): Promise<void> {
 
 	const { root, silent } = argv.flags;
 
-	logger.level = silent === true
-		? 0 // Fatal and Error
-		: 3; // Informational logs, success, fail, ready, start, ...
+	logger.level = silent === true ? LOG_LEVEL_SILENT : LOG_LEVEL_NORMAL;
 
 	/** current working directory or maybe file */
 	const cwd
