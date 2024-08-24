@@ -5,16 +5,17 @@ import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
 import { bold } from 'yoctocolors';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
-import type { JSRConfigurationFileSchema } from './jsr';
+import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
 
+type JSRScopedName = `@${string}/${string}`;
+type JSRConfigurationFileSchema = Omit<_JSRConfigurationFileSchema, 'name'> & { name: JSRScopedName };
 type Exports = JSRConfigurationFileSchema['exports'];
 type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
 
-const JSR_NAME_REGEX = /^@[^/]+\/[^/]+$/;
-
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 const isString = typia.createIs<string>();
+const isJSRScopedName = typia.createIs<JSRScopedName>();
 
 /**
  * Find package.json in the directory hierarchy
@@ -100,21 +101,24 @@ export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema)
  * the function will throw an error because it is not scoped name
  *
  */
-export function getName(pkgJSON: PackageJson): string {
+export function getName(pkgJSON: PackageJson): JSRScopedName {
 	const { name, author } = pkgJSON;
 	const jsrName = pkgJSON.jsrName as string | undefined;
 
-	if (jsrName != null && JSR_NAME_REGEX.test(jsrName)) {
+	if (isJSRScopedName(jsrName)) {
 		return jsrName;
 	}
 
-	if (name != null && JSR_NAME_REGEX.test(name)) {
+	if (!isString(jsrName) && isJSRScopedName(name)) {
 		return name;
 	}
 
-	if (name != null && author != null && (isString(author) || isString(author?.name))) {
+	if (!isString(jsrName) && isString(name) && (isString(author) || isString(author?.name))) {
 		const _author = isString(author) ? author : author.name;
-		return `@${_author}/${name}`;
+		const jsrName = `@${_author}/${name}`;
+		if (isJSRScopedName(jsrName)) {
+			return jsrName;
+		}
 	}
 
 	const errorMessages = [
