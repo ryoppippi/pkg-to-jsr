@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import typia from 'typia';
 import { findUp } from 'find-up-simple';
+import terminalLink from 'terminal-link';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema } from './jsr';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
@@ -102,10 +103,7 @@ export function getName(pkgJSON: PackageJson): string {
 	const { name, author } = pkgJSON;
 	const jsrName = pkgJSON.jsrName as string | undefined;
 
-	if (jsrName != null) {
-		if (!JSR_NAME_REGEX.test(jsrName)) {
-			_throwError(`Invalid JSR name ${jsrName}. Must be scoped`);
-		}
+	if (jsrName != null && JSR_NAME_REGEX.test(jsrName)) {
 		return jsrName;
 	}
 
@@ -119,7 +117,10 @@ export function getName(pkgJSON: PackageJson): string {
 	}
 
 	const errorMessages = [
-		'Cannot determine JSR name from package.json.',
+		jsrName != null ? `jsrName ${jsrName} is not a valid scoped package name` : undefined,
+		jsrName == null && name != null && author == null ? `name ${name} is not a valid scoped package name` : undefined,
+		`On JSR, all packages are contained within a scope. See ${terminalLink('https://jsr.io/docs/scopes', 'https://jsr.io/docs/scopes')} for more information`,
+		`To fix this issue, you can choose one of the following options:`,
 		'1. add jsrName field to package.json',
 		'2. use scoped package name (ex: @author/package)',
 		'3. add name & author field to package.json ( ex: { "name": "package", "author": { "name": "author" } })',
