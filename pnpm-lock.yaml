@@ -58,7 +58,7 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1
       tsdown:
-        specifier: ^0.2.8
+        specifier: ^0.2.10
         version: 0.2.10(@swc/core@1.7.18)(rollup@4.21.0)(typescript@5.5.4)
       typescript:
         specifier: ^5.5.4
