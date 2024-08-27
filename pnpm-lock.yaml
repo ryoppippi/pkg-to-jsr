@@ -28,7 +28,7 @@ importers:
         specifier: npm:@jsr/ryoppippi__unplugin-typia
         version: '@jsr/ryoppippi__unplugin-typia@0.6.22(@types/node@20.12.14)(rollup@4.21.0)'
       '@swc/core':
-        specifier: ^1.7.14
+        specifier: ^1.7.18
         version: 1.7.18
       '@types/bun':
         specifier: ^1.1.7

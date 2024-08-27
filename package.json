@@ -47,7 +47,7 @@
 		"@antfu/ni": "^0.22.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
-		"@swc/core": "^1.7.14",
+		"@swc/core": "^1.7.18",
 		"@types/bun": "^1.1.7",
 		"eslint": "^9.9.1",
 		"eslint-plugin-format": "^0.1.2",
