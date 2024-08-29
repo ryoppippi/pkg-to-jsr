@@ -13,7 +13,7 @@ it('basic', async () => {
 
 describe('files test', () => {
 	it('without files', async () => {
-		const DIR = resolve(__dirname, './without_files/');
+		const DIR = resolve(__dirname, './files_without_files/');
 		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
@@ -22,7 +22,7 @@ describe('files test', () => {
 	});
 
 	it('includes', async () => {
-		const DIR = resolve(__dirname, './includes');
+		const DIR = resolve(__dirname, './files_includes');
 		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
@@ -31,7 +31,7 @@ describe('files test', () => {
 	});
 
 	it('excludes', async () => {
-		const DIR = resolve(__dirname, './excludes');
+		const DIR = resolve(__dirname, './files_excludes');
 		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
