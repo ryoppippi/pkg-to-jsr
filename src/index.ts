@@ -349,9 +349,13 @@ export function getExports(pkgJSON: PackageJson): Exports {
 			case isString(value):
 				_exports[key] = value;
 				break;
-			case typia.is<Record<string, string>>(value):
-				/* if jsr is defined, use it, otherwise use import */
-				_exports[key] = value.jsr ?? value.import;
+			case typia.is<{ jsr: string }>(value):
+				/* if jsr is defined, use it */
+				_exports[key] = value.jsr;
+				break;
+			case typia.is<{ import: string | { default: string } }>(value):
+				/* if import is defined, use it */
+				_exports[key] = isString(value.import) ? value.import : value.import.default;
 				break;
 			default:
 				logger.warn(`Export key ${key} is ignored because it is not a string or object`);
