@@ -31,7 +31,7 @@
 		"dev": "tsdown --watch",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
-		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp --ignore-scripts && npm publish",
+		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp --ignore-scripts",
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
 		"test": "vitest --typecheck",
