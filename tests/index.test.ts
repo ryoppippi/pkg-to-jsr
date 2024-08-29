@@ -42,7 +42,7 @@ describe('files test', () => {
 
 describe('name test', () => {
 	it('gen name', async () => {
-		const DIR = resolve(__dirname, './gen_name/');
+		const DIR = resolve(__dirname, './name_gen_name/');
 		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
@@ -51,7 +51,7 @@ describe('name test', () => {
 	});
 
 	it('jsr name', async () => {
-		const DIR = resolve(__dirname, './jsrName/');
+		const DIR = resolve(__dirname, './name_jsrName/');
 		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
@@ -60,7 +60,7 @@ describe('name test', () => {
 	});
 
 	it('error caused name', async () => {
-		const DIR = resolve(__dirname, './error_caused_name_field/');
+		const DIR = resolve(__dirname, './name_error_caused_name_field/');
 		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		expect(() => genJsrFromPackageJson({ pkgJSON })).toThrowError();
