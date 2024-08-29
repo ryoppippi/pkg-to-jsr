@@ -11,6 +11,35 @@ it('basic', async () => {
 	await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 });
 
+describe('exports', () => {
+	it('exports_with_jsr', async () => {
+		const DIR = resolve(__dirname, './exports_with_jsr/');
+		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
+		const pkgJSON = await readPkgJSON(pkgJsonPath);
+		const jsr = genJsrFromPackageJson({ pkgJSON });
+
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
+	});
+
+	it('exprts_without_jsr', async () => {
+		const DIR = resolve(__dirname, './exports_without_jsr/');
+		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
+		const pkgJSON = await readPkgJSON(pkgJsonPath);
+		const jsr = genJsrFromPackageJson({ pkgJSON });
+
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
+	});
+
+	it('exports_without_jsr_imports_object', async () => {
+		const DIR = resolve(__dirname, './exports_without_jsr_imports_object/');
+		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
+		const pkgJSON = await readPkgJSON(pkgJsonPath);
+		const jsr = genJsrFromPackageJson({ pkgJSON });
+
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
+	});
+});
+
 describe('files test', () => {
 	it('without files', async () => {
 		const DIR = resolve(__dirname, './files_without_files/');
