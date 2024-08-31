@@ -47,6 +47,7 @@
 		"@antfu/ni": "^0.23.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
+		"@std/semver": "npm:@jsr/std__semver@^1.0.2",
 		"@swc/core": "^1.7.18",
 		"@types/bun": "^1.1.8",
 		"eslint": "^9.9.1",

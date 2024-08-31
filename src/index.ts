@@ -4,6 +4,7 @@ import typia from 'typia';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
 import { bold } from 'yoctocolors';
+import * as semver from '@std/semver';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
 import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
@@ -425,5 +426,10 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	const validation = typia.validateEquals<JSRConfigurationFileSchema>(jsr);
 
 	const { data } = _typiaErrorHandler(validation);
+
+	if (!semver.canParse(data.version)) {
+		_throwError(`Invalid version: ${version}`);
+	}
+
 	return data;
 }
