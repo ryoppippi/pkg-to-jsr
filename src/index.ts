@@ -6,11 +6,12 @@ import terminalLink from 'terminal-link';
 import { bold } from 'yoctocolors';
 import * as semver from '@std/semver';
 import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
+import type { OverrideProperties } from 'type-fest';
 import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
 
 type JSRScopedName = `@${string}/${string}`;
-type JSRJson = Omit<_JSRConfigurationFileSchema, 'name'> & { name: JSRScopedName };
+type JSRJson = OverrideProperties<_JSRConfigurationFileSchema, { name: JSRScopedName }>;
 type Exports = JSRJson['exports'];
 type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
 

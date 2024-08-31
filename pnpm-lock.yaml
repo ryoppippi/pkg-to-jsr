@@ -27,6 +27,9 @@ importers:
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia
         version: '@jsr/ryoppippi__unplugin-typia@0.6.22(@types/node@20.12.14)(rollup@4.21.0)'
+      '@std/semver':
+        specifier: npm:@jsr/std__semver@^1.0.2
+        version: '@jsr/std__semver@1.0.2'
       '@swc/core':
         specifier: ^1.7.18
         version: 1.7.18
@@ -60,6 +63,9 @@ importers:
       tsdown:
         specifier: ^0.2.10
         version: 0.2.10(@swc/core@1.7.18)(rollup@4.21.0)(typescript@5.5.4)
+      type-fest:
+        specifier: ^4.26.0
+        version: 4.26.0
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -158,13 +164,13 @@ packages:
     resolution: {integrity: sha512-EStJpq4OuY8xYfhGVXngigBJRWxftKX9ksiGDnmlY3o7B/V7KIAc9X4oiK87uPJSc/vs5L869bem5fhZa8caZw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.25.4':
-    resolution: {integrity: sha512-nq+eWrOgdtu3jG5Os4TQP3x3cLA8hR8TvJNjD8vnPa20WGycimcparWnLK4jJhElTK6SDyuJo1weMKO/5LpmLA==}
+  '@babel/parser@7.25.6':
+    resolution: {integrity: sha512-trGdfBdbD0l1ZPmcJ83eNxB9rbEax4ALFTF7fN386TMYbeCQbyme5cOEXQhbGXKebwGaB/J52w1mrklMcbgy6Q==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/types@7.25.4':
-    resolution: {integrity: sha512-zQ1ijeeCXVEh+aNL0RlmkPkG8HUiDcU2pzQQFjtbntgAczRASFzj4H+6+bV+dy1ntKR14I/DypeuRG1uma98iQ==}
+  '@babel/types@7.25.6':
+    resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==}
     engines: {node: '>=6.9.0'}
 
   '@clack/core@0.3.4':
@@ -557,6 +563,9 @@ packages:
   '@jsr/std__collections@1.0.5':
     resolution: {integrity: sha512-bL+K7aDs6uozic3U6qw0ll3zAmIO/sxb+764Dbqiavv/yo4qXrTjJf75wkkPWUECsXvIjLm34xAone/O0P0tyw==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.5.tgz}
 
+  '@jsr/std__semver@1.0.2':
+    resolution: {integrity: sha512-TCpw37AtTngCzHOok87DT/ms2+c/1DRowvkBv8cAouij88ntMc53BFKOwYk45/9V8pHiKCmJQKZf/caBhTFMkg==, tarball: https://npm.jsr.io/~/11/@jsr/std__semver/1.0.2.tgz}
+
   '@napi-rs/wasm-runtime@0.2.4':
     resolution: {integrity: sha512-9zESzOO5aDByvhIAsOy9TbpZ0Ur2AJbUI7UT73kcUTS2mxAMHOBaa1st/jAymNoCtvrit99kkzT1FZuXVcgfIQ==}
 
@@ -660,63 +669,63 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@rolldown/binding-darwin-arm64@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-imy/07QgLECFE0Yy4HKKViFqeMTHOy/kdBVhO1Mefq+Fzh4DfUwL8YJXO3t2B99pTwgC6OwruNc39W0zCqeV3A==}
+  '@rolldown/binding-darwin-arm64@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-hEtFXruyk75kQNEIKQ+utgXrvhuVCoilox7JEujzb9cCTi5VC8ejRGXxKi0oCHdmQGfcMazyjj8LYF7GiNm0FA==}
     cpu: [arm64]
     os: [darwin]
 
-  '@rolldown/binding-darwin-x64@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-Zgvti6Q585qXdMm1HzeITe45N/I2QALyO7ZBV2AZtHAf7V47vKbvhAtJTCNaT8XTdPrXdcS7EK9LPti1MfnTrA==}
+  '@rolldown/binding-darwin-x64@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-b0xd9iuICPJI6dixN5t098mPjgDNr2fc4bnt3KfwkvtuwC2Hvc+05vp6Fs5oOqWihEIxBJaxBSZv8h1wwB6olQ==}
     cpu: [x64]
     os: [darwin]
 
-  '@rolldown/binding-freebsd-x64@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-647NHoUvLC6Ti7OczpyFJXqKP+zl/isiv2gLVxPsrRc53nHLsYkXUXWJn6fplC88UxwusSztz1kG50Kf6nHedw==}
+  '@rolldown/binding-freebsd-x64@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-HAiXwr3xreOUFzC4Dzau4eJy6wJfjfVE/hshBWIXTexoglIXf0enafmL2+jdnSyG6f7YC2NXszTNdGbGozpXDg==}
     cpu: [x64]
     os: [freebsd]
 
-  '@rolldown/binding-linux-arm-gnueabihf@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-mMatnb1fQtqCkWZT5Ccud0w1VtdhuXHhZM9Z3gNBswjVPuuHev7i1q7BlJDDb6zy8ijU5BFchVSSFV8UVUZ46Q==}
+  '@rolldown/binding-linux-arm-gnueabihf@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-kLkUMb7cwzjDiRfdCf6HibjSWc2FgQI6RUUrt3l9sfUKnyiwaYszwRWZxxg8ekcfXzPr2K0M/pCrnHCHok4pYw==}
     cpu: [arm]
     os: [linux]
 
-  '@rolldown/binding-linux-arm64-gnu@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-/0a1qi3bl81RccHLk96whdM0m3T4OT2WgOe0hpFNxBK9QVQk5TgKtv5TOM4rYkVSN11jV12wTLsyoDqDluWUAw==}
+  '@rolldown/binding-linux-arm64-gnu@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-31Az4/HbXyaQ8sLApUbH/CwsTH4eQtHPsG0vYBBmraqTwgzRlD4Qq/QDJ1WnC2hIDH1eA1KqmUPxgSCg/h1G/g==}
     cpu: [arm64]
     os: [linux]
 
-  '@rolldown/binding-linux-arm64-musl@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-0Oq7w/UFjC6NqLrBoSNA7/j6bchi9lTp5/I78wi+fpzLYtoaDBEq2KB/I8yB/Q04BKcJ9N/pPh9RJNWqdQ6/zA==}
+  '@rolldown/binding-linux-arm64-musl@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-yi48jdjwCYFNbrKYDoEeMwsRjx9QuiFKIMgoafpw9e/eaxSWpYZPAQfO9UoTmZWi8rdfur3PtM8KrTfTlzXrig==}
     cpu: [arm64]
     os: [linux]
 
-  '@rolldown/binding-linux-x64-gnu@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-fqiog52dvj379fuibTR5HkbOZCtrV9h3eoTue8YqmbdZFnz8tJHPgYQ3ix0IG3QZUjFhdCGhSs7X5RpCC8XxNg==}
+  '@rolldown/binding-linux-x64-gnu@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-qp80VX0YoGM18Zjfag0x5Lf1NFBS20Divq6kasneRmkwf4M70GqZgu/TO4swKBRdvxyXMMf8u9UNr1n+OlsWTw==}
     cpu: [x64]
     os: [linux]
 
-  '@rolldown/binding-linux-x64-musl@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-FnHD3mu3IGAEjrE6nzmJMBrUsahaBV27Chow0MQNQyJR+Zbp7WyJDsXzs0/jCJuZ0CNHIXpZJA6VloaMAi3rrA==}
+  '@rolldown/binding-linux-x64-musl@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-jaXD3332ZwuZhKqMMuw/jqwABlf+uh+iw+6dKxQSUfOyGf14K/8kPSvC+fvFlceOnoM7Xh1ZH97H7u+5PkAdVw==}
     cpu: [x64]
     os: [linux]
 
-  '@rolldown/binding-wasm32-wasi@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-H20vfwIm2YdGYg/8na5VMItXdTpJX5K2Jn/9vN7mP5rKzYgrUY31YHSMKJ8YmFPg0lWHHJPggFfw5EIf+vTjiQ==}
+  '@rolldown/binding-wasm32-wasi@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-D4aDkWFSgfQ6kqygxJUeaccL28SsXkcn2bPMkadj9xOevVdtFgDi8QNzWeV2IkatvRoNoUO8Eq/Rt8RqYkYaDw==}
     engines: {node: '>=14.21.3'}
     cpu: [wasm32]
 
-  '@rolldown/binding-win32-arm64-msvc@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-M/FZ/wZ+OtFhT5VjqejiXdRXUGUfVwdWzCv2k2/C4nFc1Xe3nkR3qA6bvYCNGkU5NxDlNl/CUolQ1mu7JzhuGg==}
+  '@rolldown/binding-win32-arm64-msvc@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-cdIqCnPfqUCEoBQ4W2bIcOb1KQBrZXPNUQS6p4auqrMPoPyVfoEhqBd/vXDL//Wy33xtPSmO3u48ccdnLIl6Pg==}
     cpu: [arm64]
     os: [win32]
 
-  '@rolldown/binding-win32-ia32-msvc@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-0k8R4frnfVHjU02MjYvblMAXOP435FrAkvGLhzEzQCEk25oTiKuEsJsloLGBPNFS9ZY14/IIUr5be8mEtVHpsg==}
+  '@rolldown/binding-win32-ia32-msvc@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-5hi2FDhTT+GLH74Zcq3nfVoVOcY0MPnV206rSy1KoY0xQLl/DQldF71VPH9mds1Wd91luQiiSRP4LiAhGFLVoA==}
     cpu: [ia32]
     os: [win32]
 
-  '@rolldown/binding-win32-x64-msvc@0.12.2-snapshot-33fca46-20240830003232':
-    resolution: {integrity: sha512-c4z6PVprdqF4mbJyQq2bachX6jwCc2tN8j0TTil4Ksd4xbPuP3BoR1sORbjiRAeRFX7Wg1LkiGcisTW9uPMMZw==}
+  '@rolldown/binding-win32-x64-msvc@0.12.2-snapshot-8b7734e-20240831003056':
+    resolution: {integrity: sha512-tLhmVhMsPCGvC1u69DOiCdvTZoi3H02B5OAkaJbwXR1as5To6zWJY9nJEQpXeZg7uzlH/Th59VVqpBI7jHhC6A==}
     cpu: [x64]
     os: [win32]
 
@@ -2304,8 +2313,8 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rolldown@0.12.2-snapshot-33fca46-20240830003232:
-    resolution: {integrity: sha512-nfNg7N5ZvDfSHP7JdQVv2p6fPKe4/X95t/3QWGAPLvsk174TevofdApM6CfhTAAxEpqhn2Dro4BFz99rwDLPZA==}
+  rolldown@0.12.2-snapshot-8b7734e-20240831003056:
+    resolution: {integrity: sha512-fYtiTmmw7A43s2UUwVED05YO1le3T4mKIP1WxF76Qya9gm9xkC8LX6P0WIhdYhJpzkU4y0CYCVJQBBZloF2eEw==}
     hasBin: true
 
   rollup@4.21.0:
@@ -2555,8 +2564,8 @@ packages:
     resolution: {integrity: sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==}
     engines: {node: '>=10'}
 
-  type-fest@4.25.0:
-    resolution: {integrity: sha512-bRkIGlXsnGBRBQRAY56UXBm//9qH4bmJfFvq83gSz41N282df+fjy8ofcEgc1sM8geNt5cl6mC2g9Fht1cs8Aw==}
+  type-fest@4.26.0:
+    resolution: {integrity: sha512-OduNjVJsFbifKb57UqZ2EMP1i4u64Xwow3NYXUtBbD4vIwJdQd4+xl8YDou1dlm4DVrtwT/7Ky8z8WyCULVfxw==}
     engines: {node: '>=16'}
 
   type-flag@3.0.0:
@@ -2854,11 +2863,11 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.0.1
 
-  '@babel/parser@7.25.4':
+  '@babel/parser@7.25.6':
     dependencies:
-      '@babel/types': 7.25.4
+      '@babel/types': 7.25.6
 
-  '@babel/types@7.25.4':
+  '@babel/types@7.25.6':
     dependencies:
       '@babel/helper-string-parser': 7.24.8
       '@babel/helper-validator-identifier': 7.24.7
@@ -3160,7 +3169,7 @@ snapshots:
       magic-string: 0.30.11
       pathe: 1.1.2
       pkg-types: 1.2.0
-      type-fest: 4.25.0
+      type-fest: 4.26.0
       typescript: 5.5.4
       typia: 6.9.0(typescript@5.5.4)
       unplugin: 1.12.2
@@ -3177,6 +3186,8 @@ snapshots:
       - terser
 
   '@jsr/std__collections@1.0.5': {}
+
+  '@jsr/std__semver@1.0.2': {}
 
   '@napi-rs/wasm-runtime@0.2.4':
     dependencies:
@@ -3250,42 +3261,42 @@ snapshots:
 
   '@pkgr/core@0.1.1': {}
 
-  '@rolldown/binding-darwin-arm64@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-darwin-arm64@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-darwin-x64@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-darwin-x64@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-freebsd-x64@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-freebsd-x64@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-linux-arm-gnueabihf@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-linux-arm-gnueabihf@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-linux-arm64-gnu@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-linux-arm64-gnu@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-linux-arm64-musl@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-linux-arm64-musl@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-linux-x64-gnu@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-linux-x64-gnu@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-linux-x64-musl@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-linux-x64-musl@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-wasm32-wasi@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-wasm32-wasi@0.12.2-snapshot-8b7734e-20240831003056':
     dependencies:
       '@napi-rs/wasm-runtime': 0.2.4
     optional: true
 
-  '@rolldown/binding-win32-arm64-msvc@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-win32-arm64-msvc@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-win32-ia32-msvc@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-win32-ia32-msvc@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
-  '@rolldown/binding-win32-x64-msvc@0.12.2-snapshot-33fca46-20240830003232':
+  '@rolldown/binding-win32-x64-msvc@0.12.2-snapshot-8b7734e-20240831003056':
     optional: true
 
   '@rollup/pluginutils@5.1.0(rollup@4.21.0)':
@@ -3644,7 +3655,7 @@ snapshots:
 
   '@vue/compiler-core@3.4.38':
     dependencies:
-      '@babel/parser': 7.25.4
+      '@babel/parser': 7.25.6
       '@vue/shared': 3.4.38
       entities: 4.5.0
       estree-walker: 2.0.2
@@ -3657,7 +3668,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.4.38':
     dependencies:
-      '@babel/parser': 7.25.4
+      '@babel/parser': 7.25.6
       '@vue/compiler-core': 3.4.38
       '@vue/compiler-dom': 3.4.38
       '@vue/compiler-ssr': 3.4.38
@@ -4993,22 +5004,22 @@ snapshots:
 
   reusify@1.0.4: {}
 
-  rolldown@0.12.2-snapshot-33fca46-20240830003232:
+  rolldown@0.12.2-snapshot-8b7734e-20240831003056:
     dependencies:
       zod: 3.23.8
     optionalDependencies:
-      '@rolldown/binding-darwin-arm64': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-darwin-x64': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-freebsd-x64': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-linux-arm-gnueabihf': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-linux-arm64-gnu': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-linux-arm64-musl': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-linux-x64-gnu': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-linux-x64-musl': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-wasm32-wasi': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-win32-arm64-msvc': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-win32-ia32-msvc': 0.12.2-snapshot-33fca46-20240830003232
-      '@rolldown/binding-win32-x64-msvc': 0.12.2-snapshot-33fca46-20240830003232
+      '@rolldown/binding-darwin-arm64': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-darwin-x64': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-freebsd-x64': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-linux-arm-gnueabihf': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-linux-arm64-gnu': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-linux-arm64-musl': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-linux-x64-gnu': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-linux-x64-musl': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-wasm32-wasi': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-win32-arm64-msvc': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-win32-ia32-msvc': 0.12.2-snapshot-8b7734e-20240831003056
+      '@rolldown/binding-win32-x64-msvc': 0.12.2-snapshot-8b7734e-20240831003056
 
   rollup@4.21.0:
     dependencies:
@@ -5219,7 +5230,7 @@ snapshots:
       consola: 3.2.3
       picocolors: 1.0.1
       pkg-types: 1.2.0
-      rolldown: 0.12.2-snapshot-33fca46-20240830003232
+      rolldown: 0.12.2-snapshot-8b7734e-20240831003056
       tinyglobby: 0.2.5
       unconfig: 0.5.5
       unplugin-isolated-decl: 0.4.7(@swc/core@1.7.18)(rollup@4.21.0)(typescript@5.5.4)
@@ -5252,7 +5263,7 @@ snapshots:
 
   type-fest@1.4.0: {}
 
-  type-fest@4.25.0: {}
+  type-fest@4.26.0: {}
 
   type-flag@3.0.0: {}
 
