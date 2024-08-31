@@ -5,15 +5,14 @@ import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
 import { bold } from 'yoctocolors';
 import * as semver from '@std/semver';
-import type { PackageJson as OriginalPackageJSON } from 'pkg-types';
-import type { OverrideProperties } from 'type-fest';
+import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDeep } from 'type-fest';
 import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
 
 type JSRScopedName = `@${string}/${string}`;
 type JSRJson = OverrideProperties<_JSRConfigurationFileSchema, { name: JSRScopedName }>;
 type Exports = JSRJson['exports'];
-type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
+type PackageJson = SimplifyDeep<Pick<OriginalPackageJSON, 'name' | 'author' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] }>;
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 const isString = typia.createIs<string>();
@@ -105,7 +104,7 @@ export async function writeJsr(jsrPath: string, jsr: JSRJson): Promise<void> {
  */
 export function getName(pkgJSON: PackageJson): JSRScopedName {
 	const { name, author } = pkgJSON;
-	const jsrName = pkgJSON.jsrName as string | undefined;
+	const jsrName = pkgJSON.jsrName;
 
 	if (isJSRScopedName(jsrName)) {
 		return jsrName;

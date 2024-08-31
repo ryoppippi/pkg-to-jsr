@@ -56,7 +56,6 @@
 		"find-up-simple": "^1.0.0",
 		"json-schema-to-typescript": "^15.0.1",
 		"pathe": "^1.1.2",
-		"pkg-types": "^1.2.0",
 		"ts-patch": "^3.2.1",
 		"tsdown": "^0.2.10",
 		"type-fest": "^4.26.0",
