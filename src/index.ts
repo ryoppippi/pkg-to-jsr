@@ -10,8 +10,8 @@ import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from '
 import { _throwError, _typiaErrorHandler, logger } from './logger';
 
 type JSRScopedName = `@${string}/${string}`;
-type JSRConfigurationFileSchema = Omit<_JSRConfigurationFileSchema, 'name'> & { name: JSRScopedName };
-type Exports = JSRConfigurationFileSchema['exports'];
+type JSRJson = Omit<_JSRConfigurationFileSchema, 'name'> & { name: JSRScopedName };
+type Exports = JSRJson['exports'];
 type PackageJson = Pick<OriginalPackageJSON, 'name' | 'author' | 'jsrName' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] };
 
 const isStartWithExclamation = typia.createIs<`!${string}`>();
@@ -43,7 +43,7 @@ export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 /**
  * Write JSR to file
  */
-export async function writeJsr(jsrPath: string, jsr: JSRConfigurationFileSchema): Promise<void> {
+export async function writeJsr(jsrPath: string, jsr: JSRJson): Promise<void> {
 	try {
 		return await fs.writeFile(jsrPath, JSON.stringify(jsr, null, '\t'));
 	}
@@ -405,7 +405,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
  * );
  * ```
  */
-export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRConfigurationFileSchema {
+export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRJson {
 	const { version } = pkgJSON;
 
 	const include = getInclude(pkgJSON);
@@ -420,10 +420,10 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 					...((exclude?.length ?? 0) > 0 && { exclude }),
 				},
 		exports: getExports(pkgJSON),
-	} as const satisfies JSRConfigurationFileSchema;
+	} as const satisfies JSRJson;
 
 	/* check the JSR object */
-	const validation = typia.validateEquals<JSRConfigurationFileSchema>(jsr);
+	const validation = typia.validateEquals<JSRJson>(jsr);
 
 	const { data } = _typiaErrorHandler(validation);
 
