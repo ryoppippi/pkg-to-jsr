@@ -31,7 +31,7 @@ importers:
         specifier: npm:@jsr/std__semver@^1.0.3
         version: '@jsr/std__semver@1.0.3'
       '@swc/core':
-        specifier: ^1.7.25
+        specifier: ^1.7.26
         version: 1.7.26
       '@types/bun':
         specifier: ^1.1.9
