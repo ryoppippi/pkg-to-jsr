@@ -61,7 +61,7 @@ importers:
         specifier: ^0.2.15
         version: 0.2.15(@swc/core@1.7.26)(rollup@4.21.2)(typescript@5.5.4)
       type-fest:
-        specifier: ^4.26.0
+        specifier: ^4.26.1
         version: 4.26.1
       typescript:
         specifier: ^5.5.4
