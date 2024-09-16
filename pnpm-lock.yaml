@@ -73,7 +73,7 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(@types/node@20.12.14)(vitest@2.1.1(@types/node@20.12.14))
       vitest:
-        specifier: ^2.1.0
+        specifier: ^2.1.1
         version: 2.1.1(@types/node@20.12.14)
       yoctocolors:
         specifier: ^2.1.1
