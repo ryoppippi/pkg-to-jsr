@@ -50,7 +50,7 @@
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@swc/core": "^1.7.26",
 		"@types/bun": "^1.1.9",
-		"eslint": "^9.10.0",
+		"eslint": "^9.11.0",
 		"eslint-plugin-format": "^0.1.2",
 		"fast-glob": "^3.3.2",
 		"find-up-simple": "^1.0.0",
