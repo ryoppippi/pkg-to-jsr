@@ -67,8 +67,8 @@ importers:
         specifier: ^5.6.2
         version: 5.6.2
       typia:
-        specifier: ^6.10.2
-        version: 6.10.2(typescript@5.6.2)
+        specifier: ^6.10.3
+        version: 6.11.0(typescript@5.6.2)
       vite-plugin-doctest:
         specifier: ^1.0.0
         version: 1.0.0(@types/node@20.12.14)(vitest@2.1.1(@types/node@20.12.14))
@@ -797,8 +797,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@samchon/openapi@1.0.2':
-    resolution: {integrity: sha512-+PFmOo3fZ0RejmhMnX+yKZCC2CCSxO6NhdQLnNStcX0JFdyNZk9Z5rrcOu+SDfWOlaMdRqfYzbmfUjpknJCMfA==}
+  '@samchon/openapi@1.1.0':
+    resolution: {integrity: sha512-BX7Hhi7ZvqXerAml613p3ZP4YPUHRNHZ5tWlbk999SHB1liPB+KHfkEIyGOAooPHUFMpeIS/PRaw88bsUZB3Uw==}
 
   '@stylistic/eslint-plugin@2.8.0':
     resolution: {integrity: sha512-Ufvk7hP+bf+pD35R/QfunF793XlSRIC7USr3/EdgduK9j13i2JjmsM0LUz3/foS+jDYp2fzyWZA9N44CPur0Ow==}
@@ -2461,8 +2461,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typia@6.10.2:
-    resolution: {integrity: sha512-osSOovyx9T4WrF7jPIVvmWj3YzNX7Fzen1e+NUz9/ori3xx+Z5KkNN7idSVN+fndPfQqmzVe5Jmua1oaUGvV6A==}
+  typia@6.11.0:
+    resolution: {integrity: sha512-/rhxRZ7ECx6ZPa7EhBSC3/DlLUl5RVah/+185qdX9YHgQjmhdpd+USRi7ZpKMMnVZge9MTj4bBylfWQY6EplfQ==}
     hasBin: true
     peerDependencies:
       typescript: '>=4.8.0 <5.7.0'
@@ -3039,7 +3039,7 @@ snapshots:
       pkg-types: 1.2.0
       type-fest: 4.26.1
       typescript: 5.5.4
-      typia: 6.10.2(typescript@5.5.4)
+      typia: 6.11.0(typescript@5.5.4)
       unplugin: 1.14.1
       vite: 5.4.5(@types/node@20.12.14)
     transitivePeerDependencies:
@@ -3222,7 +3222,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.21.3':
     optional: true
 
-  '@samchon/openapi@1.0.2': {}
+  '@samchon/openapi@1.1.0': {}
 
   '@stylistic/eslint-plugin@2.8.0(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2)':
     dependencies:
@@ -5021,9 +5021,9 @@ snapshots:
 
   typescript@5.6.2: {}
 
-  typia@6.10.2(typescript@5.5.4):
+  typia@6.11.0(typescript@5.5.4):
     dependencies:
-      '@samchon/openapi': 1.0.2
+      '@samchon/openapi': 1.1.0
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
@@ -5031,9 +5031,9 @@ snapshots:
       randexp: 0.5.3
       typescript: 5.5.4
 
-  typia@6.10.2(typescript@5.6.2):
+  typia@6.11.0(typescript@5.6.2):
     dependencies:
-      '@samchon/openapi': 1.0.2
+      '@samchon/openapi': 1.1.0
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
