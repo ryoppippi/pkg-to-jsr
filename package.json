@@ -59,7 +59,7 @@
 		"ts-patch": "^3.2.1",
 		"tsdown": "^0.2.15",
 		"type-fest": "^4.26.1",
-		"typescript": "^5.6.2",
+		"typescript": "^5.6.3",
 		"typia": "^6.11.1",
 		"vite-plugin-doctest": "^1.0.0",
 		"vitest": "^2.1.2",
