@@ -1,12 +1,12 @@
-import fs from 'node:fs/promises';
+import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDeep } from 'type-fest';
 
-import typia from 'typia';
+import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
+import fs from 'node:fs/promises';
+import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
+import typia from 'typia';
 import { bold } from 'yoctocolors';
-import * as semver from '@std/semver';
-import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDeep } from 'type-fest';
-import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
 
 type JSRScopedName = `@${string}/${string}`;

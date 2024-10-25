@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import { minify } from '@swc/core';
-import { resolve } from 'pathe';
 import { consola } from 'consola';
 import fg from 'fast-glob';
+import { resolve } from 'pathe';
 
 const dist = (resolve(import.meta.dirname, '../dist'));
 

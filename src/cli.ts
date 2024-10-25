@@ -1,12 +1,12 @@
-import process from 'node:process';
 import fs from 'node:fs/promises';
+import process from 'node:process';
 import { cli } from 'cleye';
 
 import { isAbsolute, resolve } from 'pathe';
 
+import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 import { description, name, version } from '../package.json';
 import { _throwError, logger } from './logger';
-import { findPackageJSON, genJsrFromPackageJson, readPkgJSON, writeJsr } from '.';
 
 const LOG_LEVEL_SILENT = 0; // Fatal and Error
 const LOG_LEVEL_NORMAL = 3; // Informational logs, success, fail, ready, start, ...
