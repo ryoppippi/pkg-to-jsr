@@ -49,7 +49,7 @@
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@swc/core": "^1.7.39",
-		"@types/bun": "^1.1.11",
+		"@types/bun": "^1.1.12",
 		"eslint": "^9.13.0",
 		"eslint-plugin-format": "^0.1.2",
 		"fast-glob": "^3.3.2",
