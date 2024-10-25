@@ -1,6 +1,6 @@
-import process from 'node:process';
-import { type ConsolaInstance, consola } from 'consola';
 import type * as typia from 'typia';
+import process from 'node:process';
+import { consola, type ConsolaInstance } from 'consola';
 
 import { name } from '../package.json';
 
