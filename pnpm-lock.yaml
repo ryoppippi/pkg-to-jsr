@@ -70,8 +70,8 @@ importers:
         specifier: ^6.11.3
         version: 6.11.3(typescript@5.6.3)
       vite-plugin-doctest:
-        specifier: ^1.0.0
-        version: 1.0.0(@types/node@20.12.14)(vitest@2.1.4(@types/node@20.12.14))
+        specifier: ^1.1.0
+        version: 1.1.1(typescript@5.6.3)(vite@5.4.5(@types/node@20.12.14))(vitest@2.1.4(@types/node@20.12.14))
       vitest:
         specifier: ^2.1.4
         version: 2.1.4(@types/node@20.12.14)
@@ -2712,10 +2712,12 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  vite-plugin-doctest@1.0.0:
-    resolution: {integrity: sha512-qGuup/VOwNgT29ljS5BO/UDDUOQj6jRVoFNs82+m6iofijrIxjstXWllfcUCVwk4x26r0JjqFVGeqgyrU9vTbg==}
+  vite-plugin-doctest@1.1.1:
+    resolution: {integrity: sha512-E2fkJwpD8D0L5pUhVkzSPJ2EXFxDA44TflFR1XN+OJbHjF2UGjH9xEuBJkxoEUgb7GhjCX3RJxJqhptoaOOXmw==}
     peerDependencies:
-      vitest: '>=0.29.0'
+      typescript: '>=4.0.0'
+      vite: '>=5.0.0'
+      vitest: '>=2.0.0'
 
   vite@5.4.5:
     resolution: {integrity: sha512-pXqR0qtb2bTwLkev4SE3r4abCNioP3GkjvIDLlzziPpXtHgiJIjuKl+1GN6ESOT3wMjG3JTeARopj2SwYaHTOA==}
@@ -3732,7 +3734,7 @@ snapshots:
       '@vue/compiler-ssr': 3.5.5
       '@vue/shared': 3.5.5
       estree-walker: 2.0.2
-      magic-string: 0.30.11
+      magic-string: 0.30.12
       postcss: 8.4.47
       source-map-js: 1.2.1
 
@@ -5674,21 +5676,11 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-doctest@1.0.0(@types/node@20.12.14)(vitest@2.1.4(@types/node@20.12.14)):
+  vite-plugin-doctest@1.1.1(typescript@5.6.3)(vite@5.4.5(@types/node@20.12.14))(vitest@2.1.4(@types/node@20.12.14)):
     dependencies:
-      magic-string: 0.30.11
       typescript: 5.6.3
       vite: 5.4.5(@types/node@20.12.14)
       vitest: 2.1.4(@types/node@20.12.14)
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
 
   vite@5.4.5(@types/node@20.12.14):
     dependencies:
