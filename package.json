@@ -54,7 +54,7 @@
 		"eslint-plugin-format": "^0.1.2",
 		"fast-glob": "^3.3.2",
 		"find-up-simple": "^1.0.0",
-		"json-schema-to-typescript": "^15.0.2",
+		"json-schema-to-typescript": "^15.0.3",
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.2.1",
 		"tsdown": "^0.2.15",
