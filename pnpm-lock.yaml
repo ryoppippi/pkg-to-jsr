@@ -26,7 +26,7 @@ importers:
         version: '@jsr/ryoppippi__eslint-config@0.0.24(@typescript-eslint/utils@8.11.0(eslint@9.15.0(jiti@1.21.6))(typescript@5.7.2))(@vue/compiler-sfc@3.5.5)(eslint-plugin-format@0.1.2(eslint@9.15.0(jiti@1.21.6)))(eslint@9.15.0(jiti@1.21.6))(typescript@5.7.2)(vitest@2.1.5(@types/node@20.12.14))'
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia
-        version: '@jsr/ryoppippi__unplugin-typia@1.0.4(@types/node@20.12.14)(rollup@4.21.3)'
+        version: '@jsr/ryoppippi__unplugin-typia@1.0.4(@samchon/openapi@1.2.2)(@types/node@20.12.14)(rollup@4.21.3)'
       '@std/semver':
         specifier: npm:@jsr/std__semver@^1.0.3
         version: '@jsr/std__semver@1.0.3'
@@ -67,8 +67,8 @@ importers:
         specifier: ^5.7.2
         version: 5.7.2
       typia:
-        specifier: ^6.12.0
-        version: 6.12.0(typescript@5.7.2)
+        specifier: ^6.12.1
+        version: 6.12.2(@samchon/openapi@1.2.2)(typescript@5.7.2)
       vite-plugin-doctest:
         specifier: ^1.1.1
         version: 1.1.1(typescript@5.7.2)(vite@5.4.5(@types/node@20.12.14))(vitest@2.1.5(@types/node@20.12.14))
@@ -2594,10 +2594,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typia@6.12.0:
-    resolution: {integrity: sha512-+1OictM36XqJowt+fqZz6yxjNBtc6EryxmwhN2Jpc+mgkyVRclQx/7IsoGW8skhrxQdxyysXKu/COHtMq8Jlkw==}
+  typia@6.12.2:
+    resolution: {integrity: sha512-SAH/yd3bbB20kbzzkinBcwT1KZTa/tKJykPMqMkjMZWCAGWJ6nde+zfL31ntmCGVz2r/UvTHN1b75kCwlhkyxA==}
     hasBin: true
     peerDependencies:
+      '@samchon/openapi': '>=1.2.4 <2.0.0'
       typescript: '>=4.8.0 <5.7.0'
 
   ufo@1.5.4:
@@ -3193,7 +3194,7 @@ snapshots:
       - typescript
       - vitest
 
-  '@jsr/ryoppippi__unplugin-typia@1.0.4(@types/node@20.12.14)(rollup@4.21.3)':
+  '@jsr/ryoppippi__unplugin-typia@1.0.4(@samchon/openapi@1.2.2)(@types/node@20.12.14)(rollup@4.21.3)':
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.21.3)
       consola: 3.2.3
@@ -3205,10 +3206,11 @@ snapshots:
       pkg-types: 1.2.0
       type-fest: 4.28.1
       typescript: 5.5.4
-      typia: 6.12.0(typescript@5.5.4)
+      typia: 6.12.2(@samchon/openapi@1.2.2)(typescript@5.5.4)
       unplugin: 1.14.1
       vite: 5.4.5(@types/node@20.12.14)
     transitivePeerDependencies:
+      - '@samchon/openapi'
       - '@types/node'
       - less
       - lightningcss
@@ -5455,7 +5457,7 @@ snapshots:
 
   typescript@5.7.2: {}
 
-  typia@6.12.0(typescript@5.5.4):
+  typia@6.12.2(@samchon/openapi@1.2.2)(typescript@5.5.4):
     dependencies:
       '@samchon/openapi': 1.2.2
       commander: 10.0.1
@@ -5465,7 +5467,7 @@ snapshots:
       randexp: 0.5.3
       typescript: 5.5.4
 
-  typia@6.12.0(typescript@5.7.2):
+  typia@6.12.2(@samchon/openapi@1.2.2)(typescript@5.7.2):
     dependencies:
       '@samchon/openapi': 1.2.2
       commander: 10.0.1
