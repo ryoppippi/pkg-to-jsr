@@ -58,7 +58,7 @@
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.2.1",
 		"tsdown": "^0.2.15",
-		"type-fest": "^4.27.1",
+		"type-fest": "^4.28.0",
 		"typescript": "^5.7.2",
 		"typia": "^6.12.0",
 		"vite-plugin-doctest": "^1.1.1",
