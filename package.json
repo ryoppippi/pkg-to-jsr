@@ -2,7 +2,7 @@
 	"name": "pkg-to-jsr",
 	"type": "module",
 	"version": "1.2.6",
-	"packageManager": "pnpm@9.14.2",
+	"packageManager": "pnpm@9.14.3",
 	"description": "zero-config generator that creates a jsr.json file from your existing package.json",
 	"author": "ryoppippi",
 	"license": "MIT",
