@@ -44,7 +44,7 @@
 		"terminal-link": "^3.0.0"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^0.23.1",
+		"@antfu/ni": "^0.23.2",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
