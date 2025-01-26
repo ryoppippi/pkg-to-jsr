@@ -59,7 +59,7 @@
 		"json-schema-to-typescript": "^15.0.3",
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.3.0",
-		"type-fest": "^4.30.0",
+		"type-fest": "^4.33.0",
 		"typescript": "^5.7.2",
 		"typia": "^7.6.0",
 		"vite-plugin-doctest": "^1.1.1",
