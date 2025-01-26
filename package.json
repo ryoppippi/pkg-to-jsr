@@ -27,8 +27,6 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsdown && node ./scripts/postbuild.js",
-		"dev": "tsdown --watch",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
 		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp --ignore-scripts",
@@ -58,7 +56,6 @@
 		"json-schema-to-typescript": "^15.0.3",
 		"pathe": "^1.1.2",
 		"ts-patch": "^3.3.0",
-		"tsdown": "^0.2.15",
 		"type-fest": "^4.30.0",
 		"typescript": "^5.7.2",
 		"typia": "^7.6.0",
