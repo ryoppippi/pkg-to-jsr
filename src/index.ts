@@ -346,6 +346,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
 	const _exports = {} as Record<string, string>;
 
 	for (const [key, value] of Object.entries(exports)) {
+		// eslint-disable-next-line ts/switch-exhaustiveness-check
 		switch (true) {
 			case isString(value):
 				_exports[key] = value;
@@ -427,7 +428,7 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 
 	const { data } = _typiaErrorHandler(validation);
 
-	if (!semver.canParse(data.version)) {
+	if (!semver.canParse(data?.version ?? '')) {
 		_throwError(`Invalid version: ${version}`);
 	}
 
