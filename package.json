@@ -27,14 +27,16 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "bun run ./scripts/build.ts",
+		"build": "nr build:gen_types && nr build:cli",
+		"build:cli": "nr ./scripts/build.ts",
+		"build:gen_types": "nr ./scripts/gen_types.js",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
 		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp --ignore-scripts",
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
 		"test": "vitest --typecheck",
-		"prepare": "ts-patch install && typia patch && ./scripts/gen_types.js",
+		"prepare": "ts-patch install && typia patch && nr build:gen_types",
 		"prepublishOnly": "nr build",
 		"preinstall": "npx only-allow bun"
 	},
