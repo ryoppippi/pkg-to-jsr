@@ -27,16 +27,16 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "nr build:gen_types && nr build:cli",
-		"build:cli": "nr ./scripts/build.ts",
-		"build:gen_types": "nr ./scripts/gen_types.js",
+		"build": "bun build:gen_types && bun build:cli",
+		"build:cli": "bun ./scripts/build.ts",
+		"build:gen_types": "bun ./scripts/gen_types.js",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
-		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp --ignore-scripts",
-		"lint": "eslint --cache .",
-		"format": "nr lint --fix",
-		"test": "vitest --typecheck",
-		"prepare": "ts-patch install && typia patch && nr build:gen_types",
+		"release": "bun typecheck && bun test run && bun run build && bun x publint && bun x bumpp --ignore-scripts",
+		"lint": "bun -b eslint --cache .",
+		"format": "bun lint --fix",
+		"test": "bun vitest --typecheck",
+		"prepare": "bun -b ts-patch install && bun -b typia patch && bun build:gen_types",
 		"prepublishOnly": "bun run build",
 		"preinstall": "npx only-allow bun"
 	},
@@ -46,7 +46,6 @@
 		"terminal-link": "^3.0.0"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^23.3.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
 		"@ryoppippi/unplugin-typia": "^1.2.0",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
