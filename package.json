@@ -27,6 +27,7 @@
 		"dist"
 	],
 	"scripts": {
+		"build": "bun run ./scripts/build.ts",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
 		"release": "nr typecheck && nr test run && nr build && nlx publint && nlx bumpp --ignore-scripts",
