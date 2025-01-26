@@ -29,7 +29,7 @@ jobs:
           node-version: ${{env.NODE_VERSION}}
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
-      - run: bun publish --provenance --no-git-checks --access public
+      - run: npm publish --provenance --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_CONFIG_PROVENANCE: true
