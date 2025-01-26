@@ -1,8 +1,9 @@
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
-import isolatedDecl from 'bun-plugin-isolated-decl';
+import { Glob } from 'bun';
 
+import isolatedDecl from 'bun-plugin-isolated-decl';
 import pj from '../package.json';
 
 const outdir = relativePath('../dist');
@@ -15,14 +16,18 @@ function relativePath(p: string): string {
 if (import.meta.main) {
 	await rm(outdir, { recursive: true, force: true });
 
+	const entrypoints: string[] = [];
+	const glob = new Glob(relativePath('../src/**/*.ts'));
+	for await (const file of glob.scan('.')) {
+		entrypoints.push(file);
+	}
+
 	await Bun.build({
-		entrypoints: [
-			relativePath('../src/index.ts'),
-			relativePath('../src/cli.ts'),
-		],
+		entrypoints,
 		outdir,
 		target: 'node',
 		minify: true,
+		splitting: true,
 		external: Object.keys(pj.dependencies),
 		plugins: [
 			UnpluginTypia({ cache: false }),
