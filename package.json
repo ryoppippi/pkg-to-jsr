@@ -37,7 +37,7 @@
 		"format": "nr lint --fix",
 		"test": "vitest --typecheck",
 		"prepare": "ts-patch install && typia patch && nr build:gen_types",
-		"prepublishOnly": "nr build",
+		"prepublishOnly": "bun run build",
 		"preinstall": "npx only-allow bun"
 	},
 	"dependencies": {
