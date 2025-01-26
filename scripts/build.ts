@@ -1,5 +1,6 @@
 import path from 'node:path';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
+import isolatedDecl from 'bun-plugin-isolated-decl';
 
 function relativePath(p: string): string {
 	const { dir } = import.meta;
@@ -13,5 +14,6 @@ await Bun.build({
 	minify: true,
 	plugins: [
 		UnpluginTypia({ cache: false }),
+		isolatedDecl(),
 	],
 });
