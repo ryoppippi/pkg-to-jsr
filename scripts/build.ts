@@ -11,7 +11,7 @@ function relativePath(p: string): string {
 await Bun.build({
 	entrypoints: [
 		relativePath('../src/index.ts'),
-		require.resolve('../src/cli.ts'),
+		relativePath('../src/cli.ts'),
 	],
 	outdir: relativePath('../dist'),
 	target: 'node',
