@@ -49,7 +49,7 @@
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
 		"@ryoppippi/unplugin-typia": "^1.2.0",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
-		"@swc/core": "^1.10.11",
+		"@swc/core": "^1.10.12",
 		"@types/bun": "^1.2.1",
 		"bun-plugin-isolated-decl": "^0.1.8",
 		"eslint": "^9.19.0",
