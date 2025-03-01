@@ -50,7 +50,7 @@
 		"@ryoppippi/unplugin-typia": "^1.2.0",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@swc/core": "^1.11.1",
-		"@types/bun": "^1.2.3",
+		"@types/bun": "^1.2.4",
 		"bun-plugin-isolated-decl": "^0.1.9",
 		"eslint": "^9.21.0",
 		"eslint-plugin-format": "^1.0.1",
