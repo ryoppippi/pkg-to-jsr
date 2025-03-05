@@ -61,7 +61,7 @@
 		"ts-patch": "^3.3.0",
 		"type-fest": "^4.36.0",
 		"typescript": "^5.8.2",
-		"typia": "^7.6.4",
+		"typia": "^8.0.0",
 		"vite-plugin-doctest": "^1.1.1",
 		"vitest": "^3.0.7",
 		"yoctocolors": "^2.1.1"
