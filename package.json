@@ -52,7 +52,7 @@
 		"@swc/core": "^1.11.8",
 		"@types/bun": "^1.2.4",
 		"bun-plugin-isolated-decl": "^0.1.9",
-		"eslint": "^9.21.0",
+		"eslint": "^9.22.0",
 		"eslint-plugin-format": "^1.0.1",
 		"fast-glob": "^3.3.3",
 		"find-up-simple": "^1.0.1",
