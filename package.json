@@ -37,7 +37,7 @@
 		"format": "bun lint --fix",
 		"test": "bun vitest --typecheck",
 		"prepare": "bun -b ts-patch install && bun -b typia patch && bun build:gen_types",
-		"prepublishOnly": "bun run build",
+		"prepublishOnly": "npm pkg delete scripts.preinstall && bun run build",
 		"preinstall": "npx only-allow bun"
 	},
 	"dependencies": {
