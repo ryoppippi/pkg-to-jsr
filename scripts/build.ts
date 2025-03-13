@@ -1,7 +1,7 @@
-import { Glob } from 'bun';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
+import { Glob } from 'bun';
 
 import isolatedDecl from 'bun-plugin-isolated-decl';
 import pj from '../package.json';
@@ -27,7 +27,7 @@ if (import.meta.main) {
 		outdir,
 		target: 'node',
 		minify: true,
-		splitting: true,
+		splitting: false,
 		external: Object.keys(pj.dependencies),
 		plugins: [
 			UnpluginTypia({ cache: false }),
