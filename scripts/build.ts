@@ -1,29 +1,24 @@
-import { rm } from 'node:fs/promises';
+import { globSync } from 'node:fs';
 import path from 'node:path';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
-import { Glob } from 'bun';
-
+import { $ } from 'bun';
 import isolatedDecl from 'bun-plugin-isolated-decl';
+import { consola } from 'consola';
+
 import pj from '../package.json';
+
+function relativePath(p: string): string {
+	return path.resolve(import.meta.dir, p);
+}
 
 const outdir = relativePath('../dist');
 
-function relativePath(p: string): string {
-	const { dir } = import.meta;
-	return path.resolve(dir, p);
-}
-
 if (import.meta.main) {
-	await rm(outdir, { recursive: true, force: true });
+	await $`rm -rf ${outdir}`;
 
-	const entrypoints: string[] = [];
-	const glob = new Glob(relativePath('../src/**/*.ts'));
-	for await (const file of glob.scan('.')) {
-		entrypoints.push(file);
-	}
-
+	consola.info('Building...');
 	await Bun.build({
-		entrypoints,
+		entrypoints: globSync(relativePath('../src/**/*.ts')),
 		outdir,
 		target: 'node',
 		minify: true,
@@ -34,4 +29,6 @@ if (import.meta.main) {
 			isolatedDecl(),
 		],
 	});
+
+	consola.success('Build completed');
 }
