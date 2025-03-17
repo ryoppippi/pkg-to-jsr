@@ -11,18 +11,13 @@
 		"inlineSourceMap": true,
 		"noEmit": true,
 		"esModuleInterop": true,
-		"isolatedDeclarations": true,
-		"skipLibCheck": true,
-		"plugins": [
-			{
-				"transform": "typia/lib/transform"
-			}
-		]
+		"skipLibCheck": true
 	},
 	"include": [
 		"src",
 		"tests",
 		"eslint.config.js",
+		"rslib.config.ts",
 		"scripts",
 		"tests"
 	],

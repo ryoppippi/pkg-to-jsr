@@ -28,7 +28,7 @@
 	],
 	"scripts": {
 		"build": "bun build:gen_types && bun build:cli",
-		"build:cli": "bun ./scripts/build.ts",
+		"build:cli": "bun -b rslib build",
 		"build:gen_types": "bun ./scripts/gen_types.js",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsc --noEmit",
@@ -46,15 +46,14 @@
 		"terminal-link": "^3.0.0"
 	},
 	"devDependencies": {
+		"@rslib/core": "^0.5.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
 		"@ryoppippi/unplugin-typia": "^1.2.0",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@swc/core": "^1.11.8",
 		"@types/bun": "^1.2.4",
-		"bun-plugin-isolated-decl": "^0.1.9",
 		"eslint": "^9.22.0",
 		"eslint-plugin-format": "^1.0.1",
-		"fast-glob": "^3.3.3",
 		"find-up-simple": "^1.0.1",
 		"json-schema-to-typescript": "^15.0.4",
 		"pathe": "^2.0.3",
