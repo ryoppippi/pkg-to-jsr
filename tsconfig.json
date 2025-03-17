@@ -23,6 +23,7 @@
 		"src",
 		"tests",
 		"eslint.config.js",
+		"rslib.config.ts",
 		"scripts",
 		"tests"
 	],
