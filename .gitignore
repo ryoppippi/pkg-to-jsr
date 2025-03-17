@@ -134,7 +134,7 @@ dist
 
 .eslintcache
 
-/src/jsr.d.ts
+/src/jsr.ts
 
 # jsr
 jsr.json
