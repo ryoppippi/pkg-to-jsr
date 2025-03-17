@@ -34,7 +34,6 @@ export default defineConfig({
 					root: './dist',
 				},
 				minify: true,
-				sourceMap: true,
 			},
 		},
 	],
