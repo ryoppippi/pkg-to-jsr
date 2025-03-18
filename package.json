@@ -48,7 +48,7 @@
 	"devDependencies": {
 		"@rslib/core": "^0.5.4",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
-		"@ryoppippi/unplugin-typia": "^1.2.0",
+		"@ryoppippi/unplugin-typia": "^2.0.3",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@swc/core": "^1.11.9",
 		"@types/bun": "^1.2.5",
