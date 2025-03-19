@@ -2,11 +2,11 @@ import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDe
 
 import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import fs from 'node:fs/promises';
+import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
 import typia from 'typia';
-import { bold } from 'yoctocolors';
 import { _throwError, _typiaErrorHandler, logger } from './logger';
 
 type JSRScopedName = `@${string}/${string}`;
@@ -17,6 +17,10 @@ type PackageJson = SimplifyDeep<Pick<OriginalPackageJSON, 'name' | 'author' | 'f
 const isStartWithExclamation = typia.createIs<`!${string}`>();
 const isString = typia.createIs<string>();
 const isJSRScopedName = typia.createIs<JSRScopedName>();
+
+function bold(str: string): string {
+	return styleText('bold', str);
+}
 
 /**
  * Find package.json in the directory hierarchy

@@ -61,7 +61,6 @@
 		"typescript": "^5.8.2",
 		"typia": "^8.0.2",
 		"vite-plugin-doctest": "^1.1.1",
-		"vitest": "^3.0.8",
-		"yoctocolors": "^2.1.1"
+		"vitest": "^3.0.8"
 	}
 }
