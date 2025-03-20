@@ -42,7 +42,7 @@
 	},
 	"dependencies": {
 		"cleye": "^1.3.4",
-		"consola": "^3.4.0",
+		"consola": "^3.4.1",
 		"terminal-link": "^3.0.0"
 	},
 	"devDependencies": {
