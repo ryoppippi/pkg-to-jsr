@@ -37,7 +37,7 @@
 		"format": "bun lint --fix",
 		"test": "bun vitest --typecheck",
 		"prepare": "bun -b ts-patch install && bun -b typia patch && bun build:gen_types",
-		"prepack": "npm pkg delete scripts.preinstall && bun run build",
+		"prepack": "npm pkg delete scripts.preinstall && bun run build && clean-pkg-json",
 		"preinstall": "npx only-allow bun"
 	},
 	"dependencies": {
@@ -51,6 +51,7 @@
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@types/bun": "^1.2.5",
 		"bun-plugin-isolated-decl": "^0.1.10",
+		"clean-pkg-json": "^1.2.1",
 		"eslint": "^9.23.0",
 		"eslint-plugin-format": "^1.0.1",
 		"find-up-simple": "^1.0.1",
