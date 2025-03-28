@@ -43,7 +43,7 @@
 	"dependencies": {
 		"cleye": "^1.3.4",
 		"consola": "^3.4.2",
-		"terminal-link": "^3.0.0"
+		"terminal-link": "^4.0.0"
 	},
 	"devDependencies": {
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
