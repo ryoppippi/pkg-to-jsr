@@ -52,7 +52,7 @@
 		"@types/bun": "^1.2.10",
 		"bun-plugin-isolated-decl": "^0.1.10",
 		"clean-pkg-json": "^1.2.1",
-		"eslint": "^9.24.0",
+		"eslint": "^9.25.0",
 		"eslint-plugin-format": "^1.0.1",
 		"find-up-simple": "^1.0.1",
 		"json-schema-to-typescript": "^15.0.4",
