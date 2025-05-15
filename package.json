@@ -60,7 +60,7 @@
 		"ts-patch": "^3.3.0",
 		"type-fest": "^4.41.0",
 		"typescript": "^5.8.3",
-		"typia": "^9.2.0",
+		"typia": "^9.3.0",
 		"vite-plugin-doctest": "^1.1.1",
 		"vitest": "^3.1.3"
 	}
