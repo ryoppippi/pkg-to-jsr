@@ -11,7 +11,9 @@
 		"inlineSourceMap": true,
 		"noEmit": true,
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true,
+		"erasableSyntaxOnly": true
 	},
 	"include": [
 		"src",
