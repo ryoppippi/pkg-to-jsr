@@ -10,7 +10,7 @@
       },
       "devDependencies": {
         "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
-        "@ryoppippi/unplugin-typia": "^2.6.3",
+        "@ryoppippi/unplugin-typia": "^2.6.4",
         "@std/semver": "npm:@jsr/std__semver@^1.0.3",
         "@types/bun": "^1.2.13",
         "bun-plugin-isolated-decl": "^0.2.4",
