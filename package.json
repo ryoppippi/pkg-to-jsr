@@ -62,6 +62,6 @@
 		"typescript": "^5.8.3",
 		"typia": "^9.3.1",
 		"vite-plugin-doctest": "^1.1.1",
-		"vitest": "^3.1.4"
+		"vitest": "^3.2.1"
 	}
 }
