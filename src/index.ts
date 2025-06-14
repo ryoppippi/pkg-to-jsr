@@ -3,9 +3,10 @@ import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
+import { z } from 'zod/v4-mini';
 import { JSRConfigurationSchema, type JSRJson, type JSRScopedName } from './jsr';
 import { isJSRScopedName, isStartWithExclamation, isString, type PackageJson } from './jsr-schemas';
-import { _throwError, _zodErrorHandler, logger } from './logger';
+import { _throwError, logger } from './logger';
 
 type Exports = JSRJson['exports'];
 
@@ -421,11 +422,15 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	/* check the JSR object */
 	const validation = JSRConfigurationSchema.safeParse(jsr);
 
-	const { data } = _zodErrorHandler(validation);
-
-	if (data != null && !semver.canParse(String((data as JSRJson)?.version ?? ''))) {
-		_throwError(`Invalid version: ${String(version)}`);
+	if (!validation.success) {
+		_throwError(`Invalid configuration: ${z.prettifyError(validation.error)}`);
 	}
 
-	return data as JSRJson;
+	const data = validation.data;
+
+	if (data.version != null && !semver.canParse(String(data.version))) {
+		_throwError(`Invalid version: ${String(data.version)}`);
+	}
+
+	return data;
 }
