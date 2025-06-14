@@ -9,6 +9,7 @@ pkg-to-jsr is a zero-config CLI tool that generates `jsr.json` files from existi
 ## Common Commands
 
 ### Development
+
 ```fish
 # Run the CLI locally
 bun cli
@@ -31,6 +32,7 @@ bun build
 ```
 
 ### Testing
+
 ```fish
 # Run a specific test file
 bun test tests/basic/index.test.ts
@@ -40,6 +42,7 @@ bun test -u
 ```
 
 ### Release Process
+
 ```fish
 # Full release pipeline (typecheck, test, build, version bump)
 bun release
@@ -50,6 +53,7 @@ bun release
 ### Core Components
 
 **src/index.ts** - Main logic for JSR configuration generation:
+
 - `jsrName` resolution: Handles package naming for JSR (checks jsrName field, then name field, then combines author+name)
 - Export transformation: Converts package.json exports to JSR format, prioritizing `jsr` field when present
 - Include/exclude handling: Merges `files`, `jsrInclude`, and `jsrExclude` arrays into publish configuration
@@ -61,12 +65,14 @@ bun release
 ### Key Implementation Details
 
 1. **Name Resolution Priority**:
+
    - First checks `jsrName` field in package.json
    - Falls back to `name` field if it's JSR-formatted (@scope/name)
    - Combines `author` + `name` as @author/name
    - Throws error if no valid name can be generated
 
 2. **Export Handling**:
+
    - String exports are converted to object format with "." key
    - Complex exports with conditions are supported
    - `jsr` field in exports takes priority over other fields
@@ -80,6 +86,7 @@ bun release
 ### Testing Strategy
 
 Tests use Vitest with snapshot testing. Each test case in `/tests/` contains:
+
 - `package.json` - Input configuration
 - `jsr.json` - Expected output (snapshot)
 - Test verifies the transformation matches expected output
