@@ -14,6 +14,10 @@ export default defineConfig({
 		'consola',
 		'terminal-link',
 	],
+	plugins: {
+		publint: true,
+		unused: true,
+	},
 	hooks: {
 		'build:before': async () => {
 			await $`bun ./scripts/gen_types.js`
