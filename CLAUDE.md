@@ -10,7 +10,7 @@ pkg-to-jsr is a zero-config CLI tool that generates `jsr.json` files from existi
 
 ### Development
 
-```fish
+````fish
 # Run the CLI locally
 bun cli
 
@@ -27,9 +27,54 @@ bun typecheck
 bun lint
 bun format
 
-# Build the project
-bun build
+## Linting and Code Quality
+
+The project uses ESLint with strict TypeScript rules for code quality. When you encounter linting errors:
+
+### Check linting issues:
+```fish
+bun lint
+````
+
+### Auto-fix linting issues:
+
+```fish
+bun format
 ```
+
+### Type checking:
+
+```fish
+bun typecheck
+```
+
+### Common issues and fixes:
+
+- **Unused imports**: Run `bun format` to auto-remove
+- **Type errors**: Use proper type assertions with `as` when needed
+- **zod-mini syntax**: Use `z.optional()` wrapper function, not `.optional()` method
+- **Boolean expressions**: Use explicit comparisons (`value === false`, `value != null`) instead of truthy/falsy checks
+- **ESLint MCP**: Use Claude's ESLint MCP to identify and fix complex linting issues
+
+### ESLint Configuration:
+
+The project uses strict TypeScript rules including:
+
+- `ts/no-unsafe-*` rules for type safety
+- `ts/strict-boolean-expressions` for explicit boolean comparisons
+- `unused-imports/no-unused-imports` for clean imports
+- `perfectionist/sort-*` for consistent ordering
+- `antfu/top-level-function` for function declarations
+
+# Build the project
+
+bun build
+
+# Generate zod schemas from JSR spec
+
+bun build:gen_zod
+
+````
 
 ### Testing
 
@@ -39,7 +84,7 @@ bun test tests/basic/index.test.ts
 
 # Update test snapshots
 bun test -u
-```
+````
 
 ### Release Process
 
@@ -94,7 +139,16 @@ Tests use Vitest with snapshot testing. Each test case in `/tests/` contains:
 ### Dependencies
 
 - **Runtime**: Bun (JavaScript runtime and build tool)
-- **Type Validation**: Typia (runtime type validation with TypeScript)
+- **Type Validation**: zod-mini (tree-shakable runtime validation from zod v4)
 - **CLI**: cleye (command-line argument parsing)
 - **Logging**: consola
 - **Testing**: Vitest with doctest support
+
+### Validation Architecture
+
+The project uses zod-mini for runtime type validation:
+
+- **src/jsr-schemas.ts** - Generated zod schemas from JSR configuration spec
+- **scripts/gen_zod_schemas.js** - Automatically generates zod schemas from JSR JSON Schema
+- Schemas are automatically regenerated during build process
+- Tree-shakable validation with smaller bundle size compared to alternatives

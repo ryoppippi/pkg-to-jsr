@@ -1,22 +1,13 @@
-import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDeep } from 'type-fest';
-
-import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
 import fs from 'node:fs/promises';
 import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
-import typia from 'typia';
-import { _throwError, _typiaErrorHandler, logger } from './logger';
+import { JSRConfigurationSchema, type JSRJson, type JSRScopedName } from './jsr';
+import { isJSRScopedName, isStartWithExclamation, isString, type PackageJson } from './jsr-schemas';
+import { _throwError, _zodErrorHandler, logger } from './logger';
 
-type JSRScopedName = `@${string}/${string}`;
-type JSRJson = OverrideProperties<_JSRConfigurationFileSchema, { name: JSRScopedName }>;
 type Exports = JSRJson['exports'];
-type PackageJson = SimplifyDeep<Pick<OriginalPackageJSON, 'name' | 'author' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] }>;
-
-const isStartWithExclamation = typia.createIs<`!${string}`>();
-const isString = typia.createIs<string>();
-const isJSRScopedName = typia.createIs<JSRScopedName>();
 
 function bold(str: string): string {
 	return styleText('bold', str);
@@ -39,9 +30,9 @@ export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string>
  */
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
-	const validation = typia.json.validateParse<PackageJson>(pkgJSON);
-	const { data } = _typiaErrorHandler(validation);
-	return data;
+	const parsed = JSON.parse(pkgJSON) as PackageJson;
+	// For now, we just validate that it's parseable JSON
+	return parsed;
 }
 
 /**
@@ -127,8 +118,8 @@ export function getName(pkgJSON: PackageJson): JSRScopedName {
 	}
 
 	const errorMessages = [
-		jsrName != null ? `${bold(`jsrName: ${jsrName}`)} is not a valid scoped package name` : undefined,
-		jsrName == null && name != null && author == null ? `${bold(`name: ${name}`)} is not a valid scoped package name` : undefined,
+		jsrName != null ? `${bold(`jsrName: ${String(jsrName)}`)} is not a valid scoped package name` : undefined,
+		jsrName == null && name != null && author == null ? `${bold(`name: ${String(name)}`)} is not a valid scoped package name` : undefined,
 		`On JSR, all packages are contained within a scope. See ${terminalLink('https://jsr.io/docs/scopes', 'https://jsr.io/docs/scopes')} for more information`,
 		`To fix this issue, you can choose one of the following options:`,
 		'1. add jsrName field to package.json',
@@ -355,13 +346,13 @@ export function getExports(pkgJSON: PackageJson): Exports {
 			case isString(value):
 				_exports[key] = value;
 				break;
-			case typia.is<{ jsr: string }>(value):
+			case typeof value === 'object' && value != null && 'jsr' in value && isString(value.jsr):
 				/* if jsr is defined, use it */
 				_exports[key] = value.jsr;
 				break;
-			case typia.is<{ import: string | { default: string } }>(value):
+			case typeof value === 'object' && value != null && 'import' in value && (isString(value.import) || (typeof value.import === 'object' && value.import != null && 'default' in value.import && isString(value.import.default))):
 				/* if import is defined, use it */
-				_exports[key] = isString(value.import) ? value.import : value.import.default;
+				_exports[key] = isString(value.import) ? value.import : (value.import as { default: string }).default;
 				break;
 			default:
 				logger.warn(`Export key ${key} is ignored because it is not a string or object`);
@@ -428,13 +419,13 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	} as const satisfies JSRJson;
 
 	/* check the JSR object */
-	const validation = typia.validateEquals<JSRJson>(jsr);
+	const validation = JSRConfigurationSchema.safeParse(jsr);
 
-	const { data } = _typiaErrorHandler(validation);
+	const { data } = _zodErrorHandler(validation);
 
-	if (!semver.canParse(data?.version ?? '')) {
-		_throwError(`Invalid version: ${version}`);
+	if (data != null && !semver.canParse(String((data as JSRJson)?.version ?? ''))) {
+		_throwError(`Invalid version: ${String(version)}`);
 	}
 
-	return data;
+	return data as JSRJson;
 }

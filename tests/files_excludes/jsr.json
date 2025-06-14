@@ -1,6 +1,9 @@
 {
 	"name": "@ryoppippi/dummy",
 	"version": "0.1.0",
+	"exports": {
+		".": "./dist/index.js"
+	},
 	"publish": {
 		"include": [
 			"dist"
@@ -9,8 +12,5 @@
 			"src/**/*.ts",
 			"node_modules"
 		]
-	},
-	"exports": {
-		".": "./dist/index.js"
 	}
 }

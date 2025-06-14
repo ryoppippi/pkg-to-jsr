@@ -3,6 +3,15 @@
 		"context7": {
 			"type": "sse",
 			"url": "https://mcp.context7.com/sse"
+		},
+		"eslint": {
+			"type": "stdio",
+			"command": "bun",
+			"args": [
+				"x",
+				"@eslint/mcp@latest"
+			],
+			"env": {}
 		}
 	}
 }

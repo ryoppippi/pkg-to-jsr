@@ -1,4 +1,3 @@
-import type * as typia from 'typia';
 import process from 'node:process';
 import { consola, type ConsolaInstance } from 'consola';
 
@@ -19,15 +18,18 @@ export function _throwError(message: string): never {
 }
 
 /**
- * Handle typia validation error
+ * Handle zod validation error
  */
-export function _typiaErrorHandler<T>(validation: typia.IValidation<T>): never | typia.IValidation.ISuccess<T> {
-	if (!validation.success) {
-		const message = validation.errors.map(({ path, expected, value }) =>
-			`${path} is invalid. Ecpected type is ${expected}, but got ${value}`,
-		).join('\n');
-		return _throwError(`Invalid JSR configuration: ${message}`);
+/* eslint-disable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/no-non-null-asserted-optional-chain */
+export function _zodErrorHandler<T>(validation: any): { data: T } {
+	if (validation?.success === false) {
+		const errorMessage = validation?.error?.errors?.map((error: any) => {
+			const { path, message, code } = error;
+			return `${path.join('.')} is invalid: ${message} (${code})`;
+		}).join('\n') ?? 'Unknown validation error';
+		_throwError(`Invalid configuration: ${errorMessage}`);
 	}
 
-	return validation;
+	return { data: validation?.data! };
 }
+/* eslint-enable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/no-non-null-asserted-optional-chain */
