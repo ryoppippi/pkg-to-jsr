@@ -421,11 +421,11 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	/* check the JSR object */
 	const validation = JSRConfigurationSchema.safeParse(jsr);
 
-	const { data } = _zodErrorHandler(validation);
+	const { data } = _zodErrorHandler<JSRJson>(validation);
 
 	if (data != null && data.version != null && !semver.canParse(String(data.version))) {
 		_throwError(`Invalid version: ${String(data.version)}`);
 	}
 
-	return data as JSRJson;
+	return data;
 }
