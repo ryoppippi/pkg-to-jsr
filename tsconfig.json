@@ -19,7 +19,7 @@
 		"src",
 		"tests",
 		"eslint.config.js",
-		"tests"
+		"tsdown.config.ts"
 	],
 	"exclude": [
 		"node_modules",
