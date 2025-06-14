@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/pkg-to-jsr?color=yellow)](https://npmjs.com/package/pkg-to-jsr)
 [![npm downloads](https://img.shields.io/npm/dm/pkg-to-jsr?color=yellow)](https://npmjs.com/package/pkg-to-jsr)
 
-pkg-to-jsr is a zero-config generator that creates a `jsr.json` file from your existing `package.json`.
+pkg-to-jsr is a zero-config generator that creates a `jsr.json` file from your existing `package.json`, powered by zod-mini for fast runtime validation.
 
 It simplifies the process of preparing your package for publication on [JSR](https://jsr.io).
 

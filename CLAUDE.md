@@ -29,6 +29,9 @@ bun format
 
 # Build the project
 bun build
+
+# Generate zod schemas from JSR spec
+bun build:gen_zod
 ```
 
 ### Testing
@@ -94,7 +97,16 @@ Tests use Vitest with snapshot testing. Each test case in `/tests/` contains:
 ### Dependencies
 
 - **Runtime**: Bun (JavaScript runtime and build tool)
-- **Type Validation**: Typia (runtime type validation with TypeScript)
+- **Type Validation**: zod-mini (tree-shakable runtime validation from zod v4)
 - **CLI**: cleye (command-line argument parsing)
 - **Logging**: consola
 - **Testing**: Vitest with doctest support
+
+### Validation Architecture
+
+The project uses zod-mini for runtime type validation:
+
+- **src/jsr-schemas.ts** - Generated zod schemas from JSR configuration spec
+- **scripts/gen_zod_schemas.js** - Automatically generates zod schemas from JSR JSON Schema
+- Schemas are automatically regenerated during build process
+- Tree-shakable validation with smaller bundle size compared to alternatives
