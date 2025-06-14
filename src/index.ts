@@ -3,6 +3,7 @@ import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
+import { z } from 'zod/v4-mini';
 import { JSRConfigurationSchema, type JSRJson, type JSRScopedName } from './jsr';
 import { isJSRScopedName, isStartWithExclamation, isString, type PackageJson } from './jsr-schemas';
 import { _throwError, logger } from './logger';
@@ -422,14 +423,7 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	const validation = JSRConfigurationSchema.safeParse(jsr);
 
 	if (!validation.success) {
-		/* eslint-disable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call */
-		const error = validation.error as any;
-		const errorMessage = error?.errors?.map((err: any) => {
-			const { path, message, code } = err;
-			return `${path.join('.')} is invalid: ${message} (${code})`;
-		}).join('\n') ?? 'Unknown validation error';
-		/* eslint-enable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call */
-		_throwError(`Invalid configuration: ${errorMessage}`);
+		_throwError(`Invalid configuration: ${z.prettifyError(validation.error)}`);
 	}
 
 	const data = validation.data;
