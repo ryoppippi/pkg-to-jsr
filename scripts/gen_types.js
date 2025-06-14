@@ -13,6 +13,46 @@ const json = await fetch(SCHEMA_URL).then(async res => res.json());
 
 const ts = await compile(json, 'JSR');
 
-await fs.writeFile(EXPORT_PATH, ts);
+// Add zod-mini schemas to the generated types
+const zodSchemas = `
+import { z } from 'zod/v4-mini';
 
-consola.success(`Generated types at ${EXPORT_PATH.toString()}`);
+// Zod schemas for runtime validation
+export const JSRScopedNameSchema = z.string().check(
+  z.regex(/^@[a-z0-9\\-_]+\\/[a-z0-9\\-_]+$/),
+);
+
+export const JSRExportsSchema = z.union([
+  z.string(),
+  z.record(z.string(), z.string()),
+]);
+
+export const JSRPublishSchema = z.object({
+  include: z.array(z.string()).optional(),
+  exclude: z.array(z.string()).optional(),
+}).catchall(z.unknown());
+
+export const JSRConfigurationSchema = z.object({
+  name: JSRScopedNameSchema,
+  version: z.string().optional(),
+  exports: JSRExportsSchema,
+  publish: JSRPublishSchema.optional(),
+}).catchall(z.unknown());
+
+// Helper schemas for validation
+export const StartWithExclamationSchema = z.string().check(
+  z.regex(/^!/),
+);
+
+export const StringSchema = z.string();
+
+// Type inference from schemas
+export type JSRScopedName = z.infer<typeof JSRScopedNameSchema>;
+export type JSRJson = z.infer<typeof JSRConfigurationSchema>;
+`;
+
+const finalContent = ts + zodSchemas;
+
+await fs.writeFile(EXPORT_PATH, finalContent);
+
+consola.success(`Generated types with zod schemas at ${EXPORT_PATH.toString()}`);
