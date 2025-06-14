@@ -5,7 +5,7 @@ import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
 import { JSRConfigurationSchema, type JSRJson, type JSRScopedName } from './jsr';
 import { isJSRScopedName, isStartWithExclamation, isString, type PackageJson } from './jsr-schemas';
-import { _throwError, _zodErrorHandler, logger } from './logger';
+import { _throwError, logger } from './logger';
 
 type Exports = JSRJson['exports'];
 
@@ -421,9 +421,20 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	/* check the JSR object */
 	const validation = JSRConfigurationSchema.safeParse(jsr);
 
-	const { data } = _zodErrorHandler<JSRJson>(validation);
+	if (!validation.success) {
+		/* eslint-disable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call */
+		const error = validation.error as any;
+		const errorMessage = error?.errors?.map((err: any) => {
+			const { path, message, code } = err;
+			return `${path.join('.')} is invalid: ${message} (${code})`;
+		}).join('\n') ?? 'Unknown validation error';
+		/* eslint-enable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call */
+		_throwError(`Invalid configuration: ${errorMessage}`);
+	}
 
-	if (data != null && data.version != null && !semver.canParse(String(data.version))) {
+	const data = validation.data;
+
+	if (data.version != null && !semver.canParse(String(data.version))) {
 		_throwError(`Invalid version: ${String(data.version)}`);
 	}
 
