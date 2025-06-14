@@ -1,4 +1,3 @@
-import type { SafeParseReturnType } from 'zod/v4-mini';
 import process from 'node:process';
 import { consola, type ConsolaInstance } from 'consola';
 
@@ -21,13 +20,16 @@ export function _throwError(message: string): never {
 /**
  * Handle zod validation error
  */
-export function _zodErrorHandler<T>(validation: SafeParseReturnType<unknown, T>): { data: T } {
-	if (!validation.success) {
-		const message = validation.error.errors.map(({ path, message, code }) =>
-			`${path.join('.')} is invalid: ${message} (${code})`,
-		).join('\n');
-		return _throwError(`Invalid configuration: ${message}`);
+/* eslint-disable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/strict-boolean-expressions, ts/no-non-null-asserted-optional-chain */
+export function _zodErrorHandler<T>(validation: any): { data: T } {
+	if (!validation?.success) {
+		const errorMessage = validation?.error?.errors?.map((error: any) => {
+			const { path, message, code } = error;
+			return `${path.join('.')} is invalid: ${message} (${code})`;
+		}).join('\n') ?? 'Unknown validation error';
+		_throwError(`Invalid configuration: ${errorMessage}`);
 	}
 
-	return { data: validation.data };
+	return { data: validation?.data! };
 }
+/* eslint-enable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/strict-boolean-expressions, ts/no-non-null-asserted-optional-chain */

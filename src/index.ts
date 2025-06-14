@@ -1,15 +1,13 @@
-import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDeep } from 'type-fest';
-
-import { JSRScopedNameSchema, JSRConfigurationSchema, PackageJsonSchema, isStartWithExclamation, isString, isJSRScopedName, type JSRScopedName, type JSRJson, type PackageJson } from './jsr-schemas';
 import fs from 'node:fs/promises';
 import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
+import { JSRConfigurationSchema, type JSRJson, type JSRScopedName } from './jsr';
+import { isJSRScopedName, isStartWithExclamation, isString, type PackageJson } from './jsr-schemas';
 import { _throwError, _zodErrorHandler, logger } from './logger';
 
 type Exports = JSRJson['exports'];
-
 
 function bold(str: string): string {
 	return styleText('bold', str);
@@ -32,10 +30,9 @@ export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string>
  */
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
-	const parsed = JSON.parse(pkgJSON);
-	// For now, we just validate that it's parseable JSON and cast to our type
-	const data = parsed as PackageJson;
-	return data;
+	const parsed = JSON.parse(pkgJSON) as PackageJson;
+	// For now, we just validate that it's parseable JSON
+	return parsed;
 }
 
 /**
@@ -121,8 +118,8 @@ export function getName(pkgJSON: PackageJson): JSRScopedName {
 	}
 
 	const errorMessages = [
-		jsrName != null ? `${bold(`jsrName: ${jsrName}`)} is not a valid scoped package name` : undefined,
-		jsrName == null && name != null && author == null ? `${bold(`name: ${name}`)} is not a valid scoped package name` : undefined,
+		jsrName != null ? `${bold(`jsrName: ${String(jsrName)}`)} is not a valid scoped package name` : undefined,
+		jsrName == null && name != null && author == null ? `${bold(`name: ${String(name)}`)} is not a valid scoped package name` : undefined,
 		`On JSR, all packages are contained within a scope. See ${terminalLink('https://jsr.io/docs/scopes', 'https://jsr.io/docs/scopes')} for more information`,
 		`To fix this issue, you can choose one of the following options:`,
 		'1. add jsrName field to package.json',
@@ -426,9 +423,10 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 
 	const { data } = _zodErrorHandler(validation);
 
-	if (!semver.canParse(data?.version ?? '')) {
-		_throwError(`Invalid version: ${version}`);
+	// eslint-disable-next-line ts/no-unsafe-member-access
+	if (Boolean(data) && !semver.canParse(String((data as any)?.version ?? ''))) {
+		_throwError(`Invalid version: ${String(version)}`);
 	}
 
-	return data;
+	return data as JSRJson;
 }

@@ -10,7 +10,7 @@ pkg-to-jsr is a zero-config CLI tool that generates `jsr.json` files from existi
 
 ### Development
 
-```fish
+````fish
 # Run the CLI locally
 bun cli
 
@@ -27,12 +27,52 @@ bun typecheck
 bun lint
 bun format
 
+## Linting and Code Quality
+
+The project uses ESLint with strict TypeScript rules for code quality. When you encounter linting errors:
+
+### Check linting issues:
+```fish
+bun lint
+````
+
+### Auto-fix linting issues:
+
+```fish
+bun format
+```
+
+### Type checking:
+
+```fish
+bun typecheck
+```
+
+### Common issues and fixes:
+
+- **Unused imports**: Run `bun format` to auto-remove
+- **Type errors**: Use proper type assertions with `as` when needed
+- **zod-mini syntax**: Use `z.optional()` wrapper function, not `.optional()` method
+- **ESLint MCP**: Use Claude's ESLint MCP to identify and fix complex linting issues
+
+### ESLint Configuration:
+
+The project uses strict TypeScript rules including:
+
+- `ts/no-unsafe-*` rules for type safety
+- `unused-imports/no-unused-imports` for clean imports
+- `perfectionist/sort-*` for consistent ordering
+- `antfu/top-level-function` for function declarations
+
 # Build the project
+
 bun build
 
 # Generate zod schemas from JSR spec
+
 bun build:gen_zod
-```
+
+````
 
 ### Testing
 
@@ -42,7 +82,7 @@ bun test tests/basic/index.test.ts
 
 # Update test snapshots
 bun test -u
-```
+````
 
 ### Release Process
 

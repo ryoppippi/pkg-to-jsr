@@ -28,16 +28,16 @@ export const JSRExportsSchema = z.union([
 ]);
 
 export const JSRPublishSchema = z.object({
-  include: z.array(z.string()).optional(),
-  exclude: z.array(z.string()).optional(),
-}).catchall(z.unknown());
+  include: z.optional(z.array(z.string())),
+  exclude: z.optional(z.array(z.string())),
+});
 
 export const JSRConfigurationSchema = z.object({
   name: JSRScopedNameSchema,
-  version: z.string().optional(),
+  version: z.optional(z.string()),
   exports: JSRExportsSchema,
-  publish: JSRPublishSchema.optional(),
-}).catchall(z.unknown());
+  publish: z.optional(JSRPublishSchema),
+});
 
 // Helper schemas for validation
 export const StartWithExclamationSchema = z.string().check(
