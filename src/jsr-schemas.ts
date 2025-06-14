@@ -1,9 +1,7 @@
 import { z } from 'zod/v4-mini';
 
 // Generated Zod schemas from JSR JSON Schema
-export const JSRScopedNameSchema = z.string().check(
-	z.regex(/^@[a-z0-9\-_]+\/[a-z0-9\-_]+$/)
-);
+export const JSRScopedNameSchema = z.string().regex(/^@[a-z0-9\-_]+\/[a-z0-9\-_]+$/);
 
 export const JSRExportsSchema = z.union([
 	z.string(),
@@ -24,9 +22,7 @@ export const JSRConfigurationSchema = z.object({
 });
 
 // Helper schemas for validation
-export const StartWithExclamationSchema = z.string().check(
-	z.regex(/^!/)
-);
+export const StartWithExclamationSchema = z.string().regex(/^!/);
 export const StringSchema = z.string();
 
 // Package.json schema for validation (passthrough for now)
