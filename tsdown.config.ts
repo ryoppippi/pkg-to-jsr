@@ -1,3 +1,4 @@
+import { $ } from 'bun'
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
@@ -13,4 +14,9 @@ export default defineConfig({
 		'consola',
 		'terminal-link',
 	],
+	hooks: {
+		'build:before': async () => {
+			await $`bun ./scripts/gen_types.js`
+		},
+	},
 })

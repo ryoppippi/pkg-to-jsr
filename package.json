@@ -27,8 +27,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "bun build:gen_types && bun build:tsdown",
-		"build:tsdown": "bun x tsdown",
+		"build": "bun -b tsdown",
 		"build:gen_types": "bun ./scripts/gen_types.js",
 		"build:gen_zod": "bun ./scripts/gen_zod_schemas.js",
 		"cli": "./bin/pkg-to-jsr.mjs",
