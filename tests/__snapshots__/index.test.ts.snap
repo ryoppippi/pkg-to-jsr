@@ -60,51 +60,6 @@ exports[`exports > exprts_without_jsr 1`] = `
 }"
 `;
 
-exports[`exports exports_with_jsr 1`] = `
-"{
-	"name": "@ryoppippi/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./src/index.ts"
-	},
-	"publish": {
-		"include": [
-			"dist"
-		]
-	}
-}"
-`;
-
-exports[`exports exports_without_jsr_imports_object 1`] = `
-"{
-	"name": "@ryoppippi/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	},
-	"publish": {
-		"include": [
-			"dist"
-		]
-	}
-}"
-`;
-
-exports[`exports exprts_without_jsr 1`] = `
-"{
-	"name": "@ryoppippi/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	},
-	"publish": {
-		"include": [
-			"dist"
-		]
-	}
-}"
-`;
-
 exports[`files test > excludes 1`] = `
 "{
 	"name": "@ryoppippi/dummy",
@@ -150,51 +105,6 @@ exports[`files test > without files 1`] = `
 }"
 `;
 
-exports[`files test excludes 1`] = `
-"{
-	"name": "@ryoppippi/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	},
-	"publish": {
-		"include": [
-			"dist"
-		],
-		"exclude": [
-			"src/**/*.ts",
-			"node_modules"
-		]
-	}
-}"
-`;
-
-exports[`files test includes 1`] = `
-"{
-	"name": "@ryoppippi/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	},
-	"publish": {
-		"include": [
-			"src/**/*.ts",
-			"dist"
-		]
-	}
-}"
-`;
-
-exports[`files test without files 1`] = `
-"{
-	"name": "@dummy/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	}
-}"
-`;
-
 exports[`name test > gen name 1`] = `
 "{
 	"name": "@ryoppippi/dummy",
@@ -206,26 +116,6 @@ exports[`name test > gen name 1`] = `
 `;
 
 exports[`name test > jsr name 1`] = `
-"{
-	"name": "@ryoppippi/helloworld",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	}
-}"
-`;
-
-exports[`name test gen name 1`] = `
-"{
-	"name": "@ryoppippi/dummy",
-	"version": "0.1.0",
-	"exports": {
-		".": "./dist/index.js"
-	}
-}"
-`;
-
-exports[`name test jsr name 1`] = `
 "{
 	"name": "@ryoppippi/helloworld",
 	"version": "0.1.0",
