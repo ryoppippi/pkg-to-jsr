@@ -1,4 +1,4 @@
-import type * as typia from 'typia';
+import type { SafeParseReturnType } from 'zod/v4-mini';
 import process from 'node:process';
 import { consola, type ConsolaInstance } from 'consola';
 
@@ -19,15 +19,15 @@ export function _throwError(message: string): never {
 }
 
 /**
- * Handle typia validation error
+ * Handle zod validation error
  */
-export function _typiaErrorHandler<T>(validation: typia.IValidation<T>): never | typia.IValidation.ISuccess<T> {
+export function _zodErrorHandler<T>(validation: SafeParseReturnType<unknown, T>): { data: T } {
 	if (!validation.success) {
-		const message = validation.errors.map(({ path, expected, value }) =>
-			`${path} is invalid. Ecpected type is ${expected}, but got ${value}`,
+		const message = validation.error.errors.map(({ path, message, code }) =>
+			`${path.join('.')} is invalid: ${message} (${code})`,
 		).join('\n');
-		return _throwError(`Invalid JSR configuration: ${message}`);
+		return _throwError(`Invalid configuration: ${message}`);
 	}
 
-	return validation;
+	return { data: validation.data };
 }

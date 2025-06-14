@@ -1,22 +1,15 @@
 import type { PackageJson as OriginalPackageJSON, OverrideProperties, SimplifyDeep } from 'type-fest';
 
-import type { JSRConfigurationFileSchema as _JSRConfigurationFileSchema } from './jsr';
+import { JSRScopedNameSchema, JSRConfigurationSchema, PackageJsonSchema, isStartWithExclamation, isString, isJSRScopedName, type JSRScopedName, type JSRJson, type PackageJson } from './jsr-schemas';
 import fs from 'node:fs/promises';
 import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
-import typia from 'typia';
-import { _throwError, _typiaErrorHandler, logger } from './logger';
+import { _throwError, _zodErrorHandler, logger } from './logger';
 
-type JSRScopedName = `@${string}/${string}`;
-type JSRJson = OverrideProperties<_JSRConfigurationFileSchema, { name: JSRScopedName }>;
 type Exports = JSRJson['exports'];
-type PackageJson = SimplifyDeep<Pick<OriginalPackageJSON, 'name' | 'author' | 'files' | 'exports' | 'version'> & { jsrName?: string; jsrInclude?: string[]; jsrExclude?: string[] }>;
 
-const isStartWithExclamation = typia.createIs<`!${string}`>();
-const isString = typia.createIs<string>();
-const isJSRScopedName = typia.createIs<JSRScopedName>();
 
 function bold(str: string): string {
 	return styleText('bold', str);
@@ -39,8 +32,9 @@ export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string>
  */
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
-	const validation = typia.json.validateParse<PackageJson>(pkgJSON);
-	const { data } = _typiaErrorHandler(validation);
+	const parsed = JSON.parse(pkgJSON);
+	const validation = PackageJsonSchema.safeParse(parsed);
+	const { data } = _zodErrorHandler(validation);
 	return data;
 }
 
@@ -355,13 +349,13 @@ export function getExports(pkgJSON: PackageJson): Exports {
 			case isString(value):
 				_exports[key] = value;
 				break;
-			case typia.is<{ jsr: string }>(value):
+			case typeof value === 'object' && value != null && 'jsr' in value && isString(value.jsr):
 				/* if jsr is defined, use it */
 				_exports[key] = value.jsr;
 				break;
-			case typia.is<{ import: string | { default: string } }>(value):
+			case typeof value === 'object' && value != null && 'import' in value && (isString(value.import) || (typeof value.import === 'object' && value.import != null && 'default' in value.import && isString(value.import.default))):
 				/* if import is defined, use it */
-				_exports[key] = isString(value.import) ? value.import : value.import.default;
+				_exports[key] = isString(value.import) ? value.import : (value.import as { default: string }).default;
 				break;
 			default:
 				logger.warn(`Export key ${key} is ignored because it is not a string or object`);
@@ -428,9 +422,9 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	} as const satisfies JSRJson;
 
 	/* check the JSR object */
-	const validation = typia.validateEquals<JSRJson>(jsr);
+	const validation = JSRConfigurationSchema.safeParse(jsr);
 
-	const { data } = _typiaErrorHandler(validation);
+	const { data } = _zodErrorHandler(validation);
 
 	if (!semver.canParse(data?.version ?? '')) {
 		_throwError(`Invalid version: ${version}`);

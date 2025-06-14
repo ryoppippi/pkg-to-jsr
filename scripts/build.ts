@@ -1,6 +1,5 @@
 import { globSync } from 'node:fs';
 import path from 'node:path';
-import UnpluginTypia from '@ryoppippi/unplugin-typia/bun';
 import { $ } from 'bun';
 import isolatedDecl from 'bun-plugin-isolated-decl';
 import { consola } from 'consola';
@@ -25,7 +24,6 @@ if (import.meta.main) {
 		splitting: false,
 		external: Object.keys(pj.dependencies),
 		plugins: [
-			UnpluginTypia({ cache: false }),
 			isolatedDecl(),
 		],
 	});
