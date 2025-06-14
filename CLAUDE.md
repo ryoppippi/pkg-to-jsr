@@ -53,6 +53,7 @@ bun typecheck
 - **Unused imports**: Run `bun format` to auto-remove
 - **Type errors**: Use proper type assertions with `as` when needed
 - **zod-mini syntax**: Use `z.optional()` wrapper function, not `.optional()` method
+- **Boolean expressions**: Use explicit comparisons (`value === false`, `value != null`) instead of truthy/falsy checks
 - **ESLint MCP**: Use Claude's ESLint MCP to identify and fix complex linting issues
 
 ### ESLint Configuration:
@@ -60,6 +61,7 @@ bun typecheck
 The project uses strict TypeScript rules including:
 
 - `ts/no-unsafe-*` rules for type safety
+- `ts/strict-boolean-expressions` for explicit boolean comparisons
 - `unused-imports/no-unused-imports` for clean imports
 - `perfectionist/sort-*` for consistent ordering
 - `antfu/top-level-function` for function declarations

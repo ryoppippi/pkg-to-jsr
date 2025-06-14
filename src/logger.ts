@@ -20,9 +20,9 @@ export function _throwError(message: string): never {
 /**
  * Handle zod validation error
  */
-/* eslint-disable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/strict-boolean-expressions, ts/no-non-null-asserted-optional-chain */
+/* eslint-disable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/no-non-null-asserted-optional-chain */
 export function _zodErrorHandler<T>(validation: any): { data: T } {
-	if (!validation?.success) {
+	if (validation?.success === false) {
 		const errorMessage = validation?.error?.errors?.map((error: any) => {
 			const { path, message, code } = error;
 			return `${path.join('.')} is invalid: ${message} (${code})`;
@@ -32,4 +32,4 @@ export function _zodErrorHandler<T>(validation: any): { data: T } {
 
 	return { data: validation?.data! };
 }
-/* eslint-enable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/strict-boolean-expressions, ts/no-non-null-asserted-optional-chain */
+/* eslint-enable ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-call, ts/no-non-null-asserted-optional-chain */
