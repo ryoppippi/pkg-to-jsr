@@ -423,8 +423,7 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 
 	const { data } = _zodErrorHandler(validation);
 
-	// eslint-disable-next-line ts/no-unsafe-member-access
-	if (data != null && !semver.canParse(String((data as any)?.version ?? ''))) {
+	if (data != null && !semver.canParse(String((data as JSRJson)?.version ?? ''))) {
 		_throwError(`Invalid version: ${String(version)}`);
 	}
 
