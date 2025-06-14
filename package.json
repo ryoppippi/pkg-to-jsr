@@ -27,8 +27,8 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "bun build:gen_types && bun build:cli",
-		"build:cli": "bun ./scripts/build.ts",
+		"build": "bun build:gen_types && bun build:tsdown",
+		"build:tsdown": "bun x tsdown",
 		"build:gen_types": "bun ./scripts/gen_types.js",
 		"build:gen_zod": "bun ./scripts/gen_zod_schemas.js",
 		"cli": "./bin/pkg-to-jsr.mjs",
@@ -57,6 +57,7 @@
 		"find-up-simple": "^1.0.1",
 		"json-schema-to-typescript": "^15.0.4",
 		"pathe": "^2.0.3",
+		"tsdown": "^0.12.7",
 		"type-fest": "^4.41.0",
 		"typescript": "^5.8.3",
 		"vite-plugin-doctest": "^1.1.1",
