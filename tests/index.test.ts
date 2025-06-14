@@ -8,7 +8,7 @@ it('basic', async () => {
 	const pkgJSON = await readPkgJSON(pkgJsonPath);
 	const jsr = genJsrFromPackageJson({ pkgJSON });
 
-	expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+	await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 });
 
 describe('exports', () => {
@@ -18,7 +18,7 @@ describe('exports', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 
 	it('exprts_without_jsr', async () => {
@@ -27,7 +27,7 @@ describe('exports', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 
 	it('exports_without_jsr_imports_object', async () => {
@@ -36,7 +36,7 @@ describe('exports', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 });
 
@@ -47,7 +47,7 @@ describe('files test', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 
 	it('includes', async () => {
@@ -56,7 +56,7 @@ describe('files test', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 
 	it('excludes', async () => {
@@ -65,7 +65,7 @@ describe('files test', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 });
 
@@ -76,7 +76,7 @@ describe('name test', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 
 	it('jsr name', async () => {
@@ -85,7 +85,7 @@ describe('name test', () => {
 		const pkgJSON = await readPkgJSON(pkgJsonPath);
 		const jsr = genJsrFromPackageJson({ pkgJSON });
 
-		expect(JSON.stringify(jsr, null, '\t')).toMatchSnapshot();
+		await expect(JSON.stringify(jsr, null, '\t')).toMatchFileSnapshot(`${DIR}/jsr.json`);
 	});
 
 	it('error caused name', async () => {
