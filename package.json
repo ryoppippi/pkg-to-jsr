@@ -56,9 +56,11 @@
 		"find-up-simple": "^1.0.1",
 		"json-schema-to-typescript": "^15.0.4",
 		"pathe": "^2.0.3",
+		"publint": "^0.3.12",
 		"tsdown": "^0.12.7",
 		"type-fest": "^4.41.0",
 		"typescript": "^5.8.3",
+		"unplugin-unused": "^0.5.1",
 		"vite-plugin-doctest": "^1.1.1",
 		"vitest": "^3.2.3",
 		"zod": "^3.25.0"

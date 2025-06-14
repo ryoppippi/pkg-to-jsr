@@ -9,6 +9,8 @@ export default defineConfig({
 	minify: true,
 	dts: true,
 	clean: true,
+	publint: true,
+	unused: true,
 	external: [
 		'cleye',
 		'consola',
