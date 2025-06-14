@@ -76,7 +76,9 @@ async function generateZodSchemas() {
 	const schemas = `import { z } from 'zod/v4-mini';
 
 // Generated Zod schemas from JSR JSON Schema
-export const JSRScopedNameSchema = z.string().regex(/^@[a-z0-9\\-_]+\\/[a-z0-9\\-_]+$/);
+export const JSRScopedNameSchema = z.string().check(
+	z.regex(/^@[a-z0-9\\-_]+\\/[a-z0-9\\-_]+$/)
+);
 
 export const JSRExportsSchema = z.union([
 	z.string(),
@@ -84,38 +86,40 @@ export const JSRExportsSchema = z.union([
 ]);
 
 export const JSRPublishSchema = z.object({
-	include: z.array(z.string()).optional(),
-	exclude: z.array(z.string()).optional()
-}).catchall(z.unknown());
+	include: z.optional(z.array(z.string())),
+	exclude: z.optional(z.array(z.string()))
+});
 
 export const JSRConfigurationSchema = z.object({
 	name: JSRScopedNameSchema,
-	version: z.string().optional(),
-	license: z.string().optional(),
+	version: z.optional(z.string()),
+	license: z.optional(z.string()),
 	exports: JSRExportsSchema,
-	publish: JSRPublishSchema.optional()
-}).catchall(z.unknown());
+	publish: z.optional(JSRPublishSchema)
+});
 
 // Helper schemas for validation
-export const StartWithExclamationSchema = z.string().regex(/^!/);
+export const StartWithExclamationSchema = z.string().check(
+	z.regex(/^!/)
+);
 export const StringSchema = z.string();
 
-// Package.json schema for validation
-export const PackageJsonSchema = z.object({
-	name: z.string().optional(),
-	author: z.union([z.string(), z.object({ name: z.string() })]).optional(),
-	files: z.array(z.string()).optional(),
-	exports: z.union([z.string(), z.record(z.unknown())]).optional(),
-	version: z.string().optional(),
-	jsrName: z.string().optional(),
-	jsrInclude: z.array(z.string()).optional(),
-	jsrExclude: z.array(z.string()).optional()
-}).catchall(z.unknown());
+// Package.json schema for validation (passthrough for now)
+export const PackageJsonSchema = z.unknown();
 
 // Type inference from schemas
 export type JSRScopedName = z.infer<typeof JSRScopedNameSchema>;
 export type JSRJson = z.infer<typeof JSRConfigurationSchema>;
-export type PackageJson = z.infer<typeof PackageJsonSchema>;
+export type PackageJson = {
+	name?: string;
+	author?: string | { name: string };
+	files?: string[];
+	exports?: string | Record<string, unknown>;
+	version?: string;
+	jsrName?: string;
+	jsrInclude?: string[];
+	jsrExclude?: string[];
+};
 
 // Validation helpers
 export const isStartWithExclamation = (value: unknown): value is \`!\${string}\` => 

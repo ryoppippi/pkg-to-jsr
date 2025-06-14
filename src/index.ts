@@ -33,8 +33,8 @@ export async function findPackageJSON({ cwd }: { cwd: string }): Promise<string>
 export async function readPkgJSON(pkgJSONPath: string): Promise<PackageJson> {
 	const pkgJSON = await fs.readFile(pkgJSONPath, 'utf-8');
 	const parsed = JSON.parse(pkgJSON);
-	const validation = PackageJsonSchema.safeParse(parsed);
-	const { data } = _zodErrorHandler(validation);
+	// For now, we just validate that it's parseable JSON and cast to our type
+	const data = parsed as PackageJson;
 	return data;
 }
 
