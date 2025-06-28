@@ -11,6 +11,7 @@ export default defineConfig({
 	clean: true,
 	publint: true,
 	unused: true,
+  nodeProtocol: true,
 	external: [
 		'cleye',
 		'consola',
