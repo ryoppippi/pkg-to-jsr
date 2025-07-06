@@ -66,6 +66,6 @@
 		"unplugin-unused": "^0.5.1",
 		"vite-plugin-doctest": "^1.1.1",
 		"vitest": "^3.2.4",
-		"zod": "^3.25.67"
+		"zod": "^3.25.71"
 	}
 }
