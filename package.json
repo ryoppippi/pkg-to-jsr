@@ -27,7 +27,7 @@
 		"dist"
 	],
 	"engines": {
-		"node": ">=22.17.1"
+		"node": ">=22.18.0"
 	},
 	"scripts": {
 		"build": "bun -b tsdown",
