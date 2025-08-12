@@ -55,7 +55,7 @@
 		"@typescript/native-preview": "^7.0.0-dev.20250809.1",
 		"bun-plugin-isolated-decl": "^0.2.6",
 		"clean-pkg-json": "^1.3.0",
-		"eslint": "^9.32.0",
+		"eslint": "^9.33.0",
 		"eslint-plugin-format": "^1.0.1",
 		"find-up-simple": "^1.0.1",
 		"json-schema-to-typescript": "^15.0.4",
