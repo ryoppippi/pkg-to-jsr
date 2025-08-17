@@ -12,7 +12,7 @@ export default defineConfig({
 	unused: true,
   nodeProtocol: true,
 	external: [
-		'cleye',
+		'gunshi',
 		'consola',
 		'terminal-link',
 	],

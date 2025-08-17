@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import process from 'node:process';
-import { cli } from 'cleye';
+import { cli, define } from 'gunshi';
 
 import { isAbsolute, resolve } from 'pathe';
 
@@ -16,52 +16,52 @@ function resolveJsrPath(root: string): string {
 }
 
 export async function main(): Promise<void> {
-	const argv = cli({
-		name,
-		version,
-		flags: {
+	const command = define({
+		args: {
 			root: {
-				type: String,
+				type: 'string',
 				alias: 'r',
 				description: 'root directory including package.json',
-				placeholder: '[path]',
 			},
 			silent: {
-				type: Boolean,
+				type: 'boolean',
 				alias: 's',
 				description: 'Suppress non-error logs',
 			},
 		},
+		async run(ctx) {
+			const { root, silent } = ctx.values;
 
-		help: {
-			description,
+			logger.level = silent === true ? LOG_LEVEL_SILENT : LOG_LEVEL_NORMAL;
+
+			/** current working directory or maybe file */
+			const cwd
+			= root != null && isAbsolute(root)
+				? root
+				: root != null
+					? resolve(process.cwd(), root)
+					: process.cwd();
+
+			/* check if root is a directory */
+			if (!(await fs.lstat(cwd)).isDirectory()) {
+				_throwError(`${root} is not a valid root directory`);
+			}
+
+			const pkgJSONPath = await findPackageJSON({ cwd });
+			const jsrPath = resolveJsrPath(cwd);
+
+			const pkgJSON = await readPkgJSON(pkgJSONPath);
+			const jsr = genJsrFromPackageJson({ pkgJSON });
+
+			await writeJsr(jsrPath, jsr);
+
+			logger.success(`Generated ${jsrPath}`);
 		},
 	});
 
-	const { root, silent } = argv.flags;
-
-	logger.level = silent === true ? LOG_LEVEL_SILENT : LOG_LEVEL_NORMAL;
-
-	/** current working directory or maybe file */
-	const cwd
-	= isAbsolute(root as string)
-		? root as string
-		: root != null
-			? resolve(process.cwd(), root)
-			: process.cwd();
-
-	/* check if root is a directory */
-	if (!(await fs.lstat(cwd)).isDirectory()) {
-		_throwError(`${root} is not a valid root directory`);
-	}
-
-	const pkgJSONPath = await findPackageJSON({ cwd });
-	const jsrPath = resolveJsrPath(cwd);
-
-	const pkgJSON = await readPkgJSON(pkgJSONPath);
-	const jsr = genJsrFromPackageJson({ pkgJSON });
-
-	await writeJsr(jsrPath, jsr);
-
-	logger.success(`Generated ${jsrPath}`);
+	await cli(process.argv.slice(2), command, {
+		name,
+		version,
+		description,
+	});
 }

@@ -44,8 +44,8 @@
 		"preinstall": "npx only-allow bun"
 	},
 	"dependencies": {
-		"cleye": "^1.3.4",
 		"consola": "^3.4.2",
+		"gunshi": "^0.26.3",
 		"terminal-link": "^4.0.0"
 	},
 	"devDependencies": {
