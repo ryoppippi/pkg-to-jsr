@@ -40,7 +40,7 @@
 		"format": "bun lint --fix",
 		"test": "bun vitest --typecheck",
 		"prepare": "bun build:gen_zod && bun build:gen_types",
-		"prepack": "npm pkg delete scripts.preinstall && bun run build && clean-pkg-json",
+		"prepack": "bun run build && clean-pkg-json -r scripts.preinstall",
 		"preinstall": "npx only-allow bun"
 	},
 	"dependencies": {
