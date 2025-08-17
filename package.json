@@ -29,7 +29,7 @@
 		"build:gen_zod": "bun ./scripts/gen_zod_schemas.js",
 		"cli": "./bin/pkg-to-jsr.mjs",
 		"typecheck": "tsgo --noEmit",
-		"release": "rm -rf jsr.json && bun typecheck && bun test run && bun run build && bun x publint && bun x bumpp --ignore-scripts",
+		"release": "rm -rf jsr.json && bun typecheck && bun run test && bun run build && bun x publint && bun x bumpp --ignore-scripts",
 		"lint": "bun -b eslint --cache .",
 		"format": "bun lint --fix",
 		"test": "bun vitest --typecheck",
