@@ -32,7 +32,7 @@ You can achieve intelligent code reading by:
 
 Symbols are identified by their name, kind, file location, and container. Use these tools:
 
-- `index_files` - Build symbol index for files matching pattern (e.g., '**/*.ts')
+- `index_files` - Build symbol index for files matching pattern (e.g., '\*_/_.ts')
 - `search_symbol_from_index` - Fast search by name, kind (Class, Function, etc.), file pattern, or container
 - `get_document_symbols` - Get all symbols in a specific file with hierarchical structure
 - `get_definitions` - Navigate to symbol definitions
