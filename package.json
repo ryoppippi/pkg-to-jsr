@@ -34,7 +34,7 @@
 		"format": "bun lint --fix",
 		"test": "bun vitest --typecheck",
 		"prepare": "bun build:gen_zod && bun build:gen_types",
-		"prepack": "bun run build && clean-pkg-json -r scripts.preinstall",
+		"prepack": "bun run build && bun clean-pkg-json -r scripts.preinstall",
 		"preinstall": "npx only-allow bun"
 	},
 	"dependencies": {
