@@ -6,6 +6,7 @@ export default defineConfig({
     doctest(),
   ],
   test: {
+    watch: false,
     includeSource: [
       './src/**/*.[jt]s',
       './tests/**/*.[jt]s',
