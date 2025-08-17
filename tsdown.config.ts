@@ -5,7 +5,7 @@ export default defineConfig({
 	entry: 'src/cli.ts',
 	outDir: 'dist',
 	format: 'esm',
-	minify: true,
+	minify: false,
 	clean: true,
 	publint: true,
 	unused: true,
