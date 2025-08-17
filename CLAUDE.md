@@ -58,10 +58,10 @@ pkg-to-jsr is a zero-config CLI tool that generates `jsr.json` files from existi
 bun cli
 
 # Run tests with type checking
-bun test
+bun run test
 
 # Run tests in watch mode
-bun test --watch
+bun run test --watch
 
 # Type check the codebase
 bun typecheck
@@ -119,10 +119,10 @@ The project uses strict TypeScript rules including:
 bun run test
 
 # Run a specific test file
-bun test tests/basic/index.test.ts
+bun run test tests/basic/index.test.ts
 
 # Update test snapshots
-bun test -u
+bun run test -u
 ```
 
 ### Release Process
