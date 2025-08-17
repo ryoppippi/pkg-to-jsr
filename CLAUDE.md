@@ -115,6 +115,9 @@ The project uses strict TypeScript rules including:
 ### Testing
 
 ```fish
+# Run all tests with type checking
+bun run test
+
 # Run a specific test file
 bun test tests/basic/index.test.ts
 
