@@ -10,7 +10,7 @@ pkg-to-jsr is a zero-config CLI tool that generates `jsr.json` files from existi
 
 ### Development
 
-````fish
+```fish
 # Run the CLI locally
 bun cli
 
@@ -27,36 +27,39 @@ bun typecheck
 bun lint
 bun format
 
-## Linting and Code Quality
+# Build the project
+bun build
+
+# Generate zod schemas from JSR spec
+bun build:gen_zod
+
+# Generate TypeScript types
+bun build:gen_types
+```
+
+### Linting and Code Quality
 
 The project uses ESLint with strict TypeScript rules for code quality. When you encounter linting errors:
 
-### Check linting issues:
 ```fish
+# Check linting issues
 bun lint
-````
 
-### Auto-fix linting issues:
-
-```fish
+# Auto-fix linting issues
 bun format
-```
 
-### Type checking:
-
-```fish
+# Type checking
 bun typecheck
 ```
 
-### Common issues and fixes:
+**Common issues and fixes:**
 
 - **Unused imports**: Run `bun format` to auto-remove
 - **Type errors**: Use proper type assertions with `as` when needed
 - **zod-mini syntax**: Use `z.optional()` wrapper function, not `.optional()` method
 - **Boolean expressions**: Use explicit comparisons (`value === false`, `value != null`) instead of truthy/falsy checks
-- **ESLint MCP**: Use Claude's ESLint MCP to identify and fix complex linting issues
 
-### ESLint Configuration:
+**ESLint Configuration:**
 
 The project uses strict TypeScript rules including:
 
@@ -66,16 +69,6 @@ The project uses strict TypeScript rules including:
 - `perfectionist/sort-*` for consistent ordering
 - `antfu/top-level-function` for function declarations
 
-# Build the project
-
-bun build
-
-# Generate zod schemas from JSR spec
-
-bun build:gen_zod
-
-````
-
 ### Testing
 
 ```fish
@@ -84,7 +77,7 @@ bun test tests/basic/index.test.ts
 
 # Update test snapshots
 bun test -u
-````
+```
 
 ### Release Process
 
@@ -105,7 +98,9 @@ bun release
 
 **src/cli.ts** - CLI interface using `cleye` library for argument parsing
 
-**src/jsr.ts** - TypeScript schema definitions for JSR configuration
+**src/jsr-schemas.ts** - Generated zod schemas for JSR validation (auto-generated from JSR spec)
+
+**src/logger.ts** - Logging utilities using `consola`
 
 ### Key Implementation Details
 
@@ -149,6 +144,14 @@ Tests use Vitest with snapshot testing. Each test case in `/tests/` contains:
 The project uses zod-mini for runtime type validation:
 
 - **src/jsr-schemas.ts** - Generated zod schemas from JSR configuration spec
-- **scripts/gen_zod_schemas.js** - Automatically generates zod schemas from JSR JSON Schema
-- Schemas are automatically regenerated during build process
+- **scripts/gen_zod_schemas.js** - Fetches JSR schema from https://jsr.io/schema/config-file.v1.json and generates custom zod schemas
+- **scripts/gen_types.js** - Generates TypeScript types from JSON schemas
+- Schemas are automatically regenerated during build process via tsdown hooks
 - Tree-shakable validation with smaller bundle size compared to alternatives
+
+### Build System
+
+- **tsdown.config.ts** - Build configuration using tsdown for TypeScript compilation
+- **vite.config.ts** - Test configuration with vitest and doctest plugin support
+- Build process includes: type generation → zod schema generation → TypeScript compilation → minification
+- External dependencies (cleye, consola, terminal-link) are not bundled
