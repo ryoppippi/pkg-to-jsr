@@ -140,3 +140,6 @@ dist
 # jsr
 jsr.json
 !/tests/**/jsr.json
+
+# lsmcp cache
+.lsmcp/cache
