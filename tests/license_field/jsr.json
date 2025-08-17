@@ -1,0 +1,13 @@
+{
+	"name": "@test-author/test-package",
+	"version": "1.0.0",
+	"license": "MIT",
+	"publish": {
+		"include": [
+			"src"
+		]
+	},
+	"exports": {
+		".": "./src/index.ts"
+	}
+}

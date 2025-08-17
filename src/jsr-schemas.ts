@@ -41,6 +41,7 @@ export type PackageJson = {
 	files?: string[];
 	exports?: string | Record<string, unknown>;
 	version?: string;
+	license?: string;
 	jsrName?: string;
 	jsrInclude?: string[];
 	jsrExclude?: string[];
