@@ -95,3 +95,16 @@ describe('name test', () => {
 		expect(() => genJsrFromPackageJson({ pkgJSON })).toThrowError();
 	});
 });
+
+describe('license field', () => {
+	it('migrates license from package.json to jsr.json', async () => {
+		const DIR = resolve(__dirname, './license_field/');
+		const pkgJsonPath = await findPackageJSON({ cwd: DIR });
+		const pkgJSON = await readPkgJSON(pkgJsonPath);
+		const jsr = genJsrFromPackageJson({ pkgJSON });
+
+		expect(jsr.license).toBe('MIT');
+		expect(jsr.name).toBe('@test-author/test-package');
+		expect(jsr.version).toBe('1.0.0');
+	});
+});

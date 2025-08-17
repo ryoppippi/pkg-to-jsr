@@ -35,6 +35,7 @@ export const JSRPublishSchema = z.object({
 export const JSRConfigurationSchema = z.object({
   name: JSRScopedNameSchema,
   version: z.optional(z.string()),
+  license: z.optional(z.string()),
   exports: JSRExportsSchema,
   publish: z.optional(JSRPublishSchema),
 });

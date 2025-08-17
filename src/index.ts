@@ -378,6 +378,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
  *     "name": "package",
  *     "author": "author",
  *     "version": "1.0.0",
+ *     "license": "MIT",
  *     "files": ["src", "dist", "!node_modules"],
  *     "exports": {
  *       ".": "./src/index.ts",
@@ -390,6 +391,7 @@ export function getExports(pkgJSON: PackageJson): Exports {
  *  {
  *    "name": "@author/package",
  *    "version": "1.0.0",
+ *    "license": "MIT",
  *    "publish": {
  *      "include": ["src", "dist"],
  *      "exclude": ["node_modules"]
@@ -403,13 +405,14 @@ export function getExports(pkgJSON: PackageJson): Exports {
  * ```
  */
 export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JSRJson {
-	const { version } = pkgJSON;
+	const { version, license } = pkgJSON;
 
 	const include = getInclude(pkgJSON);
 	const exclude = getExclude(pkgJSON);
 	const jsr = {
 		name: getName(pkgJSON),
 		version: version as string,
+		...(license != null && { license }),
 		publish: include == null && exclude == null
 			? undefined
 			: {
