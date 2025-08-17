@@ -1,7 +1,7 @@
 {
 	"name": "pkg-to-jsr",
 	"type": "module",
-	"version": "1.4.0",
+	"version": "1.5.0",
 	"description": "zero-config generator that creates a jsr.json file from your existing package.json",
 	"engine": "bun@^1.2.0",
 	"author": "ryoppippi",
