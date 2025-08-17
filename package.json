@@ -13,12 +13,6 @@
 		"cli",
 		"zero-config"
 	],
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js"
-		}
-	},
 	"bin": {
 		"pkg-to-jsr": "./bin/pkg-to-jsr.mjs"
 	},
