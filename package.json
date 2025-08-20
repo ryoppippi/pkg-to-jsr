@@ -43,7 +43,7 @@
 		"terminal-link": "^4.0.0"
 	},
 	"devDependencies": {
-		"@mizchi/lsmcp": "^0.9.4",
+		"@mizchi/lsmcp": "^0.10.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
 		"@std/semver": "npm:@jsr/std__semver@^1.0.3",
 		"@types/bun": "^1.2.20",
