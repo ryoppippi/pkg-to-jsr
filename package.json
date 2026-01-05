@@ -55,7 +55,7 @@
 		"find-up-simple": "^1.0.1",
 		"json-schema-to-typescript": "^15.0.4",
 		"pathe": "^2.0.3",
-		"publint": "^0.3.15",
+		"publint": "^0.3.16",
 		"tsdown": "^0.14.1",
 		"type-fest": "^4.41.0",
 		"unplugin-unused": "^0.5.6",
