@@ -56,7 +56,7 @@
 		"json-schema-to-typescript": "^15.0.4",
 		"pathe": "^2.0.3",
 		"publint": "^0.3.18",
-		"tsdown": "^0.21.6",
+		"tsdown": "^0.21.7",
 		"type-fest": "^4.41.0",
 		"unplugin-unused": "^0.5.7",
 		"vite-plugin-doctest": "^1.1.1",
