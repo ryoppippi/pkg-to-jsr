@@ -58,7 +58,7 @@
 		"publint": "^0.3.23",
 		"tsdown": "^0.22.14",
 		"type-fest": "^4.41.0",
-		"unplugin-unused": "^0.5.7",
+		"unplugin-unused": "^0.6.0",
 		"vite-plugin-doctest": "^1.2.2",
 		"vitest": "^3.2.7",
 		"zod": "^4.4.3"
