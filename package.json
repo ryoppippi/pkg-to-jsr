@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"consola": "^3.4.2",
-		"gunshi": "^0.26.3",
+		"gunshi": "^0.37.1",
 		"terminal-link": "^4.0.0"
 	},
 	"devDependencies": {
