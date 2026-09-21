@@ -6,7 +6,7 @@
       "name": "pkg-to-jsr",
       "dependencies": {
         "consola": "^3.4.2",
-        "gunshi": "^0.37.2",
+        "gunshi": "^0.37.3",
         "terminal-link": "^4.0.0",
       },
       "devDependencies": {
@@ -741,7 +741,7 @@
 
     "graphemer": ["graphemer@1.4.0", "", {}, "sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag=="],
 
-    "gunshi": ["gunshi@0.37.2", "", {}, "sha512-pHsYEDSOxaNxSGIYiIYF11Lvc6OiEKw+IkfrLXRWj6bKzqI3noLX8QXOLqGTwPsM8amkpNoZG9tlpg8/4QG7MQ=="],
+    "gunshi": ["gunshi@0.37.3", "", {}, "sha512-uwm23bguqDcleEetknuQnF5okLcgmQPM3iv4aWVHTPDbiSs9shh02F079NCY0mWkrIRjHqNhgmzW6k0FCXhy1g=="],
 
     "has-flag": ["has-flag@4.0.0", "", {}, "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="],
 
