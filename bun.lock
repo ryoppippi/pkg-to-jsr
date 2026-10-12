@@ -16,7 +16,7 @@
         "@types/bun": "^1.4.2",
         "@typescript/native-preview": "^7.0.0-dev.20260707.2",
         "bun-plugin-isolated-decl": "^0.2.9",
-        "clean-pkg-json": "^1.4.2",
+        "clean-pkg-json": "^2.0.0",
         "eslint": "^9.39.5",
         "eslint-plugin-format": "^1.5.0",
         "find-up-simple": "^1.0.1",
@@ -557,7 +557,7 @@
 
     "ci-info": ["ci-info@4.1.0", "", {}, "sha512-HutrvTNsF48wnxkzERIXOe5/mlcfFcbfCmwcg6CJnizbSue78AbDt+1cgl26zwn61WFxhcPykPfZrbqjGmBb4A=="],
 
-    "clean-pkg-json": ["clean-pkg-json@1.4.2", "", { "bin": { "clean-pkg-json": "dist/index.mjs" } }, "sha512-o201s9wWOYoZSRui4QyARSFc3n0IcYDu62hkJCQGX1eshSSQ/90QhS/KveWp/QlXSqcF/g/q2+IINj25V1BMKw=="],
+    "clean-pkg-json": ["clean-pkg-json@2.0.0", "", { "bin": { "clean-pkg-json": "dist/index.mjs" } }, "sha512-HfgaeXf7xc2xEg28rKAb6iJ7KaBU6Bu1F+wefBUEm142fYvnn+dKuBg2WEwjv7hIs1S4tu/qdLK9wek03OolBQ=="],
 
     "clean-regexp": ["clean-regexp@1.0.0", "", { "dependencies": { "escape-string-regexp": "^1.0.5" } }, "sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw=="],
 
