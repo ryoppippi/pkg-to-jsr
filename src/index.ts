@@ -411,7 +411,7 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	const exclude = getExclude(pkgJSON);
 	const jsr = {
 		name: getName(pkgJSON),
-		version: version as string,
+		version,
 		...(license != null && { license }),
 		publish: include == null && exclude == null
 			? undefined
