@@ -36,11 +36,11 @@ export async function main(): Promise<void> {
 
 			/** current working directory or maybe file */
 			const cwd
-			= root != null && isAbsolute(root)
-				? root
-				: root != null
-					? resolve(process.cwd(), root)
-					: process.cwd();
+				= root != null && isAbsolute(root)
+					? root
+					: root != null
+						? resolve(process.cwd(), root)
+						: process.cwd();
 
 			/* check if root is a directory */
 			if (!(await fs.lstat(cwd)).isDirectory()) {
