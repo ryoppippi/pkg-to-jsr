@@ -1,5 +1,6 @@
+import type { ConsolaInstance } from 'consola';
 import process from 'node:process';
-import { consola, type ConsolaInstance } from 'consola';
+import { consola } from 'consola';
 
 import { name } from '../package.json';
 

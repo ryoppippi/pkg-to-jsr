@@ -12,8 +12,8 @@
 		"noEmit": true,
 		"esModuleInterop": true,
 		"verbatimModuleSyntax": true,
-		"skipLibCheck": true,
-		"erasableSyntaxOnly": true
+		"erasableSyntaxOnly": true,
+		"skipLibCheck": true
 	},
 	"include": [
 		"src",

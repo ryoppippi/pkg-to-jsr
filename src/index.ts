@@ -1,11 +1,13 @@
+import type { JSRJson, JSRScopedName } from './jsr';
+import type { PackageJson } from './jsr-schemas';
 import fs from 'node:fs/promises';
 import { styleText } from 'node:util';
 import * as semver from '@std/semver';
 import { findUp } from 'find-up-simple';
 import terminalLink from 'terminal-link';
 import { z } from 'zod/v4-mini';
-import { JSRConfigurationSchema, type JSRJson, type JSRScopedName } from './jsr';
-import { isJSRScopedName, isStartWithExclamation, isString, type PackageJson } from './jsr-schemas';
+import { JSRConfigurationSchema } from './jsr';
+import { isJSRScopedName, isStartWithExclamation, isString } from './jsr-schemas';
 import { _throwError, logger } from './logger';
 
 type Exports = JSRJson['exports'];
@@ -411,7 +413,7 @@ export function genJsrFromPackageJson({ pkgJSON }: { pkgJSON: PackageJson }): JS
 	const exclude = getExclude(pkgJSON);
 	const jsr = {
 		name: getName(pkgJSON),
-		version: version as string,
+		version,
 		...(license != null && { license }),
 		publish: include == null && exclude == null
 			? undefined
